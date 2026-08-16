@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Keep the env template in git (the .env* rule above would otherwise ignore it)
+!.env.example
+
+# Reference PDF — free download, not redistributed here. See README.
+docs/*.pdf
