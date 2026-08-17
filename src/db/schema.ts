@@ -78,6 +78,13 @@ export const verificationTokens = pgTable(
  */
 export const seasons = pgTable("season", {
   id: uuid("id").primaryKey().defaultRandom(),
+  /**
+   * Which game system this season plays. Present from day one so adding a
+   * second system is additive rather than a migration + backfill — the column
+   * is free while the table is empty and expensive once it isn't.
+   * A season is one system; you don't mix games at one table.
+   */
+  system: text("system").notNull().default("monsterhearts"),
   name: text("name").notNull().default(""),
   joinCode: text("joinCode").notNull().unique(),
   createdById: text("createdById")
@@ -113,6 +120,13 @@ export const characters = pgTable(
     seasonId: uuid("seasonId").references(() => seasons.id, {
       onDelete: "set null",
     }),
+    /** Which game system. Denormalised from the season so a character that
+     * hasn't joined one is still unambiguous. See `seasons.system`. */
+    system: text("system").notNull().default("monsterhearts"),
+    /**
+     * The playbook id — a "skin" in Monsterhearts, a "playbook" in most other
+     * PbtA games. Resolved against static data per system, never a DB row.
+     */
     skinId: text("skinId").notNull(),
     name: text("name").notNull().default(""),
     sheet: jsonb("sheet").notNull().default({}),

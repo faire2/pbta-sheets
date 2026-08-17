@@ -1,7 +1,11 @@
 # Project Agent Rules
 
-**monsterhearts-skins** — mobile-first character sheets ("skins") for Monsterhearts 2,
+**pbta-sheets** — mobile-first character sheets for Powered-by-the-Apocalypse games,
 built so the sheet *is* the rules: a player with a phone needs nothing else at the table.
+
+**Currently: Monsterhearts 2 only.** The broader name is intent, not present capability.
+Additional systems arrive one at a time; see ROADMAP → Multi-system rollout for what is
+deliberately *not* generalised yet and why.
 
 ## Deployment & Architecture
 

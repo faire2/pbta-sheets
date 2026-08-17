@@ -1,4 +1,4 @@
-# monsterhearts-skins — Roadmap
+# pbta-sheets — Roadmap
 
 Last updated: 2026-08-16
 
@@ -25,6 +25,35 @@ rules — a player with a phone needs nothing else at the table.
 - [ ] Vercel dashboard → Storage → Neon → provides `DATABASE_URL`
 - [ ] Google OAuth credentials → `AUTH_GOOGLE_ID` / `AUTH_GOOGLE_SECRET`
 - [ ] `vercel env pull .env.local` then `yarn db:push`
+
+### Multi-system rollout
+
+The app is named for PbtA generally but implements **Monsterhearts 2 only**. Systems get
+added one at a time, and nothing gets generalised before a real second system pulls on
+it — an abstraction designed against one game fits one game.
+
+**Taken now, because it's free while the DB is empty:**
+
+- `seasons.system` and `characters.system`, `text notNull default 'monsterhearts'`.
+  Adding this later would mean a migration plus a backfill.
+- `/characters/new` **redirects** to a system-scoped route rather than itself being the
+  Monsterhearts creator. Inserting the system picker later then turns a redirect into a
+  page — purely additive, and no bookmarked URL breaks.
+
+**Deliberately not done yet:**
+
+- `statKeySchema` is hardcoded `hot/cold/volatile/dark` (`src/types/rules.ts:3`, plus
+  `src/types/sheet.ts:45` and `src/types/skin.ts:5`). Every system has different stats;
+  making it pluggable is easy *once a second set exists to design against*.
+- `MAX_HARM = 4` / `XP_PER_ADVANCE = 5` are Monsterhearts values, not universals.
+- The vocabulary: `skin` (most PbtA games say *playbook*), `strings` (Masks has
+  Influence, Apocalypse World has Hx), `darkestSelf`, `sexMove`, `conditions`.
+- The sheet renderer. A second system needs its own screens, and how much can be shared
+  is unknowable until we know which game.
+
+**When a second system arrives**, the order is: move `src/data/skins/` under a per-system
+directory (static data, no consumers to break), make the stat enum and numeric constants
+system-scoped, then add the picker page. The database doesn't change.
 
 ### Next
 
@@ -117,6 +146,12 @@ directions. Names were checkable mechanically; the summaries needed a second
 independent read. Budget the audit into any future data entry.
 
 ## Known Issues / Tech Debt
+
+- **Rotate the Google OAuth client secret.** It was pasted into a chat transcript on
+  2026-08-16 and should be considered exposed. Google Auth Platform → Clients → add a
+  new secret, delete the old one, update `AUTH_GOOGLE_SECRET` in Vercel and in
+  `.env.development.local`. The client, its name and its redirect URIs are unaffected;
+  the Client ID is public by design and needs no change.
 
 - **Auth doesn't gate anything yet.** `src/middleware.ts` wires the session into the
   request but doesn't reject signed-out users. Add `callbacks.authorized` in

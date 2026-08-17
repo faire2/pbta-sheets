@@ -7,6 +7,11 @@ Central index of project documentation. Update this when adding or materially ch
 - [`AGENTS.md`](../AGENTS.md) — Project rules and working agreements for Claude (and humans)
 - [`ROADMAP.md`](../ROADMAP.md) — Active sprint, backlog, architectural decisions, blockers
 
+## Operations
+
+- [`docs/DEPLOYMENT.md`](./DEPLOYMENT.md) — Runbook: wiring Vercel to Neon and Google
+  OAuth, env var order of operations, troubleshooting table
+
 ## UI / Design
 
 - [`docs/DESIGN-SYSTEM.md`](./DESIGN-SYSTEM.md) — Visual language, tokens, spacing, interaction patterns

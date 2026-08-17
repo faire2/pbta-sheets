@@ -1,4 +1,4 @@
-# monsterhearts-skins
+# pbta-sheets
 
 Mobile-first character sheets ("skins") for **Monsterhearts 2**, built so the sheet
 *is* the rules — a player with a phone needs nothing else at the table.

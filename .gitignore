@@ -45,3 +45,4 @@ next-env.d.ts
 
 # Reference PDF — free download, not redistributed here. See README.
 docs/*.pdf
+.env*.local
