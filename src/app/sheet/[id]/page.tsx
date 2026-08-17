@@ -1,9 +1,13 @@
 import { eq } from "drizzle-orm"
+import Link from "next/link"
 import { notFound } from "next/navigation"
+import { auth } from "@/auth"
 import { db } from "@/db"
-import { characters } from "@/db/schema"
+import { characters, seasons } from "@/db/schema"
 import { getSkin } from "@/data/skins"
-import { sheetSchema, MAX_HARM, XP_PER_ADVANCE } from "@/types/sheet"
+import { sheetSchema } from "@/types/sheet"
+import { HarmTrack, XpTrack } from "./tracks"
+import { SeasonPanel, type RosterEntry } from "./season-panel"
 
 const STAT_ORDER = [
   ["hot", "Hot"],
@@ -14,45 +18,6 @@ const STAT_ORDER = [
 
 function signed(n: number): string {
   return n > 0 ? `+${String(n)}` : String(n)
-}
-
-/** The sheet's harm track: four chevrons, filled left to right. */
-function HarmTrack({ value }: { value: number }) {
-  return (
-    <div className="flex items-end gap-1.5" aria-label={`Harm ${String(value)} of ${String(MAX_HARM)}`}>
-      {Array.from({ length: MAX_HARM }, (_, i) => (
-        <svg
-          key={i}
-          viewBox="0 0 24 22"
-          className="h-6 w-6"
-          aria-hidden
-          role="presentation"
-        >
-          <path
-            d="M1 1 H23 L12 21 Z"
-            className={i < value ? "fill-oxblood stroke-oxblood" : "fill-none stroke-ink"}
-            strokeWidth="1.25"
-          />
-        </svg>
-      ))}
-    </div>
-  )
-}
-
-function XpTrack({ value }: { value: number }) {
-  return (
-    <div className="flex items-center gap-2" aria-label={`Experience ${String(value)} of ${String(XP_PER_ADVANCE)}`}>
-      {Array.from({ length: XP_PER_ADVANCE }, (_, i) => (
-        <span
-          key={i}
-          aria-hidden
-          className={`h-[13px] w-[13px] rounded-full border ${
-            i < value ? "border-ink bg-ink" : "border-ink-faint"
-          }`}
-        />
-      ))}
-    </div>
-  )
 }
 
 export default async function SheetPage({ params }: PageProps<"/sheet/[id]">) {
@@ -69,16 +34,59 @@ export default async function SheetPage({ params }: PageProps<"/sheet/[id]">) {
   const skin = getSkin(row.skinId)
   if (!skin) notFound()
 
+  const session = await auth()
+  // Sheets are readable by anyone with the link; only the owner can edit.
+  const isOwner = session?.user?.id === row.ownerId
+
   const parsed = sheetSchema.safeParse(row.sheet)
-  const sheet = parsed.success ? parsed.data : sheetSchema.parse({ identity: {} })
+  const sheet = parsed.success
+    ? parsed.data
+    : sheetSchema.parse({ identity: {} })
 
   const line = skin.statLines[sheet.statLineIndex] ?? skin.statLines[0]
   const moves = skin.moves.filter((m) => sheet.moveIds.includes(m.id))
   const granted = new Set(skin.startingMoveIds)
 
+  let seasonInfo: { id: string; name: string; joinCode: string } | null = null
+  let roster: RosterEntry[] = []
+
+  if (row.seasonId) {
+    const [season] = await db
+      .select()
+      .from(seasons)
+      .where(eq(seasons.id, row.seasonId))
+      .limit(1)
+
+    if (season) {
+      seasonInfo = {
+        id: season.id,
+        name: season.name,
+        joinCode: season.joinCode,
+      }
+      const members = await db
+        .select()
+        .from(characters)
+        .where(eq(characters.seasonId, season.id))
+
+      roster = members.map((member) => ({
+        id: member.id,
+        name: member.name,
+        skinName: getSkin(member.skinId)?.name ?? member.skinId,
+        isSelf: member.id === row.id,
+      }))
+    }
+  }
+
   return (
-    <main className="mx-auto w-full max-w-2xl flex-1 px-5 pt-10 pb-20 sm:px-8">
-      <header>
+    <main className="mx-auto w-full max-w-2xl flex-1 px-5 pt-8 pb-20 sm:px-8">
+      <Link
+        href="/"
+        className="text-ink-faint hover:text-ink font-sans text-[0.8rem] tracking-[0.14em] uppercase transition-colors"
+      >
+        ← Your table
+      </Link>
+
+      <header className="mt-5">
         <p className="text-ink-faint font-sans text-[0.7rem] tracking-[0.22em] uppercase">
           {skin.name}
         </p>
@@ -107,24 +115,39 @@ export default async function SheetPage({ params }: PageProps<"/sheet/[id]">) {
         </section>
       ) : null}
 
-      <section className="mt-8 flex flex-wrap items-end justify-between gap-6">
+      <section className="mt-8 flex flex-wrap items-start justify-between gap-x-8 gap-y-6">
         <div>
           <h2 className="font-display text-ink text-xl tracking-wide">Harm</h2>
-          <div className="mt-2">
-            <HarmTrack value={sheet.harm} />
+          <div className="mt-1">
+            <HarmTrack
+              characterId={row.id}
+              value={sheet.harm}
+              editable={isOwner}
+            />
           </div>
         </div>
         <div>
           <h2 className="font-display text-ink text-xl tracking-wide">
             Experience
           </h2>
-          <div className="mt-3">
-            <XpTrack value={sheet.experience} />
+          <div className="mt-1">
+            <XpTrack
+              characterId={row.id}
+              value={sheet.experience}
+              editable={isOwner}
+            />
           </div>
         </div>
       </section>
 
-      <section className="mt-10">
+      <SeasonPanel
+        characterId={row.id}
+        editable={isOwner}
+        season={seasonInfo}
+        roster={roster}
+      />
+
+      <section className="mt-12">
         <h2 className="sheet-heading">Moves</h2>
         <ul className="border-rule mt-4 border-t">
           {moves.map((move) => (
@@ -184,9 +207,11 @@ export default async function SheetPage({ params }: PageProps<"/sheet/[id]">) {
         </p>
       </section>
 
-      <p className="text-ink-faint mt-12 font-sans text-[0.8rem]">
-        Read-only for now — editing lands with the full sheet.
-      </p>
+      {!isOwner ? (
+        <p className="text-ink-faint mt-12 font-sans text-[0.8rem]">
+          You&rsquo;re viewing someone else&rsquo;s sheet — read only.
+        </p>
+      ) : null}
     </main>
   )
 }
