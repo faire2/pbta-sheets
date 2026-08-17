@@ -7,9 +7,21 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
+
+  /* The sheet's own palette. Everything else is derived from these. */
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-rule: var(--rule);
+  --color-oxblood: var(--oxblood);
+
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-heading: var(--font-display);
+
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -18,11 +30,6 @@
   --color-sidebar-primary: var(--sidebar-primary);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -39,92 +46,186 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Print sheets have square corners. Radii stay near zero on purpose. */
+  --radius-sm: 0px;
+  --radius-md: 1px;
+  --radius-lg: 2px;
+  --radius-xl: 2px;
+  --radius-2xl: 3px;
+  --radius-3xl: 3px;
+  --radius-4xl: 4px;
 }
 
+/* ── Paper: the default. Warm cream stock, ink-black type. ───────────── */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --paper: oklch(0.949 0.009 85);
+  --paper-deep: oklch(0.918 0.014 82);
+  --ink: oklch(0.185 0.005 60);
+  --ink-soft: oklch(0.395 0.012 70);
+  --ink-faint: oklch(0.605 0.018 75);
+  --rule: oklch(0.185 0.005 60 / 24%);
+  /* Reserved for harm, danger, and the Darkest Self. Never chrome. */
+  --oxblood: oklch(0.40 0.135 27);
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--paper);
+  --card-foreground: var(--ink);
+  --popover: var(--paper);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --secondary: var(--paper-deep);
+  --secondary-foreground: var(--ink);
+  --muted: var(--paper-deep);
+  --muted-foreground: var(--ink-soft);
+  --accent: var(--paper-deep);
+  --accent-foreground: var(--ink);
+  --destructive: var(--oxblood);
+  --border: var(--rule);
+  --input: var(--rule);
+  --ring: var(--ink-faint);
+  --radius: 0px;
+
+  --sidebar: var(--paper);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--ink);
+  --sidebar-primary-foreground: var(--paper);
+  --sidebar-accent: var(--paper-deep);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--rule);
+  --sidebar-ring: var(--ink-faint);
 }
 
+/* ── Ink: the same sheet after dark. For playing at a dim table. ─────── */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --paper: oklch(0.175 0.006 65);
+  --paper-deep: oklch(0.225 0.008 65);
+  --ink: oklch(0.918 0.014 85);
+  --ink-soft: oklch(0.735 0.015 80);
+  --ink-faint: oklch(0.545 0.014 75);
+  --rule: oklch(0.918 0.014 85 / 22%);
+  --oxblood: oklch(0.585 0.155 27);
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--paper-deep);
+  --card-foreground: var(--ink);
+  --popover: var(--paper-deep);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --secondary: var(--paper-deep);
+  --secondary-foreground: var(--ink);
+  --muted: var(--paper-deep);
+  --muted-foreground: var(--ink-soft);
+  --accent: var(--paper-deep);
+  --accent-foreground: var(--ink);
+  --destructive: var(--oxblood);
+  --border: var(--rule);
+  --input: var(--rule);
+  --ring: var(--ink-faint);
+
+  --sidebar: var(--paper-deep);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--ink);
+  --sidebar-primary-foreground: var(--paper);
+  --sidebar-accent: var(--paper);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--rule);
+  --sidebar-ring: var(--ink-faint);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
+
   html {
     @apply font-sans;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    position: relative;
+  }
+
+  /*
+   * Paper grain. A single tiled turbulence layer over the whole page —
+   * this is what stops the design reading as flat digital UI. Kept very
+   * low opacity; it should register as texture, never as noise.
+   */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.22'/%3E%3C/svg%3E");
+  }
+
+  .dark body::before {
+    mix-blend-mode: screen;
+    opacity: 0.28;
+  }
+
+  /* Content sits above the grain. */
+  body > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@layer components {
+  /* Section headings on the sheet: display face, wide tracking, hairline
+     rule running to the end of the measure. */
+  .sheet-heading {
+    @apply font-display text-ink flex items-baseline gap-3 text-2xl leading-none tracking-wide;
+  }
+  .sheet-heading::after {
+    content: "";
+    @apply bg-rule h-px flex-1;
+  }
+
+  /* Hairline divider matching the sheet's rules. */
+  .sheet-rule {
+    @apply bg-rule h-px w-full border-0;
+  }
+
+  /*
+   * The sheet's selection circle — hollow when unchosen, filled when
+   * chosen. 44px hit area with a 15px visual mark, so touch targets are
+   * honest without the ink getting heavy.
+   */
+  .mark {
+    @apply border-ink-faint relative inline-flex h-[15px] w-[15px] shrink-0 rounded-full border transition-colors duration-150;
+  }
+  .mark[data-state="on"] {
+    @apply border-ink bg-ink;
+  }
+  .mark[data-state="granted"] {
+    @apply border-ink bg-ink;
+  }
+
+  /* Ink-spread press feedback: the wash a fingertip leaves on paper. */
+  .press {
+    @apply transition-[background-color,transform] duration-150 ease-out;
+  }
+  .press:active {
+    @apply bg-paper-deep scale-[0.995];
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
