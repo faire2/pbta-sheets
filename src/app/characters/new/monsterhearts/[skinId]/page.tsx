@@ -1,9 +1,12 @@
+import { getLocale, getTranslations } from "next-intl/server"
+import type { Locale } from "@/i18n/config"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { auth } from "@/auth"
 import { signIn } from "@/auth"
 import { Button } from "@/components/ui/button"
 import { getSkin, skins } from "@/data/skins"
+import { localizeSkin } from "@/data/skins/localize"
 import { Creator } from "./creator"
 
 export function generateStaticParams() {
@@ -14,10 +17,14 @@ export default async function CreateCharacterPage({
   params,
 }: PageProps<"/characters/new/monsterhearts/[skinId]">) {
   const { skinId } = await params
-  const skin = getSkin(skinId)
-  if (!skin) notFound()
+  const raw = getSkin(skinId)
+  if (!raw) notFound()
+
+  const locale = await getLocale()
+  const skin = localizeSkin(raw, locale as Locale)
 
   const session = await auth()
+  const t = await getTranslations()
 
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 px-5 pt-8 pb-24 sm:px-8">
@@ -25,7 +32,7 @@ export default async function CreateCharacterPage({
         href="/characters/new/monsterhearts"
         className="text-ink-faint hover:text-ink font-sans text-[0.8rem] tracking-[0.14em] uppercase transition-colors"
       >
-        ← All skins
+        ← {t("common.backToSkins")}
       </Link>
 
       <header className="mt-5 mb-8">
@@ -42,8 +49,7 @@ export default async function CreateCharacterPage({
       ) : (
         <div className="border-rule border-t border-b py-10 text-center">
           <p className="text-ink-soft font-sans text-[0.95rem]">
-            Sign in to make a character — sheets are saved to your account so
-            they survive between sessions.
+            {t("creator.signInPrompt")}
           </p>
           <form
             className="mt-5"
@@ -55,7 +61,7 @@ export default async function CreateCharacterPage({
             }}
           >
             <Button type="submit" className="min-h-11 px-6">
-              Sign in with Google
+              {t("common.signInWithGoogle")}
             </Button>
           </form>
         </div>

@@ -13,7 +13,8 @@
     "db:push": "drizzle-kit push",
     "db:generate": "drizzle-kit generate",
     "db:studio": "drizzle-kit studio",
-    "validate-data": "tsx scripts/validate-data.ts"
+    "validate-data": "tsx scripts/validate-data.ts",
+    "generate-skin-messages": "tsx scripts/generate-skin-messages.ts"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.11.3",

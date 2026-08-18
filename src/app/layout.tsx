@@ -1,5 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Grenze, Grenze_Gotisch, Geist_Mono } from "next/font/google";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getTranslations } from "next-intl/server";
+import { LocaleSwitch } from "@/components/locale-switch";
 import { Providers } from "@/components/providers";
 import "./globals.css";
 
@@ -31,10 +34,10 @@ const mono = Geist_Mono({
   subsets: ["latin", "latin-ext"],
 });
 
-export const metadata: Metadata = {
-  title: "PbtA Sheets",
-  description: "Character sheets for Powered-by-the-Apocalypse games",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("meta");
+  return { title: t("appTitle"), description: t("appDescription") };
+}
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -46,14 +49,25 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const locale = await getLocale();
+
   return (
     <html
-      lang="en"
+      lang={locale}
       className={`${display.variable} ${body.variable} ${mono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <Providers>{children}</Providers>
+        <NextIntlClientProvider>
+          <Providers>
+            {/* Top-right on every page, in the flow rather than fixed — a
+                floating widget over a sheet reads as browser chrome. */}
+            <div className="mx-auto flex w-full max-w-2xl justify-end px-5 pt-4 sm:px-8">
+              <LocaleSwitch />
+            </div>
+            {children}
+          </Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

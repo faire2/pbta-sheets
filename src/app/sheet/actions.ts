@@ -2,6 +2,7 @@
 
 import { and, eq } from "drizzle-orm"
 import { revalidatePath } from "next/cache"
+import { getTranslations } from "next-intl/server"
 import { z } from "zod"
 import { auth } from "@/auth"
 import { db } from "@/db"
@@ -23,9 +24,10 @@ type Loaded =
  * member gets the other's keys as optional.
  */
 async function loadOwned(characterId: string): Promise<Loaded> {
+  const t = await getTranslations("errors")
   const session = await auth()
   const userId = session?.user?.id
-  if (!userId) return { ok: false, error: "You need to be signed in." }
+  if (!userId) return { ok: false, error: t("signedIn") }
 
   const [row] = await db
     .select()
@@ -33,7 +35,7 @@ async function loadOwned(characterId: string): Promise<Loaded> {
     .where(and(eq(characters.id, characterId), eq(characters.ownerId, userId)))
     .limit(1)
 
-  if (!row) return { ok: false, error: "That isn't your character." }
+  if (!row) return { ok: false, error: t("notYourCharacter") }
   return { ok: true, row, userId }
 }
 
@@ -55,7 +57,10 @@ export async function setTracks(
   if (!loaded.ok) return { error: loaded.error }
 
   const parsed = trackSchema.safeParse(patch)
-  if (!parsed.success) return { error: "That value is out of range." }
+  if (!parsed.success) {
+    const t = await getTranslations("errors")
+    return { error: t("valueOutOfRange") }
+  }
 
   const sheet = sheetSchema.parse(loaded.row.sheet)
   if (parsed.data.harm !== undefined) sheet.harm = parsed.data.harm
@@ -81,8 +86,9 @@ export async function joinSeasonByCode(
 
   // Codes get read aloud and typed on phones; be forgiving about case and
   // stray whitespace rather than making people retype.
+  const t = await getTranslations("errors")
   const normalised = code.trim().toUpperCase().replace(/\s+/g, "")
-  if (normalised.length === 0) return { error: "Enter a code." }
+  if (normalised.length === 0) return { error: t("enterCode") }
 
   const [season] = await db
     .select()
@@ -90,9 +96,9 @@ export async function joinSeasonByCode(
     .where(eq(seasons.joinCode, normalised))
     .limit(1)
 
-  if (!season) return { error: `No season with the code ${normalised}.` }
+  if (!season) return { error: t("noSeasonWithCode", { code: normalised }) }
   if (season.system !== loaded.row.system) {
-    return { error: "That season is playing a different game." }
+    return { error: t("differentGame") }
   }
 
   await db
@@ -123,8 +129,9 @@ export async function createSeasonForCharacter(
   const loaded = await loadOwned(characterId)
   if (!loaded.ok) return { error: loaded.error }
 
+  const t = await getTranslations("errors")
   const parsed = z.string().trim().min(1).max(80).safeParse(name)
-  if (!parsed.success) return { error: "Give the season a name." }
+  if (!parsed.success) return { error: t("nameSeason") }
 
   let created: { id: string } | undefined
   for (let attempt = 0; attempt < 5 && !created; attempt += 1) {
@@ -144,7 +151,7 @@ export async function createSeasonForCharacter(
     }
   }
 
-  if (!created) return { error: "Couldn't create that season. Try again." }
+  if (!created) return { error: t("createSeasonFailed") }
 
   await db
     .update(characters)

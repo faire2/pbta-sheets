@@ -2,6 +2,7 @@
 
 import { and, eq } from "drizzle-orm"
 import { revalidatePath } from "next/cache"
+import { getTranslations } from "next-intl/server"
 import { redirect } from "next/navigation"
 import { z } from "zod"
 import { auth } from "@/auth"
@@ -36,11 +37,12 @@ export interface SeasonActionResult {
 export async function createSeason(
   name: string,
 ): Promise<SeasonActionResult | undefined> {
+  const t = await getTranslations("errors")
   const ownerId = await requireUserId()
-  if (!ownerId) return { error: "You need to be signed in." }
+  if (!ownerId) return { error: t("signedIn") }
 
   const parsed = z.string().trim().min(1).max(80).safeParse(name)
-  if (!parsed.success) return { error: "Give the season a name." }
+  if (!parsed.success) return { error: t("nameSeason") }
 
   // joinCode is unique; collisions are vanishingly rare but not impossible.
   let created: { id: string } | undefined
@@ -61,7 +63,7 @@ export async function createSeason(
     }
   }
 
-  if (!created) return { error: "Couldn't create that season. Try again." }
+  if (!created) return { error: t("createSeasonFailed") }
 
   redirect(`/seasons/${created.id}`)
 }
@@ -70,11 +72,12 @@ export async function renameSeason(
   id: string,
   name: string,
 ): Promise<SeasonActionResult | undefined> {
+  const t = await getTranslations("errors")
   const ownerId = await requireUserId()
-  if (!ownerId) return { error: "You need to be signed in." }
+  if (!ownerId) return { error: t("signedIn") }
 
   const parsed = z.string().trim().min(1).max(80).safeParse(name)
-  if (!parsed.success) return { error: "Give the season a name." }
+  if (!parsed.success) return { error: t("nameSeason") }
 
   await db
     .update(seasons)
@@ -93,8 +96,9 @@ export async function renameSeason(
 export async function deleteSeason(
   id: string,
 ): Promise<SeasonActionResult | undefined> {
+  const t = await getTranslations("errors")
   const ownerId = await requireUserId()
-  if (!ownerId) return { error: "You need to be signed in." }
+  if (!ownerId) return { error: t("signedIn") }
 
   await db
     .delete(seasons)

@@ -1,10 +1,13 @@
 import { eq } from "drizzle-orm"
+import { getLocale, getTranslations } from "next-intl/server"
+import type { Locale } from "@/i18n/config"
 import Link from "next/link"
 import { notFound, redirect } from "next/navigation"
 import { auth } from "@/auth"
 import { db } from "@/db"
 import { characters, seasons } from "@/db/schema"
 import { getSkin } from "@/data/skins"
+import { localizeSkin } from "@/data/skins/localize"
 import { SeasonEditor } from "./season-editor"
 
 export default async function SeasonPage({
@@ -13,6 +16,8 @@ export default async function SeasonPage({
   const { id } = await params
 
   const session = await auth()
+  const t = await getTranslations()
+  const locale = (await getLocale()) as Locale
   const userId = session?.user?.id
   if (!userId) redirect("/")
 
@@ -37,7 +42,7 @@ export default async function SeasonPage({
         href="/"
         className="text-ink-faint hover:text-ink font-sans text-[0.8rem] tracking-[0.14em] uppercase transition-colors"
       >
-        ← Your table
+        ← {t("common.backToTable")}
       </Link>
 
       <SeasonEditor
@@ -47,15 +52,16 @@ export default async function SeasonPage({
       />
 
       <section className="mt-12">
-        <h2 className="sheet-heading">Roster</h2>
+        <h2 className="sheet-heading">{t("terms.roster")}</h2>
         {roster.length === 0 ? (
           <p className="text-ink-soft mt-4 font-sans text-[0.95rem] italic">
-            Nobody has joined yet. Share the code above.
+            {t("season.rosterEmpty")}
           </p>
         ) : (
           <ul className="border-rule mt-4 border-t">
             {roster.map((character) => {
-              const skin = getSkin(character.skinId)
+              const raw = getSkin(character.skinId)
+              const skin = raw ? localizeSkin(raw, locale) : undefined
               return (
                 <li key={character.id} className="border-rule border-b">
                   <Link
@@ -63,7 +69,7 @@ export default async function SeasonPage({
                     className="press focus-visible:outline-ink flex min-h-[64px] items-center py-4 focus-visible:outline-2 focus-visible:outline-offset-2"
                   >
                     <span className="font-display text-ink flex-1 text-[1.25rem] leading-none tracking-wide">
-                      {character.name || "Unnamed"}
+                      {character.name || t("common.unnamed")}
                     </span>
                     <span className="text-ink-soft font-sans text-[0.9rem] italic">
                       {skin?.name ?? character.skinId}

@@ -1,5 +1,6 @@
 "use server"
 
+import { getTranslations } from "next-intl/server"
 import { redirect } from "next/navigation"
 import { z } from "zod"
 import { auth } from "@/auth"
@@ -37,25 +38,26 @@ export interface CreateCharacterResult {
 export async function createCharacter(
   raw: CreateCharacterInput,
 ): Promise<CreateCharacterResult> {
+  const t = await getTranslations("errors")
   const session = await auth()
   const ownerId = session?.user?.id
   if (!ownerId) {
-    return { error: "You need to be signed in to create a character." }
+    return { error: t("signedInToCreate") }
   }
 
   const parsed = inputSchema.safeParse(raw)
   if (!parsed.success) {
-    return { error: "That character didn't look right. Try again." }
+    return { error: t("badCharacter") }
   }
   const input = parsed.data
 
   const skin = getSkin(input.skinId)
   if (!skin) {
-    return { error: `Unknown skin "${input.skinId}".` }
+    return { error: t("unknownSkin", { skinId: input.skinId }) }
   }
 
   if (!skin.statLines[input.statLineIndex]) {
-    return { error: "Pick a stat line." }
+    return { error: t("pickStatLine") }
   }
 
   // Granted moves are always present; the player chooses exactly the rest.
@@ -63,25 +65,24 @@ export async function createCharacter(
   const chosen = input.moveIds.filter((id) => !granted.has(id))
   const known = new Set(skin.moves.map((m) => m.id))
   if (chosen.some((id) => !known.has(id))) {
-    return { error: "That move isn't on this skin." }
+    return { error: t("moveNotOnSkin") }
   }
   if (new Set(chosen).size !== skin.chooseMoveCount) {
-    return {
-      error: `Choose exactly ${String(skin.chooseMoveCount)} move${
-        skin.chooseMoveCount === 1 ? "" : "s"
-      }.`,
-    }
+    return { error: t("chooseExactlyMoves", { count: skin.chooseMoveCount }) }
   }
 
   for (const group of skin.choiceGroups) {
     const picks = new Set(input.choiceSelections[group.id] ?? [])
     const valid = new Set(group.options.map((o) => o.id))
     if ([...picks].some((id) => !valid.has(id))) {
-      return { error: `That isn't a valid ${group.label}.` }
+      return { error: t("invalidChoice", { label: group.label }) }
     }
     if (picks.size !== group.chooseCount) {
       return {
-        error: `Choose exactly ${String(group.chooseCount)} from ${group.label}.`,
+        error: t("chooseExactlyFrom", {
+          count: group.chooseCount,
+          label: group.label,
+        }),
       }
     }
   }
@@ -110,7 +111,7 @@ export async function createCharacter(
     .returning({ id: characters.id })
 
   if (!created) {
-    return { error: "Couldn't save that character. Try again." }
+    return { error: t("saveFailed") }
   }
 
   redirect(`/sheet/${created.id}`)

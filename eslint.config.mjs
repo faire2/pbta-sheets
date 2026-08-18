@@ -63,6 +63,8 @@ export default tseslint.config(
       "next.config.*",
       // drizzle-kit reads the config via default export.
       "drizzle.config.*",
+      // next-intl's getRequestConfig must be the default export.
+      "src/i18n/request.ts",
     ],
     rules: {
       "import/no-default-export": "off",

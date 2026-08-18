@@ -63,11 +63,19 @@ system-scoped, then add the picker page. The database doesn't change.
 2. **Persistence** — every tick writes through optimistically via TanStack Query. No
    save button; an unsaved sheet at a table is a lost sheet.
 3. **Seasons** — create/join by code, so String targets come from a roster.
-4. **Czech translation** — EN source, CS locale.
+4. ~~**Czech translation**~~ — **DONE 2026-08-16.** Interface via next-intl (cookie-based,
+   no URL prefix); skin content via generated `messages/skins.en.json` + hand-written
+   `messages/skins.cs.json`, resolved per-field by `localizeSkin`. All ten skins
+   translated. Canonical terms in docs/GLOSSARY.md.
 5. **Read-only share link** — `/sheet/<uuid>`.
 
 ### Backlog
 
+- **Grammatical gender in Czech.** The sheet currently addresses a player in a gender
+  determined by their *skin*, not their character — Czech requires agreement that
+  English doesn't, so every line has to pick one. Accepted for now; see
+  docs/GLOSSARY.md → "Grammatical gender" for the current state, the Vampire's
+  internal inconsistency, and the three ways out. Relevant to a game about identity.
 - Dice roller (2d6 + stat) with the move's outcome shown inline.
 - Offline / PWA — a phone at a table with bad wifi is the real deployment environment.
 - Season Advances (the between-seasons list) — not in the reference PDF; needs the book.
@@ -95,8 +103,14 @@ date/time contracts (Monsterhearts has neither).
 ### Project-specific
 
 - **Swipe** = shadcn `carousel` (Embla). No second swipe library.
-- **i18n** = `next-intl`, **EN is the source language**, CS is the translation. Fonts
-  must include `latin-ext` or Czech diacritics break.
+- **i18n** = `next-intl`, cookie-based with no URL prefix — sheets are shared by link,
+  and a prefix would bake the sharer's language into every shared URL. **EN is the
+  source language**, CS is the translation. Fonts must include `latin-ext` or Czech
+  diacritics break.
+- **No hardcoded user-facing text**, in either language. Interface strings live in
+  `messages/{en,cs}.json`; skin text is generated into `messages/skins.en.json` from
+  the data files and translated in `messages/skins.cs.json`. The render path never
+  reads text straight from a data file. `yarn validate-data` fails on drift.
 - **Skins are static data, not DB rows.** They don't vary per user. Only the
   *character* is persisted.
 - **Skin content**: mechanics recorded exactly (stat lines, option lists, move names,

@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { useState, useTransition } from "react"
 import { deleteSeason, renameSeason } from "../actions"
 
@@ -12,6 +13,7 @@ export function SeasonEditor({
   name: string
   joinCode: string
 }) {
+  const t = useTranslations()
   const [name, setName] = useState(initialName)
   const [saved, setSaved] = useState(false)
   const [copied, setCopied] = useState(false)
@@ -52,7 +54,7 @@ export function SeasonEditor({
       <header className="mt-5">
         <label className="block">
           <span className="text-ink-faint font-sans text-[0.78rem] tracking-[0.16em] uppercase">
-            Season
+            {t("terms.season")}
           </span>
           <input
             value={name}
@@ -67,15 +69,20 @@ export function SeasonEditor({
           />
         </label>
         <p className="text-ink-faint mt-2 h-5 font-sans text-[0.8rem]">
-          {pending ? "Saving…" : saved ? "Saved." : dirty ? "Unsaved" : ""}
+          {pending
+            ? t("common.saving")
+            : saved
+              ? t("common.saved")
+              : dirty
+                ? t("common.unsaved")
+                : ""}
         </p>
       </header>
 
       <section className="mt-8">
-        <h2 className="sheet-heading">Join code</h2>
+        <h2 className="sheet-heading">{t("terms.joinCode")}</h2>
         <p className="text-ink-faint mt-2 font-sans text-[0.82rem] leading-relaxed">
-          Read this out at the table. Anyone with it can put a character in this
-          season.
+          {t("season.joinCodeHint")}
         </p>
         <button
           type="button"
@@ -93,7 +100,7 @@ export function SeasonEditor({
             {joinCode}
           </span>
           <span className="text-ink-faint font-sans text-[0.75rem] tracking-[0.14em] uppercase">
-            {copied ? "Copied" : "Copy"}
+            {copied ? t("common.copied") : t("common.copy")}
           </span>
         </button>
       </section>
@@ -103,10 +110,11 @@ export function SeasonEditor({
       ) : null}
 
       <section className="mt-12">
-        <h2 className="sheet-heading">Remove</h2>
+        <h2 className="sheet-heading">{t("season.remove")}</h2>
         <p className="text-ink-soft mt-3 font-sans text-[0.9rem] leading-relaxed">
-          Removing a season does <strong>not</strong> delete anyone&rsquo;s
-          character. Sheets survive and simply stop belonging to a season.
+          {t.rich("season.removeHint", {
+            strong: (chunks) => <strong>{chunks}</strong>,
+          })}
         </p>
         {confirming ? (
           <div className="mt-4 flex flex-wrap items-center gap-3">
@@ -116,7 +124,7 @@ export function SeasonEditor({
               onClick={remove}
               className="bg-oxblood text-paper focus-visible:outline-oxblood min-h-12 px-6 font-sans text-[0.9rem] tracking-[0.1em] uppercase transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-40"
             >
-              {pending ? "Removing…" : "Yes, remove it"}
+              {pending ? t("season.removing") : t("season.confirmRemove")}
             </button>
             <button
               type="button"
@@ -125,7 +133,7 @@ export function SeasonEditor({
               }}
               className="text-ink-faint hover:text-ink min-h-12 font-sans text-[0.85rem] tracking-[0.1em] uppercase transition-colors"
             >
-              Keep it
+              {t("season.keepIt")}
             </button>
           </div>
         ) : (
@@ -136,7 +144,7 @@ export function SeasonEditor({
             }}
             className="border-oxblood text-oxblood hover:bg-oxblood hover:text-paper focus-visible:outline-oxblood mt-4 inline-flex min-h-12 items-center border px-6 font-sans text-[0.9rem] tracking-[0.1em] uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
           >
-            Remove season
+            {t("season.removeSeason")}
           </button>
         )}
       </section>

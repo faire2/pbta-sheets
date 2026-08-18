@@ -1,30 +1,37 @@
+import { getLocale, getTranslations } from "next-intl/server"
+import type { Locale } from "@/i18n/config"
 import Link from "next/link"
 import { skins } from "@/data/skins"
+import { localizeSkins } from "@/data/skins/localize"
 
-export const metadata = {
-  title: "Choose a Skin — PbtA Sheets",
+export async function generateMetadata() {
+  const t = await getTranslations("meta")
+  return { title: `${t("pickerTitle")} — ${t("appTitle")}` }
 }
 
-export default function SkinPickerPage() {
+export default async function SkinPickerPage() {
+  const t = await getTranslations()
+  const locale = await getLocale()
+  const localized = localizeSkins(skins, locale as Locale)
+
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 px-5 pt-10 pb-16 sm:px-8">
       <header className="mb-8">
         <p className="text-ink-faint font-sans text-[0.7rem] tracking-[0.22em] uppercase">
-          Monsterhearts 2
+          {t("terms.system")}
         </p>
         <h1 className="font-display text-ink mt-2 text-[2.75rem] leading-[0.95] tracking-tight sm:text-6xl">
-          Choose a Skin
+          {t("picker.title")}
         </h1>
         <p className="text-ink-soft mt-4 max-w-prose font-sans text-[0.95rem] leading-relaxed italic">
-          Every skin is a different way of being a monster, and a different way
-          of being a teenager. Pick the one that sounds like trouble.
+          {t("picker.lede")}
         </p>
       </header>
 
       <hr className="sheet-rule" />
 
       <ul>
-        {skins.map((skin, i) => (
+        {localized.map((skin, i) => (
           <li key={skin.id}>
             <Link
               href={`/characters/new/monsterhearts/${skin.id}`}
@@ -60,8 +67,7 @@ export default function SkinPickerPage() {
       </ul>
 
       <p className="text-ink-faint mt-8 font-sans text-[0.8rem] leading-relaxed">
-        Ten core skins. The Chosen and the Serpentine aren&rsquo;t in the free
-        reference set — they need the book.
+        {t("picker.footnote")}
       </p>
 
       <style>{`

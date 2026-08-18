@@ -1,15 +1,12 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { useMemo, useState, useTransition } from "react"
 import type { Skin, Stats } from "@/types/skin"
 import { createCharacter } from "../../actions"
 
-const STAT_ORDER = [
-  ["hot", "Hot"],
-  ["cold", "Cold"],
-  ["volatile", "Volatile"],
-  ["dark", "Dark"],
-] as const
+/** Stat labels come from the catalogue — see docs/GLOSSARY.md. */
+const STAT_KEYS = ["hot", "cold", "volatile", "dark"] as const
 
 function signed(n: number): string {
   return n > 0 ? `+${String(n)}` : String(n)
@@ -64,6 +61,7 @@ function Section({
 }
 
 export function Creator({ skin }: { skin: Skin }) {
+  const t = useTranslations()
   const [name, setName] = useState("")
   const [look, setLook] = useState("")
   const [eyes, setEyes] = useState("")
@@ -126,17 +124,17 @@ export function Creator({ skin }: { skin: Skin }) {
 
   return (
     <div>
-      <Section title="Identity">
+      <Section title={t("terms.identity")}>
         <label className="block">
           <span className="text-ink-faint font-sans text-[0.78rem] tracking-[0.16em] uppercase">
-            Name
+            {t("terms.name")}
           </span>
           <input
             value={name}
             onChange={(e) => {
               setName(e.target.value)
             }}
-            placeholder="Or pick one below"
+            placeholder={t("creator.namePlaceholder")}
             className="border-rule focus:border-ink font-display text-ink placeholder:text-ink-faint mt-1.5 min-h-11 w-full border-0 border-b bg-transparent pb-1 text-2xl tracking-wide transition-colors outline-none placeholder:font-sans placeholder:text-base placeholder:tracking-normal placeholder:italic"
           />
         </label>
@@ -155,9 +153,9 @@ export function Creator({ skin }: { skin: Skin }) {
 
         {(
           [
-            ["Look", skin.identity.looks, look, setLook],
-            ["Eyes", skin.identity.eyes, eyes, setEyes],
-            ["Origin", skin.identity.origins, origin, setOrigin],
+            [t("terms.look"), skin.identity.looks, look, setLook],
+            [t("terms.eyes"), skin.identity.eyes, eyes, setEyes],
+            [t("terms.origin"), skin.identity.origins, origin, setOrigin],
           ] as const
         ).map(([label, options, value, set]) => (
           <div key={label} className="mt-6">
@@ -180,7 +178,7 @@ export function Creator({ skin }: { skin: Skin }) {
         ))}
       </Section>
 
-      <Section title="Stats" hint="Pick one line.">
+      <Section title={t("terms.stats")} hint={t("creator.statsHint")}>
         <div className="border-rule border-t">
           {skin.statLines.map((line: Stats, i) => {
             const selected = statLineIndex === i
@@ -198,10 +196,10 @@ export function Creator({ skin }: { skin: Skin }) {
               >
                 <span aria-hidden className="mark" data-state={selected ? "on" : "off"} />
                 <span className="grid flex-1 grid-cols-4 gap-2">
-                  {STAT_ORDER.map(([key, label]) => (
+                  {STAT_KEYS.map((key) => (
                     <span key={key} className="text-left">
                       <span className="font-display text-ink block text-[1.15rem] leading-none">
-                        {label}
+                        {t(`terms.${key}`)}
                       </span>
                       <span className="text-ink-soft mt-1 block font-sans text-[1.05rem] leading-none tabular-nums">
                         {signed(line[key])}
@@ -216,11 +214,14 @@ export function Creator({ skin }: { skin: Skin }) {
       </Section>
 
       <Section
-        title="Moves"
+        title={t("terms.moves")}
         hint={
           skin.startingMoveIds.length > 0
-            ? `You start with ${skin.startingMoveIds.length === 1 ? "one move" : `${String(skin.startingMoveIds.length)} moves`}. Choose ${String(skin.chooseMoveCount)} more.`
-            : `Choose ${String(skin.chooseMoveCount)}.`
+            ? t("creator.movesHintGranted", {
+                count: skin.startingMoveIds.length,
+                choose: skin.chooseMoveCount,
+              })
+            : t("creator.movesHintPlain", { choose: skin.chooseMoveCount })
         }
       >
         <ul className="border-rule border-t">
@@ -253,7 +254,7 @@ export function Creator({ skin }: { skin: Skin }) {
                       {move.name}
                       {isGranted ? (
                         <span className="text-ink-faint font-sans text-[0.66rem] tracking-[0.18em] uppercase">
-                          Granted
+                          {t("terms.granted")}
                         </span>
                       ) : null}
                     </span>
@@ -274,7 +275,7 @@ export function Creator({ skin }: { skin: Skin }) {
           <Section
             key={group.id}
             title={group.label}
-            hint={`Choose ${String(group.chooseCount)}.`}
+            hint={t("creator.chooseCount", { count: group.chooseCount })}
           >
             <ul className="border-rule border-t">
               {group.options.map((option) => {
@@ -316,7 +317,7 @@ export function Creator({ skin }: { skin: Skin }) {
         )
       })}
 
-      <Section title="Backstory" hint="Settle these at the table, in play.">
+      <Section title={t("terms.backstory")} hint={t("creator.backstoryHint")}>
         <ul className="space-y-3">
           {skin.backstory.map((entry) => (
             <li
@@ -337,12 +338,12 @@ export function Creator({ skin }: { skin: Skin }) {
         <div className="flex items-center justify-between gap-4">
           <p className="text-ink-faint font-sans text-[0.82rem] leading-tight">
             {ready
-              ? "Ready."
+              ? t("creator.statusReady")
               : statLineIndex === null
-                ? "Pick a stat line."
+                ? t("creator.statusPickStats")
                 : movesLeft > 0
-                  ? `${String(movesLeft)} more move${movesLeft === 1 ? "" : "s"}.`
-                  : "Finish the choices above."}
+                  ? t("creator.statusMovesLeft", { count: movesLeft })
+                  : t("creator.statusFinishChoices")}
           </p>
           <button
             type="button"
@@ -350,7 +351,7 @@ export function Creator({ skin }: { skin: Skin }) {
             onClick={submit}
             className="bg-ink text-paper focus-visible:outline-ink min-h-12 shrink-0 px-7 font-sans text-[0.95rem] tracking-[0.1em] uppercase transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-30"
           >
-            {pending ? "Saving…" : "Create"}
+            {pending ? t("common.saving") : t("common.create")}
           </button>
         </div>
       </div>

@@ -1,0 +1,780 @@
+{
+  "fae": {
+    "name": "The Fae",
+    "tagline": "Alluring, otherworldly, fickle, and vengeful.",
+    "identity": {
+      "looks": [
+        "dainty",
+        "girlish",
+        "gaunt",
+        "mysterious",
+        "dishevelled"
+      ],
+      "eyes": [
+        "quick eyes",
+        "lyrical eyes",
+        "mesmerizing eyes",
+        "laughing eyes",
+        "piercing eyes"
+      ],
+      "origins": [
+        "fae born",
+        "fae blooded",
+        "swapped at birth",
+        "stole the gift",
+        "touched with the gift"
+      ]
+    },
+    "moves": {
+      "faery-contract": {
+        "name": "Faery Contract",
+        "summary": "Take a String on anyone who breaks a promise or contract made to you. Spending that String for justice unlocks extra options: make them fumble something at a crucial moment for 1 Harm, or add 2 to an act of vengeance."
+      },
+      "lure": {
+        "name": "Lure",
+        "summary": "When someone makes you a promise, they mark experience. When someone breaks a promise to you, you mark experience."
+      },
+      "guide": {
+        "name": "Guide",
+        "summary": "Spend a String on someone willing to carry them across the veil into the faery realm, for a scene or two, before you both return."
+      },
+      "beyond-the-veil": {
+        "name": "Beyond The Veil",
+        "summary": "Gaze Into the Abyss to seek audience with the Faery King. On a strong hit he also reveals a hidden String on someone, and you gain it; on a weak hit he also demands a favour."
+      },
+      "unashamed": {
+        "name": "Unashamed",
+        "summary": "Give someone a String on you to add 3 to your attempt to Turn Them On."
+      },
+      "the-wild-hunt": {
+        "name": "The Wild Hunt",
+        "summary": "Add 1 to Turn Someone On when you draw on your most feral manner, moving like a cat or a wolf."
+      }
+    },
+    "choiceGroups": {},
+    "backstory": {
+      "heart-on-sleeve": "You wear your heart on your sleeve — give everyone one String.",
+      "captured-fancy": "You've captured someone's fancy — gain 2 Strings on them."
+    },
+    "darkestSelf": {
+      "summary": "Every word you say and hear registers as a promise, and any broken promise demands justice through trickery or blood. Human notions of mercy don't apply to you.",
+      "escape": "Re-balance the scales of justice in some way."
+    },
+    "sexMove": "When you lie naked with someone, you can ask them for a promise. If they refuse, take 2 Strings on them.",
+    "advances": {
+      "stat-plus-one": "Add +1 to one of your stats.",
+      "another-fae-move": "Take another Fae move.",
+      "any-skin-move": "Take a move from any Skin.",
+      "jury-of-fae": "You belong to a Jury of Fae."
+    }
+  },
+  "ghost": {
+    "name": "The Ghost",
+    "tagline": "Lonely, wounded, caring, and creepy.",
+    "identity": {
+      "looks": [
+        "forlorn",
+        "scared",
+        "stuffy",
+        "out of place",
+        "brooding"
+      ],
+      "eyes": [
+        "hollow eyes",
+        "pained eyes",
+        "dull eyes",
+        "unnerving eyes",
+        "piercing eyes"
+      ],
+      "origins": [
+        "left to die",
+        "murdered in cold blood",
+        "murdered in hot passion",
+        "a tragic accident",
+        "a confused death"
+      ]
+    },
+    "moves": {
+      "unresolved-trauma": {
+        "name": "Unresolved Trauma",
+        "summary": "Anything that reminds you of your death gives you the Condition traumatized. When someone helps you resolve it, you both mark experience."
+      },
+      "helpful-spirit": {
+        "name": "Helpful Spirit",
+        "summary": "Gain a String on anyone you help resolve a Condition."
+      },
+      "transference": {
+        "name": "Transference",
+        "summary": "Truly listen to someone's struggles: they heal 1 Harm and their remaining harm transfers to you."
+      },
+      "projected-blame": {
+        "name": "Projected Blame",
+        "summary": "While you hold the Condition traumatized, you may treat others as though they had the Condition at fault for my death."
+      },
+      "creep": {
+        "name": "Creep",
+        "summary": "Silently witness someone in a private moment — sleeping, putting on makeup — and gain a String on them."
+      },
+      "limitless": {
+        "name": "Limitless",
+        "summary": "You can walk through walls and fly."
+      }
+    },
+    "choiceGroups": {},
+    "backstory": {
+      "knows-you-died": "Someone knows you're dead and how it happened — they gain 2 Strings on you.",
+      "watched-them-sleep": "You've been in someone's bedroom while they slept — take a String on them."
+    },
+    "darkestSelf": {
+      "summary": "You become invisible and unnoticeable — unseen, unheard, untouchable. Inanimate objects are your only way to communicate.",
+      "escape": "Someone acknowledges your presence and shows how much they want you around."
+    },
+    "sexMove": "After sex you each ask one another a question, in character or player-to-player, and both must answer honestly and directly.",
+    "advances": {
+      "stat-plus-one": "Add +1 to one of your stats.",
+      "another-ghost-move": "Take another Ghost move.",
+      "any-skin-move": "Take a move from any Skin.",
+      "haunted-house": "You reside in a Haunted House."
+    }
+  },
+  "ghoul": {
+    "name": "The Ghoul",
+    "tagline": "Obsessive, dangerous, morbid, and quiet.",
+    "identity": {
+      "looks": [
+        "gaunt",
+        "stiff",
+        "disfigured",
+        "detached",
+        "wrecked"
+      ],
+      "eyes": [
+        "hollow eyes",
+        "quiet eyes",
+        "calculating eyes",
+        "harsh eyes",
+        "hungry eyes"
+      ],
+      "origins": [
+        "resurrected",
+        "constructed",
+        "disturbed",
+        "rejected",
+        "sent"
+      ]
+    },
+    "moves": {
+      "the-hunger": {
+        "name": "The Hunger",
+        "summary": "Circle one Hunger — fear, power, plunder, or thrills. Chasing it recklessly adds 1 to your roll; passing up a good chance to feed means rolling to Keep Your Cool instead."
+      },
+      "what-the-right-hand-wants": {
+        "name": "What the Right Hand Wants",
+        "summary": "Your body craves more than one thing — take an additional Hunger of your choice."
+      },
+      "satiety": {
+        "name": "Satiety",
+        "summary": "Whenever you satisfy a Hunger, pick one: heal 1 Harm, mark experience, or take 1 Forward."
+      },
+      "short-rest-for-the-wicked": {
+        "name": "Short Rest for the Wicked",
+        "summary": "Death doesn't stick — a few hours after you die, you rise again fully healed."
+      },
+      "watchful-golem": {
+        "name": "Watchful Golem",
+        "summary": "Mark experience whenever you protect someone in secret, without them ever finding out you did it."
+      },
+      "ending": {
+        "name": "Ending",
+        "summary": "You recall your own death in perfect detail. Sharing that story with someone gives them the Condition morbid, and you roll to Turn Them On using Cold."
+      },
+      "esprit-de-corpse": {
+        "name": "Esprit de Corpse",
+        "summary": "When you Gaze Into the Abyss, it hands you one of its own Hungers to carry as your own; satiating it later also marks experience."
+      }
+    },
+    "choiceGroups": {
+      "hunger": {
+        "label": "Hunger",
+        "options": {
+          "fear": {
+            "name": "Fear"
+          },
+          "power": {
+            "name": "Power"
+          },
+          "plunder": {
+            "name": "Plunder"
+          },
+          "thrills": {
+            "name": "Thrills"
+          }
+        }
+      }
+    },
+    "backstory": {
+      "reminded-you-love-remained": "Someone showed you that love hadn't been stolen from you by death after all — give them a String.",
+      "watched-you-die": "If someone witnessed your death, you and they each take 2 Strings on the other."
+    },
+    "darkestSelf": {
+      "summary": "Feeding is all you can think about, and your usual craving gives way to a deeper, more primal hunger for flesh and blood itself.",
+      "escape": "Escape it by overindulging, or by staying locked away long enough to regain your composure."
+    },
+    "sexMove": "Having sex with someone gives you a new Hunger.",
+    "advances": {
+      "stat-plus-one": "Add +1 to one of your stats.",
+      "another-ghoul-move": "Take another Ghoul move.",
+      "any-skin-move": "Take a move from any Skin.",
+      "reckless-crew": "You're part of a Reckless Crew."
+    }
+  },
+  "hollow": {
+    "name": "The Hollow",
+    "tagline": "Uncertain, unstable, impressionable, and lost.",
+    "identity": {
+      "looks": [
+        "immaculate",
+        "disheveled",
+        "haunted",
+        "inexperienced",
+        "earnest"
+      ],
+      "eyes": [
+        "shifty eyes",
+        "soulless eyes",
+        "wide eyes",
+        "vacant eyes",
+        "desperate eyes"
+      ],
+      "origins": [
+        "born of a wish",
+        "a failed experiment",
+        "once a toy",
+        "amnesiac",
+        "machine"
+      ]
+    },
+    "moves": {
+      "better-than-nothing": {
+        "name": "Better Than Nothing",
+        "summary": "Mark experience any time you pick up a new Condition."
+      },
+      "a-blank-canvas": {
+        "name": "A Blank Canvas",
+        "summary": "When you act in a way that lets one of your Conditions reshape who you are, cross that Condition off and add 1 to the roll."
+      },
+      "try-harder-next-time": {
+        "name": "Try Harder Next Time",
+        "summary": "After you botch something, take a fitting Condition and gain 1 Forward."
+      },
+      "fake": {
+        "name": "Fake",
+        "summary": "Add 1 to any roll made while you're lying."
+      },
+      "metamorphosis": {
+        "name": "Metamorphosis",
+        "summary": "On a 7+ when you Gaze Into the Abyss, the abyss also reveals what you must become, and you may permanently swap two of your stats."
+      },
+      "strange-impressions": {
+        "name": "Strange Impressions",
+        "summary": "When a main character hurts or heals you, you can stare at them and temporarily borrow one of their Skin moves onto your sheet — it disappears once you use it."
+      }
+    },
+    "choiceGroups": {},
+    "backstory": {
+      "learned-their-cues": "You've learned to mimic someone by watching them closely — take 2 Strings on them.",
+      "invented-past-exposed": "Someone caught on that your backstory is fabricated — they gain 2 Strings on you."
+    },
+    "darkestSelf": {
+      "summary": "You feel trapped in your own body and need to punish it, and you need to track down whoever made you and hold them accountable.",
+      "escape": "Recognize that someone else is even more trapped than you are."
+    },
+    "sexMove": "After sex, each of you privately writes down whether it felt confusing or soothing to your character; if you both wrote the same word, you each mark experience.",
+    "advances": {
+      "stat-plus-one": "Add +1 to one of your stats.",
+      "another-hollow-move": "Take another Hollow move.",
+      "any-skin-move": "Take a move from any Skin.",
+      "hollow-siblings": "You've found Hollow Siblings."
+    }
+  },
+  "infernal": {
+    "name": "The Infernal",
+    "tagline": "Tempted, impulsive, and in over their head.",
+    "identity": {
+      "looks": [
+        "quiet",
+        "frantic",
+        "venomous",
+        "spoiled",
+        "spooked"
+      ],
+      "eyes": [
+        "empty eyes",
+        "calculating eyes",
+        "burning eyes",
+        "flickering eyes",
+        "piercing eyes"
+      ],
+      "origins": [
+        "bartered soul",
+        "emissary",
+        "last-chancer",
+        "legion",
+        "lackey",
+        "chosen"
+      ]
+    },
+    "moves": {
+      "soul-debt": {
+        "name": "Soul Debt",
+        "summary": "Establish your debt to a named Dark Power and pick two Bargains it has already struck with you. The Dark Power collects Strings on you as the debt deepens, and if it ever holds 5 Strings on you, you trigger your Darkest Self."
+      },
+      "dark-recruiter": {
+        "name": "Dark Recruiter",
+        "summary": "Mark experience each time you deliver an innocent soul to the Dark Power."
+      },
+      "under-pressure": {
+        "name": "Under Pressure",
+        "summary": "While someone holds 3 or more Strings on you, add 1 to any roll made to carry out their bidding."
+      },
+      "cant-save-myself": {
+        "name": "Can't Save Myself",
+        "summary": "When someone rescues you from a threat beyond your own strength, they mark experience and you gain a String on them."
+      }
+    },
+    "choiceGroups": {
+      "bargains": {
+        "label": "Bargains",
+        "options": {
+          "the-power-flows-through-you": {
+            "name": "The Power Flows Through You",
+            "summary": "Hand the Dark Power a String to add 2 to your next roll."
+          },
+          "numbing-it-out": {
+            "name": "Numbing It Out",
+            "summary": "Hand the Dark Power a String to clear a Condition or heal up to two Harm."
+          },
+          "elsewise-power": {
+            "name": "Elsewise Power",
+            "summary": "Hand the Dark Power a String to borrow a move you don't have, from any Skin, for a single use."
+          },
+          "uncanny-voices": {
+            "name": "Uncanny Voices",
+            "summary": "Hand the Dark Power a String to learn a secret about someone you're talking to — their player chooses to reveal a secret fear, desire, or strength."
+          },
+          "strings-attached": {
+            "name": "Strings Attached",
+            "summary": "Ask the Dark Power for something you desperately want; the MC sets a price and hints at a hidden catch, and paying it gets you what you asked for."
+          }
+        }
+      }
+    },
+    "backstory": {
+      "owe-debts": "You owe debts — give away 3 Strings, split however you like between the Dark Power and the other characters.",
+      "someone-thinks-they-can-save-you": "Someone believes they can save you — gain a String on them."
+    },
+    "darkestSelf": {
+      "summary": "You become needy, shivering, and desperate for connection, while the Dark Power piles on daunting, open-ended demands. Satisfying each demand strips away one of its Strings on you and edges you back toward feeling whole.",
+      "escape": "You escape once the Dark Power holds no more Strings on you, or you strike a bargain with something even more dangerous."
+    },
+    "sexMove": "Having sex removes one of the Dark Power's Strings on you and gives it a new String on whoever you had sex with instead.",
+    "advances": {
+      "stat-plus-one": "Add +1 to one of your stats.",
+      "another-infernal-move": "Take another Infernal move.",
+      "take-remaining-bargains": "Take the remaining Bargains.",
+      "any-skin-move": "Take a move from any Skin.",
+      "needy-fiends": "You supply for Needy Fiends."
+    }
+  },
+  "mortal": {
+    "name": "The Mortal",
+    "tagline": "Vulnerable, magnetic, and beautiful.",
+    "identity": {
+      "looks": [
+        "quiet",
+        "desperate",
+        "awkward",
+        "beautiful",
+        "displaced"
+      ],
+      "eyes": [
+        "doe eyes",
+        "sad eyes",
+        "darting eyes",
+        "nervous eyes",
+        "human eyes"
+      ],
+      "origins": [
+        "new kid in town",
+        "kid next door",
+        "your barista",
+        "someone's girlfriend",
+        "someone's boyfriend",
+        "nobody"
+      ]
+    },
+    "moves": {
+      "true-love": {
+        "name": "True Love",
+        "summary": "You always have exactly one Lover, chosen during your backstory. If you fall for someone else instead, give them a String and they become your new Lover. You always carry 1 forward toward earning your Lover's heart or fancy."
+      },
+      "mess-with-me-mess-with-him": {
+        "name": "Mess With Me, Mess With Him",
+        "summary": "Invoking your Lover's name as a threat adds 2 to your roll to Shut Someone Down or Keep Your Cool, but your Lover gains a String on you for it."
+      },
+      "entrenched": {
+        "name": "Entrenched",
+        "summary": "When you and another character hold a combined total of 5 or more Strings on each other, gain 1 to all rolls against them."
+      },
+      "sympathy-is-my-weapon": {
+        "name": "Sympathy is My Weapon",
+        "summary": "Every time you forgive someone for hurting you and excuse their base nature, gain a String on them."
+      },
+      "excuses-are-my-armour": {
+        "name": "Excuses Are My Armour",
+        "summary": "When you ignore some blatant problem with your Lover or how they treat you, mark experience."
+      },
+      "downward-spiral": {
+        "name": "Downward Spiral",
+        "summary": "When you Gaze Into the Abyss, you may take 1 Harm to add 2 to your roll."
+      },
+      "down-the-rabbit-hole": {
+        "name": "Down the Rabbit Hole",
+        "summary": "When you go poking your nose into affairs not meant for your kind, someone involved in the situation gains a String on you, and you mark experience."
+      }
+    },
+    "choiceGroups": {},
+    "backstory": {
+      "chosen-lover": "Choose one person to be your Lover. Give them three Strings on you, and take one String on them."
+    },
+    "darkestSelf": {
+      "summary": "Nobody understands you or even tries, and you're tired of being walked over by the people you love. You lash out and betray them, exposing their monstrosity along with your own.",
+      "escape": "You escape your Darkest Self only by recognizing the pain you're causing your Lover."
+    },
+    "sexMove": "Having sex with someone stirs something sinister in you. The next time you take your eyes off them, they become their Darkest Self.",
+    "advances": {
+      "stat-plus-one": "Add +1 to one of your stats.",
+      "another-mortal-move": "Take another Mortal move.",
+      "any-skin-move": "Take a move from any Skin."
+    }
+  },
+  "queen": {
+    "name": "The Queen",
+    "tagline": "Popular, dangerous, bitchy, and commanding.",
+    "identity": {
+      "looks": [
+        "stunning",
+        "domineering",
+        "icy",
+        "neurotic",
+        "talkative"
+      ],
+      "eyes": [
+        "calculating eyes",
+        "captivating eyes",
+        "murky eyes",
+        "vacant eyes",
+        "pretty eyes"
+      ],
+      "origins": [
+        "most popular",
+        "most dangerous",
+        "cult leader",
+        "source of the infection",
+        "firstborn of the hive mind"
+      ]
+    },
+    "moves": {
+      "the-clique": {
+        "name": "The Clique",
+        "summary": "You head the toughest, coolest clique around, and it counts as a gang. Pick one strength for it from the Gang Strength choices."
+      },
+      "the-shield": {
+        "name": "The Shield",
+        "summary": "While you're surrounded by your gang, subtract 1 from any roll made against you."
+      },
+      "bought-loyalty": {
+        "name": "Bought Loyalty",
+        "summary": "Give a side character a String on you to strong-arm them into doing something for you right now; the MC decides what bribe, threat, or coaxing it takes."
+      },
+      "and-your-enemies-closer": {
+        "name": "And Your Enemies Closer",
+        "summary": "Whenever someone betrays you, take a String on them."
+      },
+      "many-bodies": {
+        "name": "Many Bodies",
+        "summary": "Promise one of your gang members to someone and add 2 to your roll to Turn Them On. Separately: whenever any of your gang members has sex with anyone, your Sex Move triggers."
+      },
+      "streaming": {
+        "name": "Streaming",
+        "summary": "You share a telepathic link with your gang and always sense their emotions and fears. To pick out specific thoughts, Gaze Into the Abyss and add 1 to the roll."
+      }
+    },
+    "choiceGroups": {
+      "gang-strength": {
+        "label": "Gang Strength",
+        "options": {
+          "armed": {
+            "name": "Armed",
+            "summary": "Your gang is packing guns and other genuinely dangerous weapons."
+          },
+          "connected": {
+            "name": "Connected",
+            "summary": "Your gang has money and access to designer drugs."
+          },
+          "talented": {
+            "name": "Talented",
+            "summary": "Your gang is genuinely good at something, like a band or a sports team."
+          },
+          "cultists": {
+            "name": "Cultists",
+            "summary": "Your gang is bound by dark oaths and would die for you."
+          }
+        }
+      }
+    },
+    "backstory": {
+      "gang-members": "Name three side characters who belong to your gang, and gain a String on each of them.",
+      "someone-threatening": "Pick someone you find threatening. Give them a String on you, and take a String on them in return."
+    },
+    "darkestSelf": {
+      "summary": "Every failure by the people around you becomes unforgivable, and you feel entitled to make a harsh, cruel example out of whoever let you down rather than accept any consequences yourself.",
+      "escape": "Hand over part of your power to someone who deserves it more, or destroy an innocent person to prove your dominance."
+    },
+    "sexMove": "When you have sex with someone, they gain the Condition one of them; for as long as they hold it, they count as part of your gang.",
+    "advances": {
+      "stat-plus-one": "Add +1 to one of your stats.",
+      "another-queen-move": "Take another Queen move.",
+      "any-skin-move": "Take a move from any Skin.",
+      "clique-again": "Take The Clique again and detail another gang."
+    }
+  },
+  "vampire": {
+    "name": "The Vampire",
+    "tagline": "Icy, manipulative, hypnotic, and cruel.",
+    "identity": {
+      "looks": [
+        "intense",
+        "aloof",
+        "predatory",
+        "smoldering",
+        "old-fashioned"
+      ],
+      "eyes": [
+        "dead eyes",
+        "lusty eyes",
+        "pained eyes",
+        "hungry eyes",
+        "thirsty eyes"
+      ],
+      "origins": [
+        "newly reborn",
+        "taken this century",
+        "many ages old",
+        "lord",
+        "cursed blood"
+      ]
+    },
+    "moves": {
+      "invited": {
+        "name": "Invited",
+        "summary": "You can't enter a home uninvited. Whenever someone invites you in, gain a String on them."
+      },
+      "hypnotic": {
+        "name": "Hypnotic",
+        "summary": "Roll with Hot to hypnotize someone who has no Strings on you. On a 10+ they obey your wishes exactly, unaware anything happened. On a 7-9 the hypnosis works, but choose one: they realize what you did to them, they botch your commands, or their sanity is left unhinged."
+      },
+      "cold-as-ice": {
+        "name": "Cold as Ice",
+        "summary": "When you Shut Someone Down and roll a 7 or higher, choose an extra option from that move's list."
+      },
+      "the-feeding": {
+        "name": "The Feeding",
+        "summary": "Feed directly on someone's hot blood. The first time you feed on them, you both mark experience. Each time you feed, choose two: heal 1 Harm, take 1 Forward, or ensure they definitely don't die."
+      },
+      "marked-for-the-hunt": {
+        "name": "Marked for the Hunt",
+        "summary": "Feeding on someone creates a lasting, preternatural bond. Afterward, when you Gaze Into the Abyss about their whereabouts or well-being, roll as though your Dark were 3."
+      },
+      "inescapable": {
+        "name": "Inescapable",
+        "summary": "Spend a String on someone to demand they remain in your presence. If they walk out on you anyway, gain 2 Strings on them."
+      }
+    },
+    "choiceGroups": {},
+    "backstory": {
+      "beautiful": "Your beauty is undeniable — gain a String on everyone.",
+      "saved-your-unlife": "Someone once saved your unlife — they gain 2 Strings on you."
+    },
+    "darkestSelf": {
+      "summary": "Everyone around you becomes a pawn or a plaything, to be hurt and toyed with for your own amusement before you're through with them.",
+      "escape": "Someone more powerful than you puts you in your rightful place."
+    },
+    "sexMove": "When you deny someone sexually, gain a String on them. When you have sex with someone, lose all Strings on them.",
+    "advances": {
+      "stat-plus-one": "Add +1 to one of your stats.",
+      "another-vampire-move": "Take another Vampire move.",
+      "any-skin-move": "Take a move from any Skin.",
+      "vampiric-coterie": "You're in a Vampiric Coterie."
+    }
+  },
+  "werewolf": {
+    "name": "The Werewolf",
+    "tagline": "Aggressive, domineering, primal, and amorous.",
+    "identity": {
+      "looks": [
+        "primal",
+        "unkempt",
+        "wiry",
+        "rugged",
+        "feisty"
+      ],
+      "eyes": [
+        "cunning eyes",
+        "predatory eyes",
+        "fierce eyes",
+        "savage eyes",
+        "wolf eyes"
+      ],
+      "origins": [
+        "born a wolf",
+        "bitten",
+        "raised by wolves",
+        "ancestral power",
+        "awoken",
+        "favoured by the moon"
+      ]
+    },
+    "moves": {
+      "primal-dominance": {
+        "name": "Primal Dominance",
+        "summary": "Whenever you harm someone, take a String on them."
+      },
+      "scent-of-blood": {
+        "name": "Scent of Blood",
+        "summary": "Add 1 to any roll made against someone who has already been harmed earlier in the current scene."
+      },
+      "howl-at-the-moon": {
+        "name": "Howl at the Moon",
+        "summary": "While bathed in moonlight, you may treat your Dark stat as if it were 3."
+      },
+      "spirit-armour": {
+        "name": "Spirit Armour",
+        "summary": "While bathed in moonlight, reduce all harm you suffer by 1, and add 2 to all rolls to Keep Your Cool."
+      },
+      "heightened-senses": {
+        "name": "Heightened Senses",
+        "summary": "When you lean on your animal instincts to read a charged situation, roll with Dark. On a 10 up, ask the MC three questions from a fixed list and take 1 Forward; on a 7-9, ask one question and take 1 Forward. The list covers things like your best escape route or way in, who's most vulnerable to you, their secret weakness, what poses the biggest threat, and who's really in control."
+      },
+      "unstable": {
+        "name": "Unstable",
+        "summary": "Mark experience whenever you become your Darkest Self."
+      }
+    },
+    "choiceGroups": {},
+    "backstory": {
+      "lack-subtlety": "You lack subtlety — give everyone a String.",
+      "watched-from-a-distance": "You've spent weeks quietly watching someone, and now know their scent and mannerisms by heart — gain two Strings on them."
+    },
+    "darkestSelf": {
+      "summary": "You become a monstrous wolf-creature consumed by a hunger for power and dominance, which you pursue through bloodshed — anyone who stands in your way must be brought down and made to bleed.",
+      "escape": "Ends when you wound someone you truly care about, or when the sun rises — whichever happens first."
+    },
+    "sexMove": "Having sex with someone forges a deep spirit connection between you: while it holds, add 1 to all rolls made to defend them. Either of you can break the connection by having sex with someone else, and you'll know when it breaks.",
+    "advances": {
+      "stat-plus-one": "Add +1 to one of your stats.",
+      "another-werewolf-move": "Take another Werewolf move.",
+      "any-skin-move": "Take a move from any Skin.",
+      "wolf-pack": "You belong to a Wolf Pack."
+    }
+  },
+  "witch": {
+    "name": "The Witch",
+    "tagline": "Brooding, vengeful, secretive, and occult.",
+    "identity": {
+      "looks": [
+        "lithe",
+        "guarded",
+        "coy",
+        "edgy",
+        "meticulous"
+      ],
+      "eyes": [
+        "calculating eyes",
+        "smirking eyes",
+        "playful eyes",
+        "wicked eyes",
+        "deep eyes"
+      ],
+      "origins": [
+        "taught by grandma",
+        "awoken",
+        "pagan initiate",
+        "tumblr",
+        "avid reader"
+      ]
+    },
+    "moves": {
+      "sympathetic-tokens": {
+        "name": "Sympathetic Tokens",
+        "summary": "Sympathetic Tokens — items of personal significance taken from others — are your source of power, and count as Strings on the people they belong to."
+      },
+      "hex-casting": {
+        "name": "Hex-Casting",
+        "summary": "Know two Hexes. To cast one, either expend a Sympathetic Token during a secret ritual, or meet the target's gaze and chant at them, then roll with Dark. On a 10 up, it works and can easily be reversed. On a 7-9, it works, but choose one: you take 1 Harm; the Hex has weird side effects; you trigger your Darkest Self."
+      },
+      "transgressive-magic": {
+        "name": "Transgressive Magic",
+        "summary": "Add 1 to a Hex-Casting roll when the ritual behind it transgresses the community's moral or sexual standards."
+      },
+      "sanctuary": {
+        "name": "Sanctuary",
+        "summary": "You have a secret place for practicing witchcraft. Add 1 to all rolls you make within it."
+      }
+    },
+    "choiceGroups": {
+      "hexes": {
+        "label": "Hexes",
+        "options": {
+          "wither": {
+            "name": "Wither",
+            "summary": "Inflicts a nasty physical affliction on the hexed — hair loss, rotting teeth, a sudden heavy period, sickly yellowed skin. The specifics vary, but it's bad."
+          },
+          "binding": {
+            "name": "Binding",
+            "summary": "The hexed target becomes physically unable to harm others."
+          },
+          "ring-of-lies": {
+            "name": "Ring of Lies",
+            "summary": "Whenever the hexed target tries to lie, they hear a piercing ringing noise. Big lies disorient them and can make their knees buckle; severe lies can cause harm or even brain damage."
+          },
+          "watching": {
+            "name": "Watching",
+            "summary": "You fall into a deep sleep and begin seeing through the hexed target's eyes, sensing their reactions to and impressions of what they see."
+          },
+          "illusions": {
+            "name": "Illusions",
+            "summary": "Pick one theme — snakes and bugs, demonic visages, false prophecies, non-existent subtext. The hexed sees that thing everywhere, though you don't control the exact manifestations."
+          }
+        }
+      }
+    },
+    "backstory": {
+      "two-sympathetic-tokens": "You start the game with two Sympathetic Tokens — decide whose they are and what they are.",
+      "caught-rummaging": "One of the others caught you rummaging through their friend's stuff, but hasn't said anything — they get a String on you."
+    },
+    "darkestSelf": {
+      "summary": "You hex anyone who slights you, without restraint or subtlety. Every hex you cast has unexpected side effects and is stronger than you're comfortable with.",
+      "escape": "Offer peace to the person you've hurt the most."
+    },
+    "sexMove": "After sex, you can take a Sympathetic Token from your partner — openly, and they're fine with it.",
+    "advances": {
+      "stat-plus-one": "Add +1 to one of your stats.",
+      "another-witch-move": "Take another Witch move.",
+      "remaining-hexes": "Take all the remaining Hexes.",
+      "new-hex": "Create a new Hex.",
+      "any-skin-move": "Take a move from any Skin.",
+      "coven": "You belong to a Coven."
+    }
+  }
+}

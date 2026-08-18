@@ -1,0 +1,780 @@
+{
+  "fae": {
+    "name": "Víla",
+    "tagline": "Svůdná, nadpozemská, vrtkavá a mstivá.",
+    "identity": {
+      "looks": [
+        "útlá",
+        "dívčí",
+        "vyzáblá",
+        "tajemná",
+        "rozcuchaná"
+      ],
+      "eyes": [
+        "rychlé oči",
+        "zpěvné oči",
+        "hypnotické oči",
+        "smějící se oči",
+        "pronikavé oči"
+      ],
+      "origins": [
+        "zrozená z víl",
+        "vílí krve",
+        "vyměněná při narození",
+        "ukradla dar",
+        "dotčená darem"
+      ]
+    },
+    "moves": {
+      "faery-contract": {
+        "name": "Vílí smlouva",
+        "summary": "Získej páku na každého, kdo poruší slib nebo smlouvu, kterou ti dal. Když tu páku utratíš na spravedlnost, přidávají se možnosti: ať v klíčovou chvíli něco zpackají a utrpí 1 zranění, nebo si přidej 2 k hodu na pomstu."
+      },
+      "lure": {
+        "name": "Vábení",
+        "summary": "Když ti někdo dá slib, značí si zkušenost on. Když ti někdo slib poruší, značíš si zkušenost ty."
+      },
+      "guide": {
+        "name": "Průvodce",
+        "summary": "Utrať páku na někoho ochotného a proveď ho závojem do vílí říše — na scénu nebo dvě, než se oba vrátíte."
+      },
+      "beyond-the-veil": {
+        "name": "Za závojem",
+        "summary": "Zahleď se do propasti a vyžádej si slyšení u Vílího krále. Při 10+ ti navíc odhalí skrytou páku na někoho a ty ji získáš; při 7–9 po tobě navíc bude chtít službu."
+      },
+      "unashamed": {
+        "name": "Beze studu",
+        "summary": "Dej někomu páku na sebe a přidej si 3 k pokusu ho vzrušit."
+      },
+      "the-wild-hunt": {
+        "name": "Divoký hon",
+        "summary": "Přidej si 1 k hodu na vzrušení, když se pohybuješ nejdivočejším způsobem — jako kočka nebo vlk."
+      }
+    },
+    "choiceGroups": {},
+    "backstory": {
+      "heart-on-sleeve": "Nosíš srdce na dlani — dej každému jednu páku.",
+      "captured-fancy": "Někoho sis získala — získej na něj 2 páky."
+    },
+    "darkestSelf": {
+      "summary": "Každé slovo, které řekneš i uslyšíš, se počítá jako slib. Porušený slib volá po spravedlnosti — lstí, nebo krví. Lidská pravidla milosti pro tebe neplatí.",
+      "escape": "Nějakým způsobem vyrovnej misky vah spravedlnosti."
+    },
+    "sexMove": "Když s někým nahá ležíš, můžeš ho požádat o slib. Když odmítne, získej na něj 2 páky.",
+    "advances": {
+      "stat-plus-one": "Přidej +1 k jedné ze svých vlastností.",
+      "another-fae-move": "Vezmi si další vílí tah.",
+      "any-skin-move": "Vezmi si tah z libovolné kůže.",
+      "jury-of-fae": "Patříš k Vílí porotě."
+    }
+  },
+  "ghost": {
+    "name": "Duch",
+    "tagline": "Osamělý, zraněný, pečující a strašidelný.",
+    "identity": {
+      "looks": [
+        "opuštěný",
+        "vystrašený",
+        "upjatý",
+        "nepatřičný",
+        "zadumaný"
+      ],
+      "eyes": [
+        "prázdné oči",
+        "utrápené oči",
+        "matné oči",
+        "znepokojivé oči",
+        "pronikavé oči"
+      ],
+      "origins": [
+        "nechán napospas smrti",
+        "zavražděn chladnokrevně",
+        "zavražděn v žáru vášně",
+        "tragická nehoda",
+        "zmatená smrt"
+      ]
+    },
+    "moves": {
+      "unresolved-trauma": {
+        "name": "Nevyřešené trauma",
+        "summary": "Cokoliv, co ti připomene tvou smrt, ti dá Stav traumatizovaný. Když ti někdo pomůže ho vyřešit, oba si značíte zkušenost."
+      },
+      "helpful-spirit": {
+        "name": "Nápomocný duch",
+        "summary": "Získej páku na každého, komu pomůžeš vyřešit Stav."
+      },
+      "transference": {
+        "name": "Přenos",
+        "summary": "Opravdu naslouchej něčím potížím: vyléčí si 1 Zranění a zbytek zranění se přenese na tebe."
+      },
+      "projected-blame": {
+        "name": "Promítaná vina",
+        "summary": "Dokud máš Stav traumatizovaný, můžeš zacházet s ostatními, jako by nesli vinu za mou smrt."
+      },
+      "creep": {
+        "name": "Slídění",
+        "summary": "Potichu sleduj někoho v soukromé chvíli — jak spí, jak se líčí — a získej na něj páku."
+      },
+      "limitless": {
+        "name": "Bez hranic",
+        "summary": "Umíš procházet zdmi a létat."
+      }
+    },
+    "choiceGroups": {},
+    "backstory": {
+      "knows-you-died": "Někdo ví, že jsi mrtvý a jak se to stalo — získá na tebe 2 páky.",
+      "watched-them-sleep": "Byl jsi v něčí ložnici, zatímco spal — získej na něj páku."
+    },
+    "darkestSelf": {
+      "summary": "Staneš se neviditelným a nevšímaným — nikdo tě nevidí, neslyší, nemůže se tě dotknout. Jediný způsob, jak se domluvit, jsou neživé předměty.",
+      "escape": "Někdo uzná tvou přítomnost a dá ti najevo, jak moc tě chce mít nablízku."
+    },
+    "sexMove": "Po sexu si navzájem položíte otázku, ať už v roli, nebo napřímo mezi hráči, a oba musíte odpovědět upřímně a přímo.",
+    "advances": {
+      "stat-plus-one": "Přidej +1 k jedné ze svých vlastností.",
+      "another-ghost-move": "Vezmi si další tah Ducha.",
+      "any-skin-move": "Vezmi si tah z libovolné kůže.",
+      "haunted-house": "Bydlíš ve Strašidelném domě."
+    }
+  },
+  "ghoul": {
+    "name": "Ghúl",
+    "tagline": "Posedlý, nebezpečný, morbidní a tichý.",
+    "identity": {
+      "looks": [
+        "vyzáblý",
+        "strnulý",
+        "znetvořený",
+        "odtažitý",
+        "zpustošený"
+      ],
+      "eyes": [
+        "duté oči",
+        "tiché oči",
+        "vypočítavé oči",
+        "tvrdé oči",
+        "hladové oči"
+      ],
+      "origins": [
+        "vzkříšený",
+        "sestrojený",
+        "vyhrabaný",
+        "odmítnutý",
+        "poslaný"
+      ]
+    },
+    "moves": {
+      "the-hunger": {
+        "name": "Hlad",
+        "summary": "Zakroužkuj jeden Hlad — strach, moc, kořist, nebo vzrušení. Když ho bezhlavě honíš, přidej si 1 k hodu; když necháš dobrou příležitost nasytit se projít, hodíš místo toho na zachování chladné hlavy."
+      },
+      "what-the-right-hand-wants": {
+        "name": "Co chce pravá ruka",
+        "summary": "Tvé tělo touží po víc než jedné věci — vezmi si další Hlad dle vlastního výběru."
+      },
+      "satiety": {
+        "name": "Sytost",
+        "summary": "Kdykoli ukojíš Hlad, vyber si jedno: zahoj 1 Zranění, znač si Zkušenost, nebo si přidej +1 vpřed."
+      },
+      "short-rest-for-the-wicked": {
+        "name": "Krátký odpočinek pro hříšníky",
+        "summary": "Smrt tě nedrží — pár hodin po tom, co zemřeš, znovu vstaneš, úplně zahojený."
+      },
+      "watchful-golem": {
+        "name": "Bdělý golem",
+        "summary": "Znač si Zkušenost, kdykoli někoho tajně ochráníš, aniž by se kdy dozvěděl, že jsi to byl ty."
+      },
+      "ending": {
+        "name": "Konec",
+        "summary": "Vzpomínáš si na vlastní smrt do posledního detailu. Když o ní někomu vyprávíš, dá mu to Stav morbidní, a ty hodíš na to, abys ho vzrušil, pomocí Chladu."
+      },
+      "esprit-de-corpse": {
+        "name": "Duch mrtvol",
+        "summary": "Když se zahledíš do propasti, odevzdá ti jeden ze svých vlastních Hladů, který si poneseš jako vlastní; jeho pozdější ukojení ti navíc znamená Zkušenost."
+      }
+    },
+    "choiceGroups": {
+      "hunger": {
+        "label": "Hlad",
+        "options": {
+          "fear": {
+            "name": "Strach"
+          },
+          "power": {
+            "name": "Moc"
+          },
+          "plunder": {
+            "name": "Kořist"
+          },
+          "thrills": {
+            "name": "Vzrušení"
+          }
+        }
+      }
+    },
+    "backstory": {
+      "reminded-you-love-remained": "Někdo ti ukázal, že ti smrt lásku nakonec neukradla — dej mu Páku.",
+      "watched-you-die": "Pokud tě někdo viděl zemřít, ty i on na sebe získáte po 2 Pákách."
+    },
+    "darkestSelf": {
+      "summary": "Nemyslíš na nic jiného než na sycení se, a tvá obvyklá touha ustupuje hlubšímu, primitivnějšímu hladu po samotném mase a krvi.",
+      "escape": "Unikni tomu tak, že se přejíš, nebo zůstaneš zavřený dost dlouho na to, abys znovu nabyl klid."
+    },
+    "sexMove": "Když se s někým vyspíš, získáš nový Hlad.",
+    "advances": {
+      "stat-plus-one": "Přidej +1 k jedné ze svých vlastností.",
+      "another-ghoul-move": "Vezmi si další ghúlí tah.",
+      "any-skin-move": "Vezmi si tah z libovolné kůže.",
+      "reckless-crew": "Patříš k Nerozvážné partě."
+    }
+  },
+  "hollow": {
+    "name": "Prázdná",
+    "tagline": "Nejistá, nestálá, snadno ovlivnitelná a ztracená.",
+    "identity": {
+      "looks": [
+        "bezvadná",
+        "rozcuchaná",
+        "pronásledovaná",
+        "nezkušená",
+        "upřímná"
+      ],
+      "eyes": [
+        "uhýbavé oči",
+        "bezduché oči",
+        "vytřeštěné oči",
+        "prázdné oči",
+        "zoufalé oči"
+      ],
+      "origins": [
+        "zrozená z přání",
+        "nepovedený experiment",
+        "kdysi hračka",
+        "ztráta paměti",
+        "stroj"
+      ]
+    },
+    "moves": {
+      "better-than-nothing": {
+        "name": "Lepší než nic",
+        "summary": "Kdykoli získáš nový Stav, znač si zkušenost."
+      },
+      "a-blank-canvas": {
+        "name": "Prázdné plátno",
+        "summary": "Když jednáš způsobem, který nechá jeden z tvých Stavů přetvořit to, kým jsi, ten Stav škrtni a přidej si 1 k hodu."
+      },
+      "try-harder-next-time": {
+        "name": "Příště se snaž víc",
+        "summary": "Poté, co něco zpackáš, vezmi si vhodný Stav a získej +1 vpřed."
+      },
+      "fake": {
+        "name": "Přetvářka",
+        "summary": "Přidej si 1 k jakémukoli hodu, který provedeš, když lžeš."
+      },
+      "metamorphosis": {
+        "name": "Proměna",
+        "summary": "Při 7+, když se zahledíš do propasti, ti propast navíc odhalí, čím se musíš stát, a můžeš natrvalo prohodit dvě své vlastnosti."
+      },
+      "strange-impressions": {
+        "name": "Podivné dojmy",
+        "summary": "Když tě zraní nebo uzdraví hlavní postava, můžeš na ni zírat a dočasně si na svůj list vypůjčit jeden z jejích tahů kůže — jakmile ho použiješ, zmizí."
+      }
+    },
+    "choiceGroups": {},
+    "backstory": {
+      "learned-their-cues": "Naučila ses někoho napodobit tím, že jsi ho pozorně sledovala — získej na něj 2 páky.",
+      "invented-past-exposed": "Někdo přišel na to, že tvé Pozadí je vymyšlené — získá tím na tebe 2 páky."
+    },
+    "darkestSelf": {
+      "summary": "Cítíš se uvězněná ve vlastním těle a potřebuješ ho potrestat, a potřebuješ vypátrat toho, kdo tě stvořil, a pohnat ho k odpovědnosti.",
+      "escape": "Uznej, že někdo jiný je uvězněný ještě víc než ty."
+    },
+    "sexMove": "Po sexu si každý z vás potají napíše, jestli to pro tvou postavu bylo matoucí, nebo uklidňující; pokud napíšete stejné slovo, oba si značíte zkušenost.",
+    "advances": {
+      "stat-plus-one": "Přidej +1 k jedné ze svých vlastností.",
+      "another-hollow-move": "Vezmi si další tah kůže Prázdná.",
+      "any-skin-move": "Vezmi si tah z libovolné kůže.",
+      "hollow-siblings": "Našla jsi Prázdné sourozence."
+    }
+  },
+  "infernal": {
+    "name": "Pekelník",
+    "tagline": "Pokoušený, impulzivní a zabředlý až po uši.",
+    "identity": {
+      "looks": [
+        "tichý",
+        "zběsilý",
+        "jedovatý",
+        "zhýčkaný",
+        "vyděšený"
+      ],
+      "eyes": [
+        "prázdné oči",
+        "vypočítavé oči",
+        "hořící oči",
+        "mihotavé oči",
+        "pronikavé oči"
+      ],
+      "origins": [
+        "prodaná duše",
+        "vyslanec",
+        "na poslední šanci",
+        "legie",
+        "poskok",
+        "vyvolený"
+      ]
+    },
+    "moves": {
+      "soul-debt": {
+        "name": "Dluh duše",
+        "summary": "Stanov svůj dluh vůči pojmenované Temné moci a vyber si dvě Úmluvy, které s tebou už uzavřela. Jak dluh roste, sbírá na tebe Temná moc páky, a pokud jich na tebe někdy drží 5, spustíš své Nejtemnější já."
+      },
+      "dark-recruiter": {
+        "name": "Temný náborář",
+        "summary": "Znač si zkušenost pokaždé, když Temné moci předáš nevinnou duši."
+      },
+      "under-pressure": {
+        "name": "Pod tlakem",
+        "summary": "Dokud na tebe někdo drží 3 nebo více pák, přidej si 1 k jakémukoli hodu, kterým plníš jeho vůli."
+      },
+      "cant-save-myself": {
+        "name": "Nedokážu se zachránit sám",
+        "summary": "Když tě někdo zachrání před hrozbou, na kterou nestačíš sám, značí si zkušenost on a ty na něj získáváš páku."
+      }
+    },
+    "choiceGroups": {
+      "bargains": {
+        "label": "Úmluvy",
+        "options": {
+          "the-power-flows-through-you": {
+            "name": "Moc proudí skrze tebe",
+            "summary": "Dej Temné moci páku a přidej si 2 vpřed."
+          },
+          "numbing-it-out": {
+            "name": "Otupění",
+            "summary": "Dej Temné moci páku a zbav se Stavu, nebo si vylič až dvě Zranění."
+          },
+          "elsewise-power": {
+            "name": "Vypůjčená moc",
+            "summary": "Dej Temné moci páku a půjč si na jedno použití tah, který nemáš, z libovolné Kůže."
+          },
+          "uncanny-voices": {
+            "name": "Zlověstné hlasy",
+            "summary": "Dej Temné moci páku a dozvíš se tajemství o někom, s kým právě mluvíš — jeho hráč zvolí, jestli odhalí tajný strach, touhu, nebo sílu."
+          },
+          "strings-attached": {
+            "name": "S háčkem",
+            "summary": "Požádej Temnou moc o něco, po čem zoufale toužíš; MC určí cenu a naznačí skrytý háček — a když ji zaplatíš, dostaneš to, oč jsi žádal."
+          }
+        }
+      }
+    },
+    "backstory": {
+      "owe-debts": "Máš dluhy — rozdej 3 páky, rozděl je, jak chceš, mezi Temnou moc a ostatní postavy.",
+      "someone-thinks-they-can-save-you": "Někdo věří, že tě dokáže zachránit — získej na něj páku."
+    },
+    "darkestSelf": {
+      "summary": "Stáváš se potřebným, roztřeseným a zoufale toužíš po sepětí s někým, zatímco na tebe Temná moc nakládá děsivé, otevřené požadavky. Splnění každého požadavku ti sundá jednu z jejích pák na tebe a přibližuje tě zpátky k pocitu celistvosti.",
+      "escape": "Unikneš, jakmile na tebe Temná moc nedrží žádné páky, nebo když uzavřeš úmluvu s něčím ještě nebezpečnějším."
+    },
+    "sexMove": "Sex ti sundá jednu z pák, které na tebe drží Temná moc, a místo toho jí dá novou páku na toho, s kým jsi měl sex.",
+    "advances": {
+      "stat-plus-one": "Přidej +1 k jedné ze svých vlastností.",
+      "another-infernal-move": "Vezmi si další pekelný tah.",
+      "take-remaining-bargains": "Vezmi si zbývající Úmluvy.",
+      "any-skin-move": "Vezmi si tah z libovolné kůže.",
+      "needy-fiends": "Zásobuješ Potřebné démony."
+    }
+  },
+  "mortal": {
+    "name": "Smrtelník",
+    "tagline": "Zranitelný, přitažlivý a krásný.",
+    "identity": {
+      "looks": [
+        "tichý",
+        "zoufalý",
+        "nemotorný",
+        "krásný",
+        "vykořeněný"
+      ],
+      "eyes": [
+        "laní oči",
+        "smutné oči",
+        "těkavé oči",
+        "nervózní oči",
+        "lidské oči"
+      ],
+      "origins": [
+        "nový ve městě",
+        "kluk od vedle",
+        "tvůj barista",
+        "něčí přítelkyně",
+        "něčí přítel",
+        "nikdo"
+      ]
+    },
+    "moves": {
+      "true-love": {
+        "name": "Pravá láska",
+        "summary": "Vždy máš přesně jednoho Milence, vybraného během svého pozadí. Pokud se zamiluješ do někoho jiného, dej mu páku a stane se tvým novým Milencem. Vždy si neseš +1 vpřed k hodu, kterým se snažíš získat srdce nebo náklonnost svého Milence."
+      },
+      "mess-with-me-mess-with-him": {
+        "name": "Zahrávej si se mnou, zahráváš si s ním",
+        "summary": "Když použiješ jméno svého Milence jako hrozbu, přidej si 2 k hodu na srazení někoho nebo na zachování chladné hlavy, ale tvůj Milenec za to získá páku na tebe."
+      },
+      "entrenched": {
+        "name": "Zakopaní",
+        "summary": "Když ty a jiná postava držíte dohromady 5 nebo více pák jeden na druhého, získej 1 ke všem hodům proti ní."
+      },
+      "sympathy-is-my-weapon": {
+        "name": "Soucit je má zbraň",
+        "summary": "Pokaždé, když někomu odpustíš, že ti ublížil, a omluvíš jeho povahu, získej na něj páku."
+      },
+      "excuses-are-my-armour": {
+        "name": "Výmluvy jsou má zbroj",
+        "summary": "Když přehlédneš zjevný problém se svým Milencem nebo s tím, jak se k tobě chová, znač si zkušenost."
+      },
+      "downward-spiral": {
+        "name": "Sestupná spirála",
+        "summary": "Když se zahledíš do propasti, můžeš si vzít 1 zranění a přidat si 2 k hodu."
+      },
+      "down-the-rabbit-hole": {
+        "name": "Králičí nora",
+        "summary": "Když strkáš nos do věcí, které nejsou určené pro tvůj druh, někdo zapojený do té situace na tebe získá páku a ty si znač zkušenost."
+      }
+    },
+    "choiceGroups": {},
+    "backstory": {
+      "chosen-lover": "Vyber si jednu osobu, která bude tvým Milencem. Dej jí tři páky na sebe a vezmi si jednu páku na ni."
+    },
+    "darkestSelf": {
+      "summary": "Nikdo ti nerozumí, ani se o to nesnaží, a už tě unavuje nechat se šlapat lidmi, které miluješ. Udeříš a zradíš je, čímž odhalíš jejich monstróznost spolu se svou vlastní.",
+      "escape": "Ze svého Nejtemnějšího já unikneš, jen když si uvědomíš bolest, kterou působíš svému Milenci."
+    },
+    "sexMove": "Sex s někým v tobě probudí něco zlověstného. Až od něj příště odvrátíš pohled, promění se ve své Nejtemnější já.",
+    "advances": {
+      "stat-plus-one": "Přidej +1 k jedné ze svých vlastností.",
+      "another-mortal-move": "Vezmi si další smrtelnický tah.",
+      "any-skin-move": "Vezmi si tah z libovolné kůže."
+    }
+  },
+  "queen": {
+    "name": "Královna",
+    "tagline": "Oblíbená, nebezpečná, jedovatá a velitelská.",
+    "identity": {
+      "looks": [
+        "oslnivá",
+        "panovačná",
+        "ledová",
+        "neurotická",
+        "upovídaná"
+      ],
+      "eyes": [
+        "vypočítavé oči",
+        "podmanivé oči",
+        "kalné oči",
+        "prázdné oči",
+        "hezké oči"
+      ],
+      "origins": [
+        "nejoblíbenější",
+        "nejnebezpečnější",
+        "vůdkyně kultu",
+        "zdroj nákazy",
+        "prvorozená kolektivní mysli"
+      ]
+    },
+    "moves": {
+      "the-clique": {
+        "name": "Parta",
+        "summary": "Vedeš nejtvrdší a nejskvělejší partu široko daleko; pro účely pravidel se počítá jako parta. Vyber pro ni jednu vlastnost z nabídky Síla party."
+      },
+      "the-shield": {
+        "name": "Štít",
+        "summary": "Dokud jsi obklopená svou partou, odečti 1 od každého hodu vedeného proti tobě."
+      },
+      "bought-loyalty": {
+        "name": "Koupená věrnost",
+        "summary": "Dej vedlejší postavě páku na sebe, abys ji hned teď přinutila pro tebe něco udělat; MC rozhodne, jaký úplatek, výhrůžka nebo přemlouvání je k tomu potřeba."
+      },
+      "and-your-enemies-closer": {
+        "name": "Nepřátele blíž",
+        "summary": "Kdykoli tě někdo zradí, získej na něj páku."
+      },
+      "many-bodies": {
+        "name": "Mnoho těl",
+        "summary": "Slib někomu jednoho člena své party a přidej si 2 k pokusu ho vzrušit. Zvlášť: kdykoli má kterýkoli člen tvé party s někým sex, spustí se tvůj Sex tah."
+      },
+      "streaming": {
+        "name": "Vysílání",
+        "summary": "S partou máš telepatické spojení a vždy vnímáš jejich emoce a strachy. Abys rozeznala konkrétní myšlenky, zahleď se do propasti a přidej si 1 k hodu."
+      }
+    },
+    "choiceGroups": {
+      "gang-strength": {
+        "label": "Síla party",
+        "options": {
+          "armed": {
+            "name": "Ozbrojená",
+            "summary": "Tvoje parta je ozbrojená zbraněmi a dalším opravdu nebezpečným vybavením."
+          },
+          "connected": {
+            "name": "Napojená",
+            "summary": "Tvoje parta má peníze a přístup k drahým drogám."
+          },
+          "talented": {
+            "name": "Talentovaná",
+            "summary": "Tvoje parta je v něčem opravdu dobrá, třeba jako kapela nebo sportovní tým."
+          },
+          "cultists": {
+            "name": "Kultisté",
+            "summary": "Tvoje parta je svázaná temnými přísahami a zemřela by pro tebe."
+          }
+        }
+      }
+    },
+    "backstory": {
+      "gang-members": "Pojmenuj tři vedlejší postavy, které patří do tvé party, a získej na každou z nich páku.",
+      "someone-threatening": "Vyber si někoho, koho vnímáš jako hrozbu. Dej mu páku na sebe a na oplátku získej páku na něj."
+    },
+    "darkestSelf": {
+      "summary": "Každé selhání lidí kolem tebe se stává neodpustitelným a ty cítíš, že máš právo z každého, kdo tě zklamal, udělat tvrdý a krutý příklad, místo abys sama nesla jakékoli následky.",
+      "escape": "Předej část své moci někomu, kdo si ji zaslouží víc, nebo znič nevinného člověka, abys dokázala svou nadvládu."
+    },
+    "sexMove": "Když s někým máš sex, získá Stav „jeden z nás\"; dokud ho má, počítá se jako součást tvé party.",
+    "advances": {
+      "stat-plus-one": "Přidej +1 k jedné ze svých vlastností.",
+      "another-queen-move": "Vezmi si další tah Královny.",
+      "any-skin-move": "Vezmi si tah z libovolné kůže.",
+      "clique-again": "Vezmi si znovu Partu a popiš další partu."
+    }
+  },
+  "vampire": {
+    "name": "Upír",
+    "tagline": "Ledový, manipulativní, hypnotický a krutý.",
+    "identity": {
+      "looks": [
+        "intenzivní",
+        "odměřená",
+        "dravčí",
+        "doutnající",
+        "staromódní"
+      ],
+      "eyes": [
+        "mrtvé oči",
+        "chtivé oči",
+        "bolestné oči",
+        "hladové oči",
+        "žíznivé oči"
+      ],
+      "origins": [
+        "nově zrozená",
+        "obrácená v tomto století",
+        "stará mnoho věků",
+        "šlechtična",
+        "prokletá krev"
+      ]
+    },
+    "moves": {
+      "invited": {
+        "name": "Pozvání",
+        "summary": "Nemůžeš vstoupit do domu bez pozvání. Kdykoli tě někdo pozve dovnitř, získej na něj páku."
+      },
+      "hypnotic": {
+        "name": "Hypnóza",
+        "summary": "Hoď na Žár, abys zhypnotizovala někoho, kdo na tebe nemá žádnou páku. Při 10+ tě poslechne přesně podle tvých přání, aniž by si čehokoli všiml. Při 7–9 hypnóza zabere, ale vyber si jedno: všimne si, cos s ním provedla, poplete si tvé příkazy, nebo mu to nenávratně poškodí zdravý rozum."
+      },
+      "cold-as-ice": {
+        "name": "Chladná jako led",
+        "summary": "Když srazíš někoho a hodíš 7 nebo víc, vyber si navíc jednu možnost ze seznamu toho tahu."
+      },
+      "the-feeding": {
+        "name": "Krmení",
+        "summary": "Nasávej horkou krev přímo z někoho. Poprvé, co se od něj nakrmíš, si oba značíte zkušenost. Pokaždé, když se nakrmíš, vyber si dvě možnosti: vylič si 1 zranění, vezmi si +1 vpřed, nebo zajisti, že rozhodně nezemře."
+      },
+      "marked-for-the-hunt": {
+        "name": "Poznamenaná pro lov",
+        "summary": "Nakrmit se na někom vytváří trvalé, nadpřirozené pouto. Poté, když se zahledíš do propasti kvůli tomu, kde je nebo jak se mu daří, hoď, jako by tvá Temnota byla 3."
+      },
+      "inescapable": {
+        "name": "Nevyhnutelná",
+        "summary": "Utrať páku na někoho a požaduj, aby zůstal v tvé přítomnosti. Pokud tě i tak opustí, získej na něj 2 páky."
+      }
+    },
+    "choiceGroups": {},
+    "backstory": {
+      "beautiful": "Tvá krása je nepopiratelná — získej páku na každého.",
+      "saved-your-unlife": "Někdo jednou zachránil tvůj neživot — získá na tebe 2 páky."
+    },
+    "darkestSelf": {
+      "summary": "Každý kolem tebe se stává pěšcem nebo hračkou, kterou můžeš zraňovat a hrát si s ní pro vlastní pobavení, než s ní skoncuješ.",
+      "escape": "Někdo mocnější než ty tě postaví na tvé místo."
+    },
+    "sexMove": "Když někomu odepřeš sex, získej na něj páku. Když se s někým vyspíš, ztrať na něj všechny páky.",
+    "advances": {
+      "stat-plus-one": "Přidej +1 k jedné ze svých vlastností.",
+      "another-vampire-move": "Vezmi si další upíří tah.",
+      "any-skin-move": "Vezmi si tah z libovolné kůže.",
+      "vampiric-coterie": "Jsi v upíří kotérii."
+    }
+  },
+  "werewolf": {
+    "name": "Vlkodlak",
+    "tagline": "Agresivní, panovačný, pudový a náruživý.",
+    "identity": {
+      "looks": [
+        "pudový",
+        "neupravený",
+        "šlachovitý",
+        "drsný",
+        "bojovný"
+      ],
+      "eyes": [
+        "mazané oči",
+        "dravčí oči",
+        "zuřivé oči",
+        "divoké oči",
+        "vlčí oči"
+      ],
+      "origins": [
+        "narozený jako vlk",
+        "pokousaný",
+        "vychovaný vlky",
+        "moc předků",
+        "probuzený",
+        "oblíbenec měsíce"
+      ]
+    },
+    "moves": {
+      "primal-dominance": {
+        "name": "Pudová nadvláda",
+        "summary": "Kdykoli někoho zraníš, získej na něj páku."
+      },
+      "scent-of-blood": {
+        "name": "Pach krve",
+        "summary": "Přidej si 1 k libovolnému hodu proti někomu, kdo už byl v této scéně dřív zraněn."
+      },
+      "howl-at-the-moon": {
+        "name": "Vytí na měsíc",
+        "summary": "Zatímco se koupeš v měsíčním světle, můžeš svou vlastnost Temnota počítat, jako by měla hodnotu 3."
+      },
+      "spirit-armour": {
+        "name": "Duchovní brnění",
+        "summary": "Zatímco se koupeš v měsíčním světle, sniž si veškeré utrpěné zranění o 1 a přidej si 2 ke všem hodům na zachování chladné hlavy."
+      },
+      "heightened-senses": {
+        "name": "Vybroušené smysly",
+        "summary": "Když se spolehneš na svoje zvířecí instinkty, abys pochopil napjatou situaci, hoď na Temnotu. Při 10+ polož Vypravěči tři otázky z pevného seznamu a získej +1 vpřed; při 7-9 polož jednu otázku a získej +1 vpřed. Seznam zahrnuje věci jako tvoje nejlepší úniková cesta nebo cesta dovnitř, kdo je vůči tobě nejzranitelnější, jeho tajná slabina, co představuje největší hrozbu a kdo tu má skutečně navrch."
+      },
+      "unstable": {
+        "name": "Nestabilní",
+        "summary": "Znač si zkušenost, kdykoli se staneš svým Nejtemnějším já."
+      }
+    },
+    "choiceGroups": {},
+    "backstory": {
+      "lack-subtlety": "Chybí ti jemnost — dej každému páku.",
+      "watched-from-a-distance": "Celé týdny jsi někoho potají sledoval a teď znáš jeho pach i zvyky nazpaměť — získej na něj dvě páky."
+    },
+    "darkestSelf": {
+      "summary": "Staneš se monstrózním vlčím stvořením pohlceným touhou po moci a nadvládě, kterou naplňuješ krveprolitím — každý, kdo ti stojí v cestě, musí padnout a krvácet.",
+      "escape": "Končí, když zraníš někoho, na kom ti opravdu záleží, nebo když vyjde slunce — podle toho, co nastane dřív."
+    },
+    "sexMove": "Sex s někým mezi vámi vytvoří hluboké duchovní pouto: dokud trvá, přidávej si 1 ke všem hodům na jeho obranu. Kdokoli z vás dvou ho může přerušit tím, že bude mít sex s někým jiným, a oba poznáte, když se to stane.",
+    "advances": {
+      "stat-plus-one": "Přidej +1 k jedné ze svých vlastností.",
+      "another-werewolf-move": "Vezmi si další vlkodlačí tah.",
+      "any-skin-move": "Vezmi si tah z libovolné kůže.",
+      "wolf-pack": "Patříš k Vlčí smečce."
+    }
+  },
+  "witch": {
+    "name": "Čarodějnice",
+    "tagline": "Zadumaná, mstivá, tajnůstkářská a okultní.",
+    "identity": {
+      "looks": [
+        "vláčná",
+        "ostražitá",
+        "koketní",
+        "ostrá",
+        "pečlivá"
+      ],
+      "eyes": [
+        "vypočítavé oči",
+        "posměšné oči",
+        "hravé oči",
+        "zlomyslné oči",
+        "hluboké oči"
+      ],
+      "origins": [
+        "naučená babičkou",
+        "procitlá",
+        "pohanská zasvěcenkyně",
+        "tumblr",
+        "vášnivá čtenářka"
+      ]
+    },
+    "moves": {
+      "sympathetic-tokens": {
+        "name": "Sympatetické předměty",
+        "summary": "Sympatetické předměty — osobní věci, které jsi vzala ostatním — jsou zdrojem tvé moci a počítají se jako Páky na osoby, kterým patří."
+      },
+      "hex-casting": {
+        "name": "Sesílání kleteb",
+        "summary": "Znáš dvě Kletby. Sešli jednu tak, že buď utratíš Sympatetický předmět během tajného rituálu, nebo se cíli podíváš do očí a odříkáš zaklínadlo — pak hoď na Temnotu. Při 10+ kletba zabere a dá se snadno zvrátit. Při 7–9 zabere, ale vyber si jedno: utrpíš 1 zranění; kletba má podivné vedlejší účinky; probudíš své Nejtemnější já."
+      },
+      "transgressive-magic": {
+        "name": "Magie tabu",
+        "summary": "Přidej si 1 k hodu na Sesílání kleteb, pokud rituál za ním porušuje mravní nebo sexuální normy komunity."
+      },
+      "sanctuary": {
+        "name": "Útočiště",
+        "summary": "Máš tajné místo pro provozování čarodějnictví. Přidej si 1 ke všem hodům, které v něm provedeš."
+      }
+    },
+    "choiceGroups": {
+      "hexes": {
+        "label": "Kletby",
+        "options": {
+          "wither": {
+            "name": "Chřadnutí",
+            "summary": "Sešle na prokletého ošklivou tělesnou neduh — vypadávání vlasů, hnijící zuby, náhlou silnou menstruaci, chorobně zažloutlou kůži. Konkrétní podoba se liší, ale vždy je to zlé."
+          },
+          "binding": {
+            "name": "Spoutání",
+            "summary": "Prokletý cíl se stane tělesně neschopným ublížit ostatním."
+          },
+          "ring-of-lies": {
+            "name": "Kruh lží",
+            "summary": "Kdykoli se prokletý cíl pokusí lhát, uslyší pronikavé zvonění. Velké lži ho dezorientují a mohou mu podlomit kolena; závažné lži mu mohou způsobit zranění nebo dokonce poškození mozku."
+          },
+          "watching": {
+            "name": "Sledování",
+            "summary": "Upadneš do hlubokého spánku a začneš vidět očima prokletého cíle, vnímat jeho reakce a dojmy z toho, co vidí."
+          },
+          "illusions": {
+            "name": "Iluze",
+            "summary": "Vyber si jedno téma — hadi a hmyz, démonické tváře, falešná proroctví, neexistující podtext. Prokletý to vidí všude, i když přesnou podobu projevů nemáš pod kontrolou."
+          }
+        }
+      }
+    },
+    "backstory": {
+      "two-sympathetic-tokens": "Hru začínáš se dvěma Sympatetickými předměty — urči, čí jsou a co jsou zač.",
+      "caught-rummaging": "Někdo z ostatních tě přistihl, jak se hrabeš ve věcech jejich kamaráda, ale nic neřekl — získává na tebe páku."
+    },
+    "darkestSelf": {
+      "summary": "Prokleješ každého, kdo tě urazí, bez zábran a jemnosti. Každá kletba, kterou sešleš, má nečekané vedlejší účinky a je silnější, než je ti příjemné.",
+      "escape": "Nabídni smír osobě, které jsi ublížila nejvíc."
+    },
+    "sexMove": "Po sexu si můžeš vzít Sympatetický předmět od svého partnera — otevřeně, a jemu to nevadí.",
+    "advances": {
+      "stat-plus-one": "Přidej +1 k jedné ze svých vlastností.",
+      "another-witch-move": "Vezmi si další tah Čarodějnice.",
+      "remaining-hexes": "Vezmi si všechny zbývající Kletby.",
+      "new-hex": "Vytvoř novou Kletbu.",
+      "any-skin-move": "Vezmi si tah z libovolné kůže.",
+      "coven": "Patříš ke kovenu."
+    }
+  }
+}

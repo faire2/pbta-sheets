@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { useOptimistic, useTransition } from "react"
 import { MAX_HARM, XP_PER_ADVANCE } from "@/types/sheet"
 import { setTracks } from "../actions"
@@ -22,6 +23,7 @@ export function HarmTrack({
   value: number
   editable: boolean
 }) {
+  const t = useTranslations()
   const [optimistic, setOptimistic] = useOptimistic(value)
   const [, startTransition] = useTransition()
 
@@ -37,7 +39,7 @@ export function HarmTrack({
     <div
       className="flex items-end gap-1"
       role={editable ? "group" : undefined}
-      aria-label={`Harm ${String(optimistic)} of ${String(MAX_HARM)}`}
+      aria-label={`${t("terms.harm")} ${String(optimistic)}/${String(MAX_HARM)}`}
     >
       {Array.from({ length: MAX_HARM }, (_, i) => {
         const filled = i < optimistic
@@ -62,7 +64,7 @@ export function HarmTrack({
               set(i)
             }}
             aria-pressed={filled}
-            aria-label={`Harm ${String(i + 1)}`}
+            aria-label={`${t("terms.harm")} ${String(i + 1)}`}
             className="focus-visible:outline-oxblood flex h-11 w-11 items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-95"
           >
             {chevron}
@@ -86,6 +88,7 @@ export function XpTrack({
   value: number
   editable: boolean
 }) {
+  const t = useTranslations()
   const [optimistic, setOptimistic] = useOptimistic(value)
   const [, startTransition] = useTransition()
 
@@ -104,7 +107,7 @@ export function XpTrack({
       <div
         className="flex items-center gap-0.5"
         role={editable ? "group" : undefined}
-        aria-label={`Experience ${String(optimistic)} of ${String(XP_PER_ADVANCE)}`}
+        aria-label={`${t("terms.experience")} ${String(optimistic)}/${String(XP_PER_ADVANCE)}`}
       >
         {Array.from({ length: XP_PER_ADVANCE }, (_, i) => {
           const filled = i < optimistic
@@ -124,7 +127,7 @@ export function XpTrack({
                 set(i)
               }}
               aria-pressed={filled}
-              aria-label={`Experience ${String(i + 1)}`}
+              aria-label={`${t("terms.experience")} ${String(i + 1)}`}
               className="focus-visible:outline-ink flex h-11 w-11 items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-95"
             >
               {dot}
@@ -138,7 +141,7 @@ export function XpTrack({
       </div>
       {full ? (
         <p className="text-oxblood -mt-1 font-sans text-[0.8rem] tracking-wide">
-          Take an advance.
+          {t("sheet.takeAdvance")}
         </p>
       ) : null}
     </div>
