@@ -9,6 +9,7 @@ import { characters, seasons } from "@/db/schema"
 import { getSkin } from "@/data/skins"
 import { localizeSkin } from "@/data/skins/localize"
 import { SeasonEditor } from "./season-editor"
+import { PageBar } from "@/components/page-bar"
 
 export default async function SeasonPage({
   params,
@@ -41,7 +42,9 @@ export default async function SeasonPage({
   if (!canEdit && !isMember) notFound()
 
   return (
-    <main className="mx-auto w-full max-w-2xl flex-1 px-5 pt-8 pb-20 sm:px-8">
+    <>
+      <PageBar />
+      <main className="mx-auto w-full max-w-2xl flex-1 px-5 pt-8 pb-20 sm:px-8">
       <Link
         href="/"
         className="text-ink-faint hover:text-ink font-sans text-[0.8rem] tracking-[0.14em] uppercase transition-colors"
@@ -105,5 +108,6 @@ export default async function SeasonPage({
         )}
       </section>
     </main>
+    </>
   )
 }

@@ -1,45 +1,46 @@
 import { eq, inArray } from "drizzle-orm"
 import { getLocale, getTranslations } from "next-intl/server"
 import type { Locale } from "@/i18n/config"
-import Link from "next/link"
 import { notFound } from "next/navigation"
 import { auth } from "@/auth"
 import { db } from "@/db"
 import { characters, seasons } from "@/db/schema"
 import { getSkin } from "@/data/skins"
 import { localizeSkin } from "@/data/skins/localize"
-import { sheetSchema } from "@/types/sheet"
+import { XP_PER_ADVANCE, sheetSchema } from "@/types/sheet"
 import { HarmTrack, XpTrack } from "./tracks"
 import { SeasonPanel, type RosterEntry } from "./season-panel"
-import {
-  StringsPanel,
-  type StringCandidate,
-  type StringRow,
-} from "./strings-panel"
+import { StringsPanel, type StringCandidate, type StringRow } from "./strings-panel"
+import { ConditionsPanel } from "./conditions-panel"
+import { AdvancesPanel, type AdvanceRow } from "./advances-panel"
+import { NotesPanel } from "./notes-panel"
+import { BasicsSection } from "./basics-section"
+import { SheetShell } from "./sheet-shell"
+import type { StatValues } from "./stats-panel"
 
-/** Stat labels come from the catalogue — see docs/GLOSSARY.md. */
-const STAT_KEYS = ["hot", "cold", "volatile", "dark"] as const
-
-function signed(n: number): string {
-  return n > 0 ? `+${String(n)}` : String(n)
+/**
+ * Identity picks are stored as the English string chosen at creation, not as
+ * an index, so they don't follow the locale on their own. Resolve them
+ * positionally against the untranslated skin — no migration, and an
+ * unrecognised value (hand-edited, or from an older list) passes through.
+ */
+function localizeChoice(value: string, rawList: string[], localList: string[]): string {
+  const index = rawList.indexOf(value)
+  return index >= 0 ? (localList[index] ?? value) : value
 }
 
 export default async function SheetPage({ params }: PageProps<"/sheet/[id]">) {
   const { id } = await params
 
-  const [row] = await db
-    .select()
-    .from(characters)
-    .where(eq(characters.id, id))
-    .limit(1)
+  const [row] = await db.select().from(characters).where(eq(characters.id, id)).limit(1)
 
   if (!row) notFound()
 
   const rawSkin = getSkin(row.skinId)
   if (!rawSkin) notFound()
 
-  const locale = await getLocale()
-  const skin = localizeSkin(rawSkin, locale as Locale)
+  const locale = (await getLocale()) as Locale
+  const skin = localizeSkin(rawSkin, locale)
 
   const session = await auth()
   const t = await getTranslations()
@@ -47,41 +48,32 @@ export default async function SheetPage({ params }: PageProps<"/sheet/[id]">) {
   const isOwner = session?.user?.id === row.ownerId
 
   const parsed = sheetSchema.safeParse(row.sheet)
-  const sheet = parsed.success
-    ? parsed.data
-    : sheetSchema.parse({ identity: {} })
+  const sheet = parsed.success ? parsed.data : sheetSchema.parse({ identity: {} })
 
   const line = skin.statLines[sheet.statLineIndex] ?? skin.statLines[0]
   const moves = skin.moves.filter((m) => sheet.moveIds.includes(m.id))
   const granted = new Set(skin.startingMoveIds)
 
+  const base: StatValues = line
+    ? { hot: line.hot, cold: line.cold, volatile: line.volatile, dark: line.dark }
+    : { hot: 0, cold: 0, volatile: 0, dark: 0 }
+
   let seasonInfo: { id: string; name: string; joinCode: string } | null = null
   let roster: RosterEntry[] = []
 
   if (row.seasonId) {
-    const [season] = await db
-      .select()
-      .from(seasons)
-      .where(eq(seasons.id, row.seasonId))
-      .limit(1)
+    const [season] = await db.select().from(seasons).where(eq(seasons.id, row.seasonId)).limit(1)
 
     if (season) {
-      seasonInfo = {
-        id: season.id,
-        name: season.name,
-        joinCode: season.joinCode,
-      }
-      const members = await db
-        .select()
-        .from(characters)
-        .where(eq(characters.seasonId, season.id))
+      seasonInfo = { id: season.id, name: season.name, joinCode: season.joinCode }
+      const members = await db.select().from(characters).where(eq(characters.seasonId, season.id))
 
       roster = members.map((member) => ({
         id: member.id,
         name: member.name,
         skinName: (() => {
           const s = getSkin(member.skinId)
-          return s ? localizeSkin(s, locale as Locale).name : member.skinId
+          return s ? localizeSkin(s, locale).name : member.skinId
         })(),
         isSelf: member.id === row.id,
       }))
@@ -91,9 +83,7 @@ export default async function SheetPage({ params }: PageProps<"/sheet/[id]">) {
   // String targets resolve by id rather than from the roster: a String outlives
   // its target leaving the season, and the name has to outlive it too.
   const targetIds = sheet.strings
-    .map((entry) =>
-      entry.target.kind === "character" ? entry.target.characterId : null,
-    )
+    .map((entry) => (entry.target.kind === "character" ? entry.target.characterId : null))
     .filter((value): value is string => value !== null)
 
   const targets =
@@ -128,9 +118,7 @@ export default async function SheetPage({ params }: PageProps<"/sheet/[id]">) {
       count: entry.count,
       label: target.name || t("common.unnamed"),
       href: `/sheet/${target.id}`,
-      detail: rawTargetSkin
-        ? localizeSkin(rawTargetSkin, locale as Locale).name
-        : target.skinId,
+      detail: rawTargetSkin ? localizeSkin(rawTargetSkin, locale).name : target.skinId,
     }
   })
 
@@ -142,86 +130,75 @@ export default async function SheetPage({ params }: PageProps<"/sheet/[id]">) {
       skinName: entry.skinName,
     }))
 
-  return (
-    <main className="mx-auto w-full max-w-2xl flex-1 px-5 pt-8 pb-20 sm:px-8">
-      <Link
-        href="/"
-        className="text-ink-faint hover:text-ink font-sans text-[0.8rem] tracking-[0.14em] uppercase transition-colors"
-      >
-        ← {t("common.backToTable")}
-      </Link>
+  const advanceRows: AdvanceRow[] = skin.advances.map((advance) => ({
+    id: advance.id,
+    summary: advance.summary,
+    maxTimes: advance.maxTimes,
+    taken: sheet.advancesTaken.filter((a) => a.advanceId === advance.id).length,
+  }))
 
-      <header className="mt-5">
-        <p className="text-ink-faint font-sans text-[0.7rem] tracking-[0.22em] uppercase">
-          {skin.name}
-        </p>
-        <h1 className="font-display text-ink mt-2 text-[2.75rem] leading-[0.95] tracking-tight sm:text-6xl">
-          {row.name || t("common.unnamed")}
-        </h1>
-        <p className="text-ink-soft mt-2 font-sans text-[0.95rem] italic">
-          {[sheet.identity.look, sheet.identity.eyes, sheet.identity.origin]
-            .filter(Boolean)
-            .join(" · ") || skin.tagline}
-        </p>
-      </header>
+  const identityLine =
+    [
+      localizeChoice(sheet.identity.look, rawSkin.identity.looks, skin.identity.looks),
+      localizeChoice(sheet.identity.eyes, rawSkin.identity.eyes, skin.identity.eyes),
+      localizeChoice(sheet.identity.origin, rawSkin.identity.origins, skin.identity.origins),
+    ]
+      .filter(Boolean)
+      .join(" · ") || skin.tagline
 
-      {line ? (
-        <section className="border-rule mt-8 grid grid-cols-4 gap-2 border-t border-b py-4">
-          {STAT_KEYS.map((key) => (
-            <div key={key}>
-              <span className="font-display text-ink block text-[1.15rem] leading-none">
-                {t(`terms.${key}`)}
-              </span>
-              <span className="text-ink-soft mt-1.5 block font-sans text-[1.3rem] leading-none tabular-nums">
-                {signed(line[key] + sheet.statBonuses[key])}
-              </span>
-            </div>
-          ))}
-        </section>
-      ) : null}
-
-      <section className="mt-8 flex flex-wrap items-start justify-between gap-x-8 gap-y-6">
+  const you = (
+    <>
+      {/* Side by side: the two tracks are read together — "how hurt am I,
+          how close to an advance" — and stacking them wasted a whole screen. */}
+      <section className="mt-6 grid grid-cols-2 gap-x-3">
         <div>
-          <h2 className="font-display text-ink text-xl tracking-wide">
+          <h2 className="font-display text-ink text-[1.05rem] leading-none tracking-wide">
             {t("terms.harm")}
           </h2>
-          <div className="mt-1">
-            <HarmTrack
-              characterId={row.id}
-              value={sheet.harm}
-              editable={isOwner}
-            />
+          <div className="mt-1.5">
+            <HarmTrack characterId={row.id} value={sheet.harm} editable={isOwner} />
           </div>
         </div>
         <div>
-          <h2 className="font-display text-ink text-xl tracking-wide">
+          <h2 className="font-display text-ink text-[1.05rem] leading-none tracking-wide">
             {t("terms.experience")}
           </h2>
-          <div className="mt-1">
-            <XpTrack
-              characterId={row.id}
-              value={sheet.experience}
-              editable={isOwner}
-            />
+          <div className="mt-1.5">
+            <XpTrack characterId={row.id} value={sheet.experience} editable={isOwner} />
           </div>
         </div>
       </section>
 
-      <SeasonPanel
+      <ConditionsPanel characterId={row.id} editable={isOwner} conditions={sheet.conditions} />
+
+      <AdvancesPanel
         characterId={row.id}
         editable={isOwner}
-        season={seasonInfo}
-        roster={roster}
+        advances={advanceRows}
+        experienceFull={sheet.experience >= XP_PER_ADVANCE}
       />
 
+      {!isOwner ? (
+        <p className="text-ink-faint mt-10 font-sans text-[0.8rem]">{t("sheet.readOnly")}</p>
+      ) : null}
+    </>
+  )
+
+  const stringsPane = (
+    <>
       <StringsPanel
         characterId={row.id}
         editable={isOwner}
         rows={stringRows}
         candidates={stringCandidates}
       />
+      <SeasonPanel characterId={row.id} editable={isOwner} season={seasonInfo} roster={roster} />
+    </>
+  )
 
-      <section className="mt-12">
+  const movesPane = (
+    <>
+      <section className="mt-8">
         <h2 className="sheet-heading">{t("terms.moves")}</h2>
         <ul className="border-rule mt-4 border-t">
           {moves.map((move) => (
@@ -268,6 +245,13 @@ export default async function SheetPage({ params }: PageProps<"/sheet/[id]">) {
       })}
 
       <section className="mt-10">
+        <h2 className="sheet-heading">{t("terms.sexMove")}</h2>
+        <p className="text-ink-soft mt-4 font-sans text-[0.95rem] leading-relaxed">
+          {skin.sexMove.fullText ?? skin.sexMove.summary}
+        </p>
+      </section>
+
+      <section className="mt-10">
         <h2 className="sheet-heading">{t("terms.darkestSelf")}</h2>
         <p className="text-ink-soft mt-4 font-sans text-[0.95rem] leading-relaxed">
           {skin.darkestSelf.summary}
@@ -281,11 +265,45 @@ export default async function SheetPage({ params }: PageProps<"/sheet/[id]">) {
         </p>
       </section>
 
-      {!isOwner ? (
-        <p className="text-ink-faint mt-12 font-sans text-[0.8rem]">
-          {t("sheet.readOnly")}
-        </p>
-      ) : null}
-    </main>
+      <section className="mt-10">
+        <h2 className="sheet-heading">{t("terms.backstory")}</h2>
+        <ul className="border-rule mt-4 border-t">
+          {skin.backstory.map((entry) => (
+            <li
+              key={entry.id}
+              className="border-rule text-ink-soft border-b py-3.5 font-sans text-[0.93rem] leading-snug"
+            >
+              {entry.summary}
+            </li>
+          ))}
+        </ul>
+      </section>
+    </>
+  )
+
+  return (
+    <SheetShell
+      characterId={row.id}
+      editable={isOwner}
+      backLabel={t("common.backToTable")}
+      skinName={skin.name}
+      characterName={row.name || t("common.unnamed")}
+      identityLine={identityLine}
+      base={base}
+      bonuses={sheet.statBonuses}
+      panes={{
+        strings: stringsPane,
+        you,
+        moves: movesPane,
+        basics: <BasicsSection locale={locale} />,
+        notes: (
+          <NotesPanel
+            characterId={row.id}
+            editable={isOwner}
+            value={sheet.notes}
+          />
+        ),
+      }}
+    />
   )
 }

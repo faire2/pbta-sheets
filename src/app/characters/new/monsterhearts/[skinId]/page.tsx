@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { getSkin, skins } from "@/data/skins"
 import { localizeSkin } from "@/data/skins/localize"
 import { Creator } from "./creator"
+import { PageBar } from "@/components/page-bar"
 
 export function generateStaticParams() {
   return skins.map((skin) => ({ skinId: skin.id }))
@@ -27,7 +28,9 @@ export default async function CreateCharacterPage({
   const t = await getTranslations()
 
   return (
-    <main className="mx-auto w-full max-w-2xl flex-1 px-5 pt-8 pb-24 sm:px-8">
+    <>
+      <PageBar />
+      <main className="mx-auto w-full max-w-2xl flex-1 px-5 pt-8 pb-24 sm:px-8">
       <Link
         href="/characters/new/monsterhearts"
         className="text-ink-faint hover:text-ink font-sans text-[0.8rem] tracking-[0.14em] uppercase transition-colors"
@@ -67,5 +70,6 @@ export default async function CreateCharacterPage({
         </div>
       )}
     </main>
+    </>
   )
 }

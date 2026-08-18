@@ -11,6 +11,7 @@
  */
 import { writeFileSync } from "node:fs"
 import { skins } from "../src/data/skins"
+import { basicMoves, rulesEntries } from "../src/data/basic-moves"
 import type { Skin } from "../src/types/skin"
 
 export interface SkinMessages {
@@ -67,6 +68,47 @@ export function extract(skin: Skin): SkinMessages {
   }
 }
 
+/**
+ * Basic moves and rules boxes are skin-independent, so they get their own
+ * catalogue rather than a reserved key inside the per-skin one.
+ */
+export interface RulesMessages {
+  basicMoves: Record<
+    string,
+    {
+      name: string
+      trigger: string
+      strongHit: string
+      weakHit: string
+      options: string[]
+    }
+  >
+  rules: Record<string, { name: string; summary: string; options: string[] }>
+}
+
+export function extractRules(): RulesMessages {
+  return {
+    basicMoves: Object.fromEntries(
+      basicMoves.map((m) => [
+        m.id,
+        {
+          name: m.name,
+          trigger: m.trigger,
+          strongHit: m.strongHit,
+          weakHit: m.weakHit,
+          options: m.options,
+        },
+      ]),
+    ),
+    rules: Object.fromEntries(
+      rulesEntries.map((r) => [
+        r.id,
+        { name: r.name, summary: r.summary, options: r.options },
+      ]),
+    ),
+  }
+}
+
 export function extractAll(): Record<string, SkinMessages> {
   return Object.fromEntries(skins.map((s) => [s.id, extract(s)]))
 }
@@ -75,8 +117,13 @@ const isMain = process.argv[1]?.endsWith("generate-skin-messages.ts") ?? false
 if (isMain) {
   const out = JSON.stringify(extractAll(), null, 2) + "\n"
   writeFileSync("messages/skins.en.json", out)
+  const rulesOut = JSON.stringify(extractRules(), null, 2) + "\n"
+  writeFileSync("messages/rules.en.json", rulesOut)
   const count = JSON.stringify(extractAll()).match(/"/g)?.length ?? 0
   console.log(
     `Wrote messages/skins.en.json — ${String(skins.length)} skins, ~${String(Math.floor(count / 4))} strings`,
+  )
+  console.log(
+    `Wrote messages/rules.en.json — ${String(basicMoves.length)} basic moves, ${String(rulesEntries.length)} rules boxes`,
   )
 }

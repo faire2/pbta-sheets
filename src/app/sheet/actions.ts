@@ -7,6 +7,7 @@ import { z } from "zod"
 import { auth } from "@/auth"
 import { db } from "@/db"
 import { characters, seasons } from "@/db/schema"
+import { getSkin } from "@/data/skins"
 import {
   MAX_HARM,
   XP_PER_ADVANCE,
@@ -288,5 +289,156 @@ export async function setStringCount(
     entry.count = parsed.data
   }
 
+  await writeSheet(characterId, sheet)
+}
+
+// ── Conditions ────────────────────────────────────────────────────────────
+//
+// Conditions are named by whoever applies them ("shaken", "guilty"), so this
+// is free text rather than a fixed list. The cap is a guard against a runaway
+// paste, not a rule.
+const MAX_CONDITIONS = 12
+const MAX_CONDITION_LENGTH = 40
+
+export async function addCondition(
+  characterId: string,
+  name: string,
+): Promise<SheetActionResult | undefined> {
+  const loaded = await loadOwned(characterId)
+  if (!loaded.ok) return { error: loaded.error }
+
+  const t = await getTranslations("errors")
+  const parsed = z
+    .string()
+    .trim()
+    .min(1)
+    .max(MAX_CONDITION_LENGTH)
+    .safeParse(name)
+  if (!parsed.success) return { error: t("nameCondition") }
+
+  const sheet = sheetSchema.parse(loaded.row.sheet)
+  const already = sheet.conditions.some(
+    (c) => c.toLowerCase() === parsed.data.toLowerCase(),
+  )
+  if (already) return { error: t("conditionAlready") }
+  if (sheet.conditions.length >= MAX_CONDITIONS) {
+    return { error: t("tooManyConditions") }
+  }
+
+  sheet.conditions.push(parsed.data)
+  await writeSheet(characterId, sheet)
+}
+
+export async function removeCondition(
+  characterId: string,
+  name: string,
+): Promise<SheetActionResult | undefined> {
+  const loaded = await loadOwned(characterId)
+  if (!loaded.ok) return { error: loaded.error }
+
+  const sheet = sheetSchema.parse(loaded.row.sheet)
+  sheet.conditions = sheet.conditions.filter((c) => c !== name)
+  await writeSheet(characterId, sheet)
+}
+
+// ── Stat bonuses ──────────────────────────────────────────────────────────
+//
+// "Add +1 to one of your stats" is an advance, but which stat is the player's
+// choice and the data doesn't model it — so the bonus is adjusted by hand and
+// added to the chosen stat line on render.
+const MIN_STAT_BONUS = -3
+const MAX_STAT_BONUS = 3
+
+const statKeys = ["hot", "cold", "volatile", "dark"] as const
+const statBonusSchema = z.object({
+  stat: z.enum(statKeys),
+  value: z.number().int().min(MIN_STAT_BONUS).max(MAX_STAT_BONUS),
+})
+
+export async function setStatBonus(
+  characterId: string,
+  stat: (typeof statKeys)[number],
+  value: number,
+): Promise<SheetActionResult | undefined> {
+  const loaded = await loadOwned(characterId)
+  if (!loaded.ok) return { error: loaded.error }
+
+  const t = await getTranslations("errors")
+  const parsed = statBonusSchema.safeParse({ stat, value })
+  if (!parsed.success) return { error: t("valueOutOfRange") }
+
+  const sheet = sheetSchema.parse(loaded.row.sheet)
+  sheet.statBonuses[parsed.data.stat] = parsed.data.value
+  await writeSheet(characterId, sheet)
+}
+
+// ── Advances ──────────────────────────────────────────────────────────────
+
+/**
+ * Sets how many times an advance has been taken (0…maxTimes).
+ *
+ * Each step costs a full Experience track, and stepping back refunds it — a
+ * mis-tap at the table shouldn't cost five sessions of experience. That does
+ * mean the refund is trust-based, which matches a game played on paper.
+ */
+export async function setAdvanceCount(
+  characterId: string,
+  advanceId: string,
+  count: number,
+): Promise<SheetActionResult | undefined> {
+  const loaded = await loadOwned(characterId)
+  if (!loaded.ok) return { error: loaded.error }
+
+  const t = await getTranslations("errors")
+  const skin = getSkin(loaded.row.skinId)
+  const advance = skin?.advances.find((a) => a.id === advanceId)
+  if (!advance) return { error: t("unknownAdvance") }
+
+  const parsed = z.number().int().min(0).max(advance.maxTimes).safeParse(count)
+  if (!parsed.success) return { error: t("valueOutOfRange") }
+
+  const sheet = sheetSchema.parse(loaded.row.sheet)
+  const taken = sheet.advancesTaken.filter((a) => a.advanceId === advanceId)
+  const delta = parsed.data - taken.length
+  if (delta === 0) return
+
+  if (delta > 0) {
+    if (sheet.experience < XP_PER_ADVANCE) {
+      return { error: t("needFullExperience") }
+    }
+    sheet.advancesTaken.push({
+      advanceId,
+      takenAt: new Date().toISOString(),
+    })
+    sheet.experience = 0
+  } else {
+    // Drop the most recently taken one, and hand the experience back.
+    const lastIndex = sheet.advancesTaken.findLastIndex(
+      (a) => a.advanceId === advanceId,
+    )
+    if (lastIndex >= 0) sheet.advancesTaken.splice(lastIndex, 1)
+    sheet.experience = XP_PER_ADVANCE
+  }
+
+  await writeSheet(characterId, sheet)
+}
+
+// ── Notes ─────────────────────────────────────────────────────────────────
+
+const MAX_NOTES = 5000
+
+export async function setNotes(
+  characterId: string,
+  notes: string,
+): Promise<SheetActionResult | undefined> {
+  const loaded = await loadOwned(characterId)
+  if (!loaded.ok) return { error: loaded.error }
+
+  const t = await getTranslations("errors")
+  const parsed = z.string().max(MAX_NOTES).safeParse(notes)
+  if (!parsed.success) return { error: t("notesTooLong") }
+
+  const sheet = sheetSchema.parse(loaded.row.sheet)
+  sheet.notes = parsed.data
   await writeSheet(characterId, sheet)
 }

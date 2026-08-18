@@ -9,12 +9,15 @@ import { characters, seasons } from "@/db/schema"
 import { getSkin } from "@/data/skins"
 import { localizeSkin } from "@/data/skins/localize"
 import { NewSeasonForm } from "./new-season-form"
+import { PageBar } from "@/components/page-bar"
 
 async function SignedOut() {
   const t = await getTranslations()
 
   return (
-    <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col justify-center px-5 py-20 sm:px-8">
+    <>
+      <PageBar />
+      <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col justify-center px-5 py-20 sm:px-8">
       <p className="text-ink-faint font-sans text-[0.7rem] tracking-[0.22em] uppercase">
         {t("landing.eyebrow")}
       </p>
@@ -39,6 +42,7 @@ async function SignedOut() {
         {t("landing.note")}
       </p>
     </main>
+    </>
   )
 }
 
@@ -97,7 +101,9 @@ export default async function HomePage() {
   }
 
   return (
-    <main className="mx-auto w-full max-w-2xl flex-1 px-5 pt-10 pb-20 sm:px-8">
+    <>
+      <PageBar />
+      <main className="mx-auto w-full max-w-2xl flex-1 px-5 pt-10 pb-20 sm:px-8">
       <header className="flex items-start justify-between gap-4">
         <div>
           <p className="text-ink-faint font-sans text-[0.7rem] tracking-[0.22em] uppercase">
@@ -222,5 +228,6 @@ export default async function HomePage() {
         <NewSeasonForm />
       </section>
     </main>
+    </>
   )
 }

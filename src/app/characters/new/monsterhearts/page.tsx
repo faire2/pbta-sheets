@@ -3,6 +3,7 @@ import type { Locale } from "@/i18n/config"
 import Link from "next/link"
 import { skins } from "@/data/skins"
 import { localizeSkins } from "@/data/skins/localize"
+import { PageBar } from "@/components/page-bar"
 
 export async function generateMetadata() {
   const t = await getTranslations("meta")
@@ -15,7 +16,9 @@ export default async function SkinPickerPage() {
   const localized = localizeSkins(skins, locale as Locale)
 
   return (
-    <main className="mx-auto w-full max-w-2xl flex-1 px-5 pt-10 pb-16 sm:px-8">
+    <>
+      <PageBar />
+      <main className="mx-auto w-full max-w-2xl flex-1 px-5 pt-10 pb-16 sm:px-8">
       <header className="mb-8">
         <p className="text-ink-faint font-sans text-[0.7rem] tracking-[0.22em] uppercase">
           {t("terms.system")}
@@ -77,5 +80,6 @@ export default async function SkinPickerPage() {
         }
       `}</style>
     </main>
+    </>
   )
 }

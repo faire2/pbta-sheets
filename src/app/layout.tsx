@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Grenze, Grenze_Gotisch, Geist_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
-import { LocaleSwitch } from "@/components/locale-switch";
 import { Providers } from "@/components/providers";
 import "./globals.css";
 
@@ -60,11 +59,6 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col">
         <NextIntlClientProvider>
           <Providers>
-            {/* Top-right on every page, in the flow rather than fixed — a
-                floating widget over a sheet reads as browser chrome. */}
-            <div className="mx-auto flex w-full max-w-2xl justify-end px-5 pt-4 sm:px-8">
-              <LocaleSwitch />
-            </div>
             {children}
           </Providers>
         </NextIntlClientProvider>

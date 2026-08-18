@@ -1,0 +1,103 @@
+{
+  "basicMoves": {
+    "turn-someone-on": {
+      "name": "Vzrušit někoho",
+      "trigger": "Vzrušíš někoho.",
+      "strongHit": "Získáš na tu osobu páku a ona si zvolí jednu reakci níže.",
+      "weakHit": "Ta osoba volí: buď ti dá páku, nebo si zvolí jednu reakci níže.",
+      "options": [
+        "Oddám se ti",
+        "Slíbím ti něco, o čem si myslím, že to chceš",
+        "Ztrapním se a chovám se nemotorně"
+      ]
+    },
+    "shut-someone-down": {
+      "name": "Setřít někoho",
+      "trigger": "Setřeš někoho.",
+      "strongHit": "Zvol jednu možnost níže.",
+      "weakHit": "Zvol jednu možnost níže, ale vyzníš špatně a ta osoba ti na oplátku dá stav.",
+      "options": [
+        "Ztratí na tebe páku",
+        "Pokud na tebe žádnou páku nemá, získáš ty páku na ni",
+        "Získá stav",
+        "Vezmi si +1 vpřed"
+      ]
+    },
+    "keep-your-cool": {
+      "name": "Zachovat chladnou hlavu",
+      "trigger": "Jednáš navzdory strachu. Pojmenuj, čeho se bojíš.",
+      "strongHit": "Udržíš se a získáš vhled: zeptej se MC na otázku ohledně situace a vezmi si +1 vpřed, když podle odpovědi jednáš.",
+      "weakHit": "MC ti řekne, čím by tě to vystavilo nebezpečí; ty se rozhodneš, jestli couvneš, nebo do toho půjdeš i tak.",
+      "options": []
+    },
+    "lash-out-physically": {
+      "name": "Fyzicky zaútočit",
+      "trigger": "Fyzicky zaútočíš.",
+      "strongHit": "Uštědříš zranění a druhá strana ztuhne, než stihne zareagovat.",
+      "weakHit": "Uštědříš zranění, ale zvol jednu možnost níže.",
+      "options": [
+        "Ta osoba se dozví něco o tvé pravé podstatě a získá na tebe páku",
+        "MC rozhodne, jak zle zranění dopadne",
+        "Propadneš svému nejtemnějšímu já"
+      ]
+    },
+    "run-away": {
+      "name": "Utéct",
+      "trigger": "Utečeš.",
+      "strongHit": "Dostaneš se někam do bezpečí.",
+      "weakHit": "Dostaneš se pryč, ale zvol jednu možnost níže.",
+      "options": [
+        "Vběhneš do něčeho horšího",
+        "Způsobíš velkou scénu",
+        "Něco po sobě zanecháš"
+      ]
+    },
+    "gaze-into-the-abyss": {
+      "name": "Pohlédnout do propasti",
+      "trigger": "Pohlédneš do propasti. Pojmenuj, co hledáš.",
+      "strongHit": "Propast odpoví jasnými vizemi a ty si vezmi +1 vpřed, když podle nich jednáš.",
+      "weakHit": "Vize jsou matoucí a znepokojivé, ale odpověď přesto dostaneš.",
+      "options": []
+    }
+  },
+  "rules": {
+    "pulling-strings": {
+      "name": "Použití pák",
+      "summary": "Když na někom utratíš páku, zvol jednu možnost:",
+      "options": [
+        "Zlákej tu osobu, aby udělala, co chceš",
+        "Dej jí stav",
+        "Přičti si +1 k hodu proti ní",
+        "Přičti si +1 ke zranění, které jí uštědříš"
+      ]
+    },
+    "healing": {
+      "name": "Léčení",
+      "summary": "Jednou za sezení si můžeš ošetřit rány a vyléčit 1 zranění. Pokud ti je ošetří někdo jiný — citlivě, důvěrně — vyléčíš si o 1 víc.",
+      "options": []
+    },
+    "skirting-death": {
+      "name": "Na hraně smrti",
+      "summary": "Chceš-li ošálit smrt, smaž veškerá zranění a zvol jednu možnost:",
+      "options": [
+        "Propadneš svému nejtemnějšímu já",
+        "Ztratíš všechny páky, které na kohokoli držíš"
+      ]
+    },
+    "conditions": {
+      "name": "Stavy",
+      "summary": "Když v tahu proti někomu využiješ jeho stav, přičti si +1 k hodu. Stav pomine, jakmile ten, kdo ho nese, udělá něco, co ho řeší.",
+      "options": []
+    },
+    "experience": {
+      "name": "Zkušenost",
+      "summary": "Označ si zkušenost pokaždé, když neuspěješ v hodu.",
+      "options": []
+    },
+    "gangs": {
+      "name": "Party",
+      "summary": "Parta ti přidává +1 k hodům a ke zranění, kde to dává smysl.",
+      "options": []
+    }
+  }
+}

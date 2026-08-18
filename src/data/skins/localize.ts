@@ -1,5 +1,6 @@
 import type { Locale } from "@/i18n/config"
 import type { Skin } from "@/types/skin"
+import { resolvers } from "../catalogue"
 import en from "../../../messages/skins.en.json"
 import cs from "../../../messages/skins.cs.json"
 
@@ -18,32 +19,6 @@ type Catalogue = Record<string, unknown>
 
 const CATALOGUES: Record<string, Catalogue> = { en, cs }
 
-function pick(cat: Catalogue | undefined, path: string[]): string | undefined {
-  let node: unknown = cat
-  for (const key of path) {
-    if (typeof node !== "object" || node === null) return undefined
-    node = (node as Record<string, unknown>)[key]
-  }
-  return typeof node === "string" ? node : undefined
-}
-
-function pickList(
-  cat: Catalogue | undefined,
-  path: string[],
-  expected: number,
-): string[] | undefined {
-  let node: unknown = cat
-  for (const key of path) {
-    if (typeof node !== "object" || node === null) return undefined
-    node = (node as Record<string, unknown>)[key]
-  }
-  if (!Array.isArray(node)) return undefined
-  // A mismatched length means the translation drifted from the data; the
-  // options are positional, so a wrong-length list would silently mis-label.
-  if (node.length !== expected) return undefined
-  return node.every((v) => typeof v === "string") ? node : undefined
-}
-
 export function localizeSkin(skin: Skin, locale: Locale): Skin {
   if (locale === "en") {
     // Still resolved through the catalogue, so English takes the same path.
@@ -54,20 +29,11 @@ export function localizeSkin(skin: Skin, locale: Locale): Skin {
 
 function resolve(skin: Skin, cats: (Catalogue | undefined)[]): Skin {
   const id = skin.id
-  const first = (path: string[], fallback: string): string => {
-    for (const cat of cats) {
-      const hit = pick(cat, [id, ...path])
-      if (hit !== undefined) return hit
-    }
-    return fallback
-  }
-  const firstList = (path: string[], fallback: string[]): string[] => {
-    for (const cat of cats) {
-      const hit = pickList(cat, [id, ...path], fallback.length)
-      if (hit !== undefined) return hit
-    }
-    return fallback
-  }
+  const resolve = resolvers(cats)
+  const first = (path: string[], fallback: string): string =>
+    resolve.first([id, ...path], fallback)
+  const firstList = (path: string[], fallback: string[]): string[] =>
+    resolve.firstList([id, ...path], fallback)
 
   return {
     ...skin,

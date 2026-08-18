@@ -45,7 +45,12 @@
     "dark": "Temnota",
     "joinCode": "Kód",
     "roster": "Soupiska",
-    "system": "Monsterhearts 2"
+    "system": "Monsterhearts 2",
+    "advances": "Postupy",
+    "notes": "Poznámky",
+    "basicMoves": "Základní tahy",
+    "rules": "Pravidla",
+    "sexMove": "Sex tah"
   },
   "landing": {
     "eyebrow": "Powered by the Apocalypse",
@@ -84,7 +89,6 @@
     "statusFinishChoices": "Dokonči volby výše."
   },
   "sheet": {
-    "takeAdvance": "Vezmi si postup.",
     "readOnly": "Prohlížíš si cizí deník — jen ke čtení.",
     "notInSeason": "Tahle postava zatím není u stolu. Připoj se k sezóně své skupiny a jejich postavy se objeví tady — aby Páky mířily na skutečné lidi, ne na jména napsaná rukou.",
     "joinWithCode": "Připojit se kódem",
@@ -106,7 +110,29 @@
     "stringTargetGone": "Smazaná postava",
     "stringIncrease": "Získat páku na {name}",
     "stringDecrease": "Utratit páku na {name}",
-    "stringCount": "{count, plural, one {# páka na {name}} few {# páky na {name}} other {# pák na {name}}}"
+    "stringCount": "{count, plural, one {# páka na {name}} few {# páky na {name}} other {# pák na {name}}}",
+    "screens": "Obrazovky",
+    "pane": {
+      "strings": "Páky",
+      "you": "Ty",
+      "moves": "Tahy",
+      "basics": "Základy",
+      "notes": "Poznámky"
+    },
+    "strongHit": "10+",
+    "weakHit": "7–9",
+    "statIncrease": "Zvýšit {stat}",
+    "statDecrease": "Snížit {stat}",
+    "conditionsEmpty": "Zatím žádné.",
+    "conditionAdd": "Přidat",
+    "conditionClear": "Zrušit stav {name}",
+    "conditionPlaceholder": "strach, vina, hanba…",
+    "advanceReady": "Zkušenost je plná — vezmi si postup.",
+    "advanceHint": "Postup si můžeš vzít, až bude zkušenost plná.",
+    "notesPlaceholder": "Cokoli, co stojí za zapamatování.",
+    "statAdjust": "Upravit {stat}",
+    "statDone": "Hotovo – {stat}",
+    "notesEmpty": "Zatím nic zapsáno."
   },
   "season": {
     "joinCodeHint": "Přečti ho nahlas u stolu. Kdokoli s ním může do téhle sezóny přidat postavu.",
@@ -140,7 +166,13 @@
     "badStringTarget": "Tenhle cíl nevypadá správně.",
     "noSelfString": "Na sebe páku držet nemůžeš.",
     "stringTargetMissing": "Tato postava už neexistuje.",
-    "stringNotFound": "Tato páka už tam není."
+    "stringNotFound": "Tato páka už tam není.",
+    "nameCondition": "Pojmenuj stav.",
+    "conditionAlready": "Tento stav už tam je.",
+    "tooManyConditions": "Víc stavů se na deník nevejde.",
+    "unknownAdvance": "Tento postup k této kůži nepatří.",
+    "needFullExperience": "Nejdřív zaplň zkušenost.",
+    "notesTooLong": "Poznámky jsou příliš dlouhé."
   },
   "language": {
     "label": "Jazyk",

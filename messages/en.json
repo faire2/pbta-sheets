@@ -45,7 +45,12 @@
     "dark": "Dark",
     "joinCode": "Join code",
     "roster": "Roster",
-    "system": "Monsterhearts 2"
+    "system": "Monsterhearts 2",
+    "advances": "Advances",
+    "notes": "Notes",
+    "basicMoves": "Basic Moves",
+    "rules": "Rules",
+    "sexMove": "Sex Move"
   },
   "landing": {
     "eyebrow": "Powered by the Apocalypse",
@@ -84,7 +89,6 @@
     "statusFinishChoices": "Finish the choices above."
   },
   "sheet": {
-    "takeAdvance": "Take an advance.",
     "readOnly": "You're viewing someone else's sheet — read only.",
     "notInSeason": "This character isn't at a table yet. Join your group's season and their characters show up here — so Strings can point at real people instead of names you typed.",
     "joinWithCode": "Join with a code",
@@ -106,7 +110,29 @@
     "stringTargetGone": "Deleted character",
     "stringIncrease": "Gain a String on {name}",
     "stringDecrease": "Spend a String on {name}",
-    "stringCount": "{count, plural, one {# String on {name}} other {# Strings on {name}}}"
+    "stringCount": "{count, plural, one {# String on {name}} other {# Strings on {name}}}",
+    "screens": "Screens",
+    "pane": {
+      "strings": "Strings",
+      "you": "You",
+      "moves": "Moves",
+      "basics": "Basics",
+      "notes": "Notes"
+    },
+    "strongHit": "10+",
+    "weakHit": "7–9",
+    "statIncrease": "Raise {stat}",
+    "statDecrease": "Lower {stat}",
+    "conditionsEmpty": "None right now.",
+    "conditionAdd": "Add",
+    "conditionClear": "Clear the condition {name}",
+    "conditionPlaceholder": "shaken, guilty…",
+    "advanceReady": "Your experience is full — take an advance.",
+    "advanceHint": "An advance becomes available once the experience track is full.",
+    "notesPlaceholder": "Anything worth remembering.",
+    "statAdjust": "Adjust {stat}",
+    "statDone": "Done adjusting {stat}",
+    "notesEmpty": "Nothing written down yet."
   },
   "season": {
     "joinCodeHint": "Read this out at the table. Anyone with it can put a character in this season.",
@@ -140,7 +166,13 @@
     "badStringTarget": "That target didn’t look right.",
     "noSelfString": "You can’t hold a String on yourself.",
     "stringTargetMissing": "That character no longer exists.",
-    "stringNotFound": "That String is already gone."
+    "stringNotFound": "That String is already gone.",
+    "nameCondition": "Name the condition.",
+    "conditionAlready": "That condition is already there.",
+    "tooManyConditions": "That is as many conditions as the sheet holds.",
+    "unknownAdvance": "That advance isn’t on this skin.",
+    "needFullExperience": "Fill the experience track first.",
+    "notesTooLong": "Those notes are too long."
   },
   "language": {
     "label": "Language",
