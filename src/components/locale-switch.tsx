@@ -17,11 +17,7 @@ export function LocaleSwitch() {
   const [pending, startTransition] = useTransition()
 
   return (
-    <div
-      className="border-rule inline-flex border"
-      role="group"
-      aria-label={t("label")}
-    >
+    <div className="border-rule inline-flex border" role="group" aria-label={t("label")}>
       {locales.map((locale) => {
         const isActive = locale === active
         return (
@@ -38,10 +34,8 @@ export function LocaleSwitch() {
                 })
               })
             }}
-            className={`min-h-9 px-2.5 font-sans text-[0.72rem] tracking-[0.14em] uppercase transition-colors ${
-              isActive
-                ? "bg-ink text-paper"
-                : "text-ink-faint hover:text-ink disabled:opacity-50"
+            className={`min-h-9 px-2.5 font-sans text-[0.95rem] tracking-[0.14em] uppercase transition-colors ${
+              isActive ? "bg-ink text-paper" : "text-ink-faint hover:text-ink disabled:opacity-50"
             }`}
           >
             {locale}

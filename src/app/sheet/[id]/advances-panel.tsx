@@ -50,20 +50,15 @@ export function AdvancesPanel({
   return (
     <section className="mt-12">
       <h2 className="sheet-heading">{t("terms.advances")}</h2>
-      <p className="text-ink-faint mt-2 font-sans text-[0.82rem] leading-relaxed">
+      <p className="text-ink-faint mt-2 font-sans text-[0.951rem] leading-relaxed">
         {experienceFull ? t("sheet.advanceReady") : t("sheet.advanceHint")}
       </p>
 
-      {error ? (
-        <p className="text-oxblood mt-3 font-sans text-[0.9rem]">{error}</p>
-      ) : null}
+      {error ? <p className="text-oxblood mt-3 font-sans text-[1.044rem]">{error}</p> : null}
 
       <ul className="border-rule mt-4 border-t">
         {optimistic.map((row) => (
-          <li
-            key={row.id}
-            className="border-rule flex items-start gap-3 border-b py-3.5"
-          >
+          <li key={row.id} className="border-rule flex items-start gap-3 border-b py-3.5">
             <span className="flex shrink-0 items-center gap-0.5 pt-0.5">
               {Array.from({ length: row.maxTimes }, (_, i) => {
                 const filled = i < row.taken
@@ -89,16 +84,13 @@ export function AdvancesPanel({
                     {box}
                   </button>
                 ) : (
-                  <span
-                    key={i}
-                    className="flex h-11 w-9 items-center justify-center"
-                  >
+                  <span key={i} className="flex h-11 w-9 items-center justify-center">
                     {box}
                   </span>
                 )
               })}
             </span>
-            <span className="text-ink flex-1 pt-2.5 font-sans text-[0.95rem] leading-snug">
+            <span className="text-ink flex-1 pt-2.5 font-sans text-[1.102rem] leading-snug">
               {row.summary}
             </span>
           </li>

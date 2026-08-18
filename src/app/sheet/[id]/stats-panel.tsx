@@ -64,7 +64,7 @@ export function StatStrip({
                   onSelect(null)
                 }}
                 aria-label={t("sheet.statDone", { stat: label })}
-                className="font-display text-ink w-7 text-center text-[1.15rem] leading-none tabular-nums underline decoration-dotted underline-offset-4"
+                className="font-display text-ink w-7 text-center text-[1.2rem] leading-none tabular-nums underline decoration-dotted underline-offset-4"
               >
                 {signed(values[key])}
               </button>
@@ -85,8 +85,8 @@ export function StatStrip({
 
         const content = (
           <>
-            <span className="font-display text-ink-soft text-[0.9rem] leading-none">{label}</span>
-            <span className="font-display text-ink text-[1.15rem] leading-none tabular-nums">
+            <span className="font-display text-ink-soft text-[0.95rem] leading-none">{label}</span>
+            <span className="font-display text-ink text-[1.2rem] leading-none tabular-nums">
               {signed(values[key])}
             </span>
           </>

@@ -35,7 +35,7 @@ export function NewSeasonForm() {
         onClick={() => {
           setOpen(true)
         }}
-        className="border-ink text-ink hover:bg-ink hover:text-paper focus-visible:outline-ink mt-5 inline-flex min-h-12 items-center border px-6 font-sans text-[0.9rem] tracking-[0.1em] uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
+        className="border-ink text-ink hover:bg-ink hover:text-paper focus-visible:outline-ink mt-5 inline-flex min-h-12 items-center border px-6 font-sans text-[1.044rem] tracking-[0.1em] uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
       >
         {t("home.newSeason")}
       </button>
@@ -45,7 +45,7 @@ export function NewSeasonForm() {
   return (
     <div className="border-rule mt-5 border-t pt-5">
       <label className="block">
-        <span className="text-ink-faint font-sans text-[0.78rem] tracking-[0.16em] uppercase">
+        <span className="text-ink-faint font-sans text-[1.03rem] tracking-[0.16em] uppercase">
           {t("home.seasonNameLabel")}
         </span>
         <input
@@ -63,16 +63,14 @@ export function NewSeasonForm() {
         />
       </label>
 
-      {error ? (
-        <p className="text-oxblood mt-3 font-sans text-[0.9rem]">{error}</p>
-      ) : null}
+      {error ? <p className="text-oxblood mt-3 font-sans text-[1.044rem]">{error}</p> : null}
 
       <div className="mt-4 flex items-center gap-3">
         <button
           type="button"
           disabled={pending || name.trim().length === 0}
           onClick={submit}
-          className="bg-ink text-paper focus-visible:outline-ink min-h-12 px-6 font-sans text-[0.9rem] tracking-[0.1em] uppercase transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-30"
+          className="bg-ink text-paper focus-visible:outline-ink min-h-12 px-6 font-sans text-[1.044rem] tracking-[0.1em] uppercase transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-30"
         >
           {pending ? t("common.creating") : t("common.create")}
         </button>
@@ -82,7 +80,7 @@ export function NewSeasonForm() {
             setOpen(false)
             setError(null)
           }}
-          className="text-ink-faint hover:text-ink min-h-12 font-sans text-[0.85rem] tracking-[0.1em] uppercase transition-colors"
+          className="text-ink-faint hover:text-ink min-h-12 font-sans text-[0.986rem] tracking-[0.1em] uppercase transition-colors"
         >
           {t("common.cancel")}
         </button>

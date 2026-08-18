@@ -126,14 +126,14 @@ export function SheetShell({
           >
             ←
           </Link>
-          <h1 className="font-display text-ink min-w-0 flex-1 truncate text-[1.85rem] leading-none tracking-tight">
+          <h1 className="font-display text-ink min-w-0 flex-1 truncate text-[1.961rem] leading-none tracking-tight">
             {characterName}
           </h1>
           <LocaleSwitch />
         </div>
 
         <div className="mx-auto w-full max-w-2xl px-5 sm:px-8">
-          <p className="text-ink-soft mt-1.5 truncate font-sans text-[0.82rem] italic">
+          <p className="text-ink-soft mt-1.5 truncate font-sans text-[0.88rem] italic">
             <span className="text-ink-faint tracking-[0.14em] uppercase not-italic">
               {skinName}
             </span>
@@ -165,7 +165,7 @@ export function SheetShell({
                   onClick={() => {
                     api?.scrollTo(index)
                   }}
-                  className={`min-h-10 flex-1 border-b-2 px-0.5 font-sans text-[0.65rem] tracking-[0.06em] uppercase transition-colors ${
+                  className={`min-h-11 flex-1 border-b-2 px-0.5 font-sans text-[0.95rem] leading-none transition-colors ${
                     isActive
                       ? "border-ink text-ink"
                       : "text-ink-faint hover:text-ink border-transparent"

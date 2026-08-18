@@ -22,17 +22,13 @@ export interface StringCandidate {
   skinName: string
 }
 
-type Patch =
-  | { type: "set"; id: string; count: number }
-  | { type: "add"; row: StringRow }
+type Patch = { type: "set"; id: string; count: number } | { type: "add"; row: StringRow }
 
 function reduce(rows: StringRow[], patch: Patch): StringRow[] {
   if (patch.type === "add") {
     const existing = rows.find((r) => r.label === patch.row.label)
     if (existing) {
-      return rows.map((r) =>
-        r.id === existing.id ? { ...r, count: r.count + 1 } : r,
-      )
+      return rows.map((r) => (r.id === existing.id ? { ...r, count: r.count + 1 } : r))
     }
     return [...rows, patch.row]
   }
@@ -101,23 +97,21 @@ export function StringsPanel({
         type: "add",
         row: { id: `pending-${trimmed}`, count: 1, label: trimmed },
       })
-      void addString(characterId, { kind: "name", name: trimmed }).then(
-        (result) => {
-          if (result?.error) setError(result.error)
-        },
-      )
+      void addString(characterId, { kind: "name", name: trimmed }).then((result) => {
+        if (result?.error) setError(result.error)
+      })
     })
   }
 
   return (
     <section className="mt-12">
       <h2 className="sheet-heading">{t("terms.strings")}</h2>
-      <p className="text-ink-faint mt-2 font-sans text-[0.82rem] leading-relaxed">
+      <p className="text-ink-faint mt-2 font-sans text-[0.951rem] leading-relaxed">
         {t("sheet.stringsLede")}
       </p>
 
       {optimistic.length === 0 ? (
-        <p className="text-ink-soft mt-4 font-sans text-[0.95rem] italic">
+        <p className="text-ink-soft mt-4 font-sans text-[1.102rem] italic">
           {t("sheet.stringsEmpty")}
         </p>
       ) : (
@@ -131,17 +125,17 @@ export function StringsPanel({
                 {row.href ? (
                   <Link
                     href={row.href}
-                    className="font-display text-ink hover:text-oxblood block truncate text-[1.2rem] leading-none tracking-wide transition-colors"
+                    className="font-display text-ink hover:text-oxblood block truncate text-[1.392rem] leading-none tracking-wide transition-colors"
                   >
                     {row.label}
                   </Link>
                 ) : (
-                  <span className="font-display text-ink block truncate text-[1.2rem] leading-none tracking-wide">
+                  <span className="font-display text-ink block truncate text-[1.392rem] leading-none tracking-wide">
                     {row.label}
                   </span>
                 )}
                 {row.detail ? (
-                  <span className="text-ink-soft mt-1 block truncate font-sans text-[0.85rem] italic">
+                  <span className="text-ink-soft mt-1 block truncate font-sans text-[0.986rem] italic">
                     {row.detail}
                   </span>
                 ) : null}
@@ -161,7 +155,7 @@ export function StringsPanel({
               ) : null}
 
               <span
-                className="font-display text-ink w-8 shrink-0 text-center text-[1.6rem] leading-none tabular-nums"
+                className="font-display text-ink w-8 shrink-0 text-center text-[1.696rem] leading-none tabular-nums"
                 aria-label={t("sheet.stringCount", {
                   name: row.label,
                   count: row.count,
@@ -187,16 +181,14 @@ export function StringsPanel({
         </ul>
       )}
 
-      {error ? (
-        <p className="text-oxblood mt-4 font-sans text-[0.9rem]">{error}</p>
-      ) : null}
+      {error ? <p className="text-oxblood mt-4 font-sans text-[1.044rem]">{error}</p> : null}
 
       {editable ? (
         adding ? (
           <div className="border-rule mt-5 border-t pt-5">
             {candidates.length > 0 ? (
               <>
-                <p className="text-ink-faint font-sans text-[0.78rem] tracking-[0.16em] uppercase">
+                <p className="text-ink-faint font-sans text-[1.03rem] tracking-[0.16em] uppercase">
                   {t("sheet.stringsFromSeason")}
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2">
@@ -207,12 +199,10 @@ export function StringsPanel({
                       onClick={() => {
                         addCharacter(candidate)
                       }}
-                      className="border-rule hover:border-ink hover:bg-ink hover:text-paper text-ink focus-visible:outline-ink inline-flex min-h-11 items-center gap-2 border px-4 font-sans text-[0.9rem] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
+                      className="border-rule hover:border-ink hover:bg-ink hover:text-paper text-ink focus-visible:outline-ink inline-flex min-h-11 items-center gap-2 border px-4 font-sans text-[1.044rem] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
                     >
                       {candidate.name}
-                      <span className="text-[0.78rem] italic opacity-70">
-                        {candidate.skinName}
-                      </span>
+                      <span className="text-[1.03rem] italic opacity-70">{candidate.skinName}</span>
                     </button>
                   ))}
                 </div>
@@ -220,10 +210,8 @@ export function StringsPanel({
             ) : null}
 
             <label className="mt-6 block">
-              <span className="text-ink-faint font-sans text-[0.78rem] tracking-[0.16em] uppercase">
-                {candidates.length > 0
-                  ? t("sheet.stringsSomeoneElse")
-                  : t("sheet.stringsAnyone")}
+              <span className="text-ink-faint font-sans text-[1.03rem] tracking-[0.16em] uppercase">
+                {candidates.length > 0 ? t("sheet.stringsSomeoneElse") : t("sheet.stringsAnyone")}
               </span>
               <input
                 value={name}
@@ -247,7 +235,7 @@ export function StringsPanel({
                 type="button"
                 disabled={name.trim().length === 0}
                 onClick={addName}
-                className="bg-ink text-paper min-h-12 px-6 font-sans text-[0.9rem] tracking-[0.1em] uppercase transition-opacity disabled:opacity-30"
+                className="bg-ink text-paper min-h-12 px-6 font-sans text-[1.044rem] tracking-[0.1em] uppercase transition-opacity disabled:opacity-30"
               >
                 {t("sheet.addString")}
               </button>
@@ -258,7 +246,7 @@ export function StringsPanel({
                   setName("")
                   setError(null)
                 }}
-                className="text-ink-faint hover:text-ink min-h-12 font-sans text-[0.85rem] tracking-[0.1em] uppercase transition-colors"
+                className="text-ink-faint hover:text-ink min-h-12 font-sans text-[0.986rem] tracking-[0.1em] uppercase transition-colors"
               >
                 {t("common.done")}
               </button>
@@ -270,7 +258,7 @@ export function StringsPanel({
             onClick={() => {
               setAdding(true)
             }}
-            className="border-ink text-ink hover:bg-ink hover:text-paper focus-visible:outline-ink mt-5 inline-flex min-h-12 items-center border px-6 font-sans text-[0.9rem] tracking-[0.1em] uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
+            className="border-ink text-ink hover:bg-ink hover:text-paper focus-visible:outline-ink mt-5 inline-flex min-h-12 items-center border px-6 font-sans text-[1.044rem] tracking-[0.1em] uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
           >
             {t("sheet.addString")}
           </button>

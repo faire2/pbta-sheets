@@ -44,11 +44,11 @@ export function NotesPanel({
       <section className="mt-8">
         <h2 className="sheet-heading">{t("terms.notes")}</h2>
         {value.trim().length > 0 ? (
-          <p className="text-ink-soft mt-4 font-sans text-[0.95rem] leading-relaxed whitespace-pre-wrap">
+          <p className="text-ink-soft mt-4 font-sans text-[1.102rem] leading-relaxed whitespace-pre-wrap">
             {value}
           </p>
         ) : (
-          <p className="text-ink-faint mt-4 font-sans text-[0.95rem] italic">
+          <p className="text-ink-faint mt-4 font-sans text-[1.102rem] italic">
             {t("sheet.notesEmpty")}
           </p>
         )}
@@ -78,9 +78,9 @@ export function NotesPanel({
         placeholder={t("sheet.notesPlaceholder")}
         /* Notes own the whole pane now, so the field fills it rather than
            sitting in a fixed box with dead space underneath. */
-        className="border-rule focus:border-ink text-ink placeholder:text-ink-faint mt-4 min-h-[55dvh] w-full resize-y border bg-transparent p-3 font-sans text-[0.95rem] leading-relaxed transition-colors outline-none placeholder:italic"
+        className="border-rule focus:border-ink text-ink placeholder:text-ink-faint mt-4 min-h-[55dvh] w-full resize-y border bg-transparent p-3 font-sans text-[1.102rem] leading-relaxed transition-colors outline-none placeholder:italic"
       />
-      <p className="text-ink-faint h-5 font-sans text-[0.8rem]">
+      <p className="text-ink-faint h-5 font-sans text-[0.928rem]">
         {status === "saving" ? t("common.saving") : status === "saved" ? t("common.saved") : ""}
       </p>
     </section>

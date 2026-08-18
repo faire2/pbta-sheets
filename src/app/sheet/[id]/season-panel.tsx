@@ -3,11 +3,7 @@
 import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { useState, useTransition } from "react"
-import {
-  createSeasonForCharacter,
-  joinSeasonByCode,
-  leaveSeason,
-} from "../actions"
+import { createSeasonForCharacter, joinSeasonByCode, leaveSeason } from "../actions"
 
 export interface RosterEntry {
   id: string
@@ -49,13 +45,11 @@ export function SeasonPanel({
     return (
       <section className="mt-10">
         <h2 className="sheet-heading">{t("terms.season")}</h2>
-        <p className="text-ink-soft mt-3 font-sans text-[0.95rem]">
+        <p className="text-ink-soft mt-3 font-sans text-[1.102rem]">
           {season.name}
           <span className="text-ink-faint">
             {" · "}
-            <span className="font-mono tracking-[0.18em]">
-              {season.joinCode}
-            </span>
+            <span className="font-mono tracking-[0.18em]">{season.joinCode}</span>
           </span>
         </p>
 
@@ -66,15 +60,15 @@ export function SeasonPanel({
                 href={`/sheet/${entry.id}`}
                 className="press focus-visible:outline-ink flex min-h-[60px] items-center gap-3 py-3.5 focus-visible:outline-2 focus-visible:outline-offset-2"
               >
-                <span className="font-display text-ink flex-1 text-[1.2rem] leading-none tracking-wide">
+                <span className="font-display text-ink flex-1 text-[1.392rem] leading-none tracking-wide">
                   {entry.name || t("common.unnamed")}
                   {entry.isSelf ? (
-                    <span className="text-ink-faint ml-2 font-sans text-[0.66rem] tracking-[0.18em] uppercase">
+                    <span className="text-ink-faint ml-2 font-sans text-[0.871rem] tracking-[0.18em] uppercase">
                       {t("sheet.you")}
                     </span>
                   ) : null}
                 </span>
-                <span className="text-ink-soft font-sans text-[0.88rem] italic">
+                <span className="text-ink-soft font-sans text-[1.021rem] italic">
                   {entry.skinName}
                 </span>
               </Link>
@@ -83,25 +77,19 @@ export function SeasonPanel({
         </ul>
 
         {roster.length <= 1 ? (
-          <p className="text-ink-faint mt-3 font-sans text-[0.82rem]">
-            {t("sheet.nobodyElse")}
-          </p>
+          <p className="text-ink-faint mt-3 font-sans text-[0.951rem]">{t("sheet.nobodyElse")}</p>
         ) : null}
 
         {editable ? (
           <>
-            {error ? (
-              <p className="text-oxblood mt-4 font-sans text-[0.9rem]">
-                {error}
-              </p>
-            ) : null}
+            {error ? <p className="text-oxblood mt-4 font-sans text-[1.044rem]">{error}</p> : null}
             <button
               type="button"
               disabled={pending}
               onClick={() => {
                 run(() => leaveSeason(characterId))
               }}
-              className="text-ink-faint hover:text-oxblood mt-4 min-h-11 font-sans text-[0.78rem] tracking-[0.14em] uppercase transition-colors disabled:opacity-40"
+              className="text-ink-faint hover:text-oxblood mt-4 min-h-11 font-sans text-[1.03rem] tracking-[0.14em] uppercase transition-colors disabled:opacity-40"
             >
               {pending ? t("sheet.leaving") : t("sheet.leaveSeason")}
             </button>
@@ -117,13 +105,11 @@ export function SeasonPanel({
   return (
     <section className="mt-10">
       <h2 className="sheet-heading">{t("terms.season")}</h2>
-      <p className="text-ink-soft mt-3 font-sans text-[0.95rem] leading-relaxed">
+      <p className="text-ink-soft mt-3 font-sans text-[1.102rem] leading-relaxed">
         {t("sheet.notInSeason")}
       </p>
 
-      {error ? (
-        <p className="text-oxblood mt-4 font-sans text-[0.9rem]">{error}</p>
-      ) : null}
+      {error ? <p className="text-oxblood mt-4 font-sans text-[1.044rem]">{error}</p> : null}
 
       {mode === "idle" ? (
         <div className="mt-5 flex flex-wrap gap-3">
@@ -132,7 +118,7 @@ export function SeasonPanel({
             onClick={() => {
               setMode("join")
             }}
-            className="border-ink text-ink hover:bg-ink hover:text-paper focus-visible:outline-ink inline-flex min-h-12 items-center border px-6 font-sans text-[0.9rem] tracking-[0.1em] uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
+            className="border-ink text-ink hover:bg-ink hover:text-paper focus-visible:outline-ink inline-flex min-h-12 items-center border px-6 font-sans text-[1.044rem] tracking-[0.1em] uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
           >
             {t("sheet.joinWithCode")}
           </button>
@@ -141,7 +127,7 @@ export function SeasonPanel({
             onClick={() => {
               setMode("create")
             }}
-            className="text-ink-faint hover:text-ink inline-flex min-h-12 items-center font-sans text-[0.9rem] tracking-[0.1em] uppercase transition-colors"
+            className="text-ink-faint hover:text-ink inline-flex min-h-12 items-center font-sans text-[1.044rem] tracking-[0.1em] uppercase transition-colors"
           >
             {t("sheet.orStartOne")}
           </button>
@@ -151,7 +137,7 @@ export function SeasonPanel({
       {mode === "join" ? (
         <div className="border-rule mt-5 border-t pt-5">
           <label className="block">
-            <span className="text-ink-faint font-sans text-[0.78rem] tracking-[0.16em] uppercase">
+            <span className="text-ink-faint font-sans text-[1.03rem] tracking-[0.16em] uppercase">
               {t("terms.joinCode")}
             </span>
             <input
@@ -169,7 +155,7 @@ export function SeasonPanel({
               autoCapitalize="characters"
               autoCorrect="off"
               spellCheck={false}
-              className="border-rule focus:border-ink text-ink placeholder:text-ink-faint mt-1.5 min-h-12 w-full border-0 border-b bg-transparent pb-1 font-mono text-[1.6rem] tracking-[0.3em] transition-colors outline-none"
+              className="border-rule focus:border-ink text-ink placeholder:text-ink-faint mt-1.5 min-h-12 w-full border-0 border-b bg-transparent pb-1 font-mono text-[1.696rem] tracking-[0.3em] transition-colors outline-none"
             />
           </label>
           <div className="mt-4 flex items-center gap-3">
@@ -179,7 +165,7 @@ export function SeasonPanel({
               onClick={() => {
                 run(() => joinSeasonByCode(characterId, code))
               }}
-              className="bg-ink text-paper min-h-12 px-6 font-sans text-[0.9rem] tracking-[0.1em] uppercase transition-opacity disabled:opacity-30"
+              className="bg-ink text-paper min-h-12 px-6 font-sans text-[1.044rem] tracking-[0.1em] uppercase transition-opacity disabled:opacity-30"
             >
               {pending ? t("sheet.joining") : t("sheet.join")}
             </button>
@@ -189,7 +175,7 @@ export function SeasonPanel({
                 setMode("idle")
                 setError(null)
               }}
-              className="text-ink-faint hover:text-ink min-h-12 font-sans text-[0.85rem] tracking-[0.1em] uppercase transition-colors"
+              className="text-ink-faint hover:text-ink min-h-12 font-sans text-[0.986rem] tracking-[0.1em] uppercase transition-colors"
             >
               {t("common.cancel")}
             </button>
@@ -200,7 +186,7 @@ export function SeasonPanel({
       {mode === "create" ? (
         <div className="border-rule mt-5 border-t pt-5">
           <label className="block">
-            <span className="text-ink-faint font-sans text-[0.78rem] tracking-[0.16em] uppercase">
+            <span className="text-ink-faint font-sans text-[1.03rem] tracking-[0.16em] uppercase">
               {t("home.seasonNameLabel")}
             </span>
             <input
@@ -224,7 +210,7 @@ export function SeasonPanel({
               onClick={() => {
                 run(() => createSeasonForCharacter(characterId, name))
               }}
-              className="bg-ink text-paper min-h-12 px-6 font-sans text-[0.9rem] tracking-[0.1em] uppercase transition-opacity disabled:opacity-30"
+              className="bg-ink text-paper min-h-12 px-6 font-sans text-[1.044rem] tracking-[0.1em] uppercase transition-opacity disabled:opacity-30"
             >
               {pending ? t("common.creating") : t("common.create")}
             </button>
@@ -234,7 +220,7 @@ export function SeasonPanel({
                 setMode("idle")
                 setError(null)
               }}
-              className="text-ink-faint hover:text-ink min-h-12 font-sans text-[0.85rem] tracking-[0.1em] uppercase transition-colors"
+              className="text-ink-faint hover:text-ink min-h-12 font-sans text-[0.986rem] tracking-[0.1em] uppercase transition-colors"
             >
               {t("common.cancel")}
             </button>

@@ -152,7 +152,7 @@ export default async function SheetPage({ params }: PageProps<"/sheet/[id]">) {
           how close to an advance" — and stacking them wasted a whole screen. */}
       <section className="mt-6 grid grid-cols-2 gap-x-3">
         <div>
-          <h2 className="font-display text-ink text-[1.05rem] leading-none tracking-wide">
+          <h2 className="font-display text-ink text-[1.218rem] leading-none tracking-wide">
             {t("terms.harm")}
           </h2>
           <div className="mt-1.5">
@@ -160,7 +160,7 @@ export default async function SheetPage({ params }: PageProps<"/sheet/[id]">) {
           </div>
         </div>
         <div>
-          <h2 className="font-display text-ink text-[1.05rem] leading-none tracking-wide">
+          <h2 className="font-display text-ink text-[1.218rem] leading-none tracking-wide">
             {t("terms.experience")}
           </h2>
           <div className="mt-1.5">
@@ -179,7 +179,7 @@ export default async function SheetPage({ params }: PageProps<"/sheet/[id]">) {
       />
 
       {!isOwner ? (
-        <p className="text-ink-faint mt-10 font-sans text-[0.8rem]">{t("sheet.readOnly")}</p>
+        <p className="text-ink-faint mt-10 font-sans text-[0.928rem]">{t("sheet.readOnly")}</p>
       ) : null}
     </>
   )
@@ -203,15 +203,15 @@ export default async function SheetPage({ params }: PageProps<"/sheet/[id]">) {
         <ul className="border-rule mt-4 border-t">
           {moves.map((move) => (
             <li key={move.id} className="border-rule border-b py-4">
-              <h3 className="font-display text-ink flex items-baseline gap-2 text-[1.2rem] leading-tight tracking-wide">
+              <h3 className="font-display text-ink flex items-baseline gap-2 text-[1.392rem] leading-tight tracking-wide">
                 {move.name}
                 {granted.has(move.id) ? (
-                  <span className="text-ink-faint font-sans text-[0.66rem] tracking-[0.18em] uppercase">
+                  <span className="text-ink-faint font-sans text-[0.871rem] tracking-[0.18em] uppercase">
                     {t("terms.granted")}
                   </span>
                 ) : null}
               </h3>
-              <p className="text-ink-soft mt-1 font-sans text-[0.93rem] leading-snug">
+              <p className="text-ink-soft mt-1 font-sans text-[1.079rem] leading-snug">
                 {move.fullText ?? move.summary}
               </p>
             </li>
@@ -229,11 +229,11 @@ export default async function SheetPage({ params }: PageProps<"/sheet/[id]">) {
             <ul className="border-rule mt-4 border-t">
               {options.map((option) => (
                 <li key={option.id} className="border-rule border-b py-4">
-                  <h3 className="font-display text-ink text-[1.15rem] tracking-wide">
+                  <h3 className="font-display text-ink text-[1.334rem] tracking-wide">
                     {option.name}
                   </h3>
                   {option.summary ? (
-                    <p className="text-ink-soft mt-1 font-sans text-[0.93rem] leading-snug">
+                    <p className="text-ink-soft mt-1 font-sans text-[1.079rem] leading-snug">
                       {option.summary}
                     </p>
                   ) : null}
@@ -246,18 +246,18 @@ export default async function SheetPage({ params }: PageProps<"/sheet/[id]">) {
 
       <section className="mt-10">
         <h2 className="sheet-heading">{t("terms.sexMove")}</h2>
-        <p className="text-ink-soft mt-4 font-sans text-[0.95rem] leading-relaxed">
+        <p className="text-ink-soft mt-4 font-sans text-[1.102rem] leading-relaxed">
           {skin.sexMove.fullText ?? skin.sexMove.summary}
         </p>
       </section>
 
       <section className="mt-10">
         <h2 className="sheet-heading">{t("terms.darkestSelf")}</h2>
-        <p className="text-ink-soft mt-4 font-sans text-[0.95rem] leading-relaxed">
+        <p className="text-ink-soft mt-4 font-sans text-[1.102rem] leading-relaxed">
           {skin.darkestSelf.summary}
         </p>
-        <p className="text-ink mt-3 font-sans text-[0.95rem] leading-relaxed">
-          <span className="text-ink-faint text-[0.72rem] tracking-[0.18em] uppercase">
+        <p className="text-ink mt-3 font-sans text-[1.102rem] leading-relaxed">
+          <span className="text-ink-faint text-[0.95rem] tracking-[0.18em] uppercase">
             {t("terms.escape")}
           </span>
           <br />
@@ -271,7 +271,7 @@ export default async function SheetPage({ params }: PageProps<"/sheet/[id]">) {
           {skin.backstory.map((entry) => (
             <li
               key={entry.id}
-              className="border-rule text-ink-soft border-b py-3.5 font-sans text-[0.93rem] leading-snug"
+              className="border-rule text-ink-soft border-b py-3.5 font-sans text-[1.079rem] leading-snug"
             >
               {entry.summary}
             </li>
@@ -296,13 +296,7 @@ export default async function SheetPage({ params }: PageProps<"/sheet/[id]">) {
         you,
         moves: movesPane,
         basics: <BasicsSection locale={locale} />,
-        notes: (
-          <NotesPanel
-            characterId={row.id}
-            editable={isOwner}
-            value={sheet.notes}
-          />
-        ),
+        notes: <NotesPanel characterId={row.id} editable={isOwner} value={sheet.notes} />,
       }}
     />
   )

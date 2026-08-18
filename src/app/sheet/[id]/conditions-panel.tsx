@@ -7,9 +7,7 @@ import { addCondition, removeCondition } from "../actions"
 type Patch = { type: "add"; name: string } | { type: "remove"; name: string }
 
 function reduce(list: string[], patch: Patch): string[] {
-  return patch.type === "add"
-    ? [...list, patch.name]
-    : list.filter((c) => c !== patch.name)
+  return patch.type === "add" ? [...list, patch.name] : list.filter((c) => c !== patch.name)
 }
 
 /**
@@ -57,12 +55,10 @@ export function ConditionsPanel({
 
   return (
     <section className="mt-8">
-      <h2 className="font-display text-ink text-xl tracking-wide">
-        {t("terms.conditions")}
-      </h2>
+      <h2 className="font-display text-ink text-xl tracking-wide">{t("terms.conditions")}</h2>
 
       {optimistic.length === 0 ? (
-        <p className="text-ink-faint mt-2 font-sans text-[0.9rem] italic">
+        <p className="text-ink-faint mt-2 font-sans text-[1.044rem] italic">
           {t("sheet.conditionsEmpty")}
         </p>
       ) : (
@@ -76,15 +72,15 @@ export function ConditionsPanel({
                     drop(condition)
                   }}
                   aria-label={t("sheet.conditionClear", { name: condition })}
-                  className="border-oxblood text-oxblood hover:bg-oxblood hover:text-paper focus-visible:outline-oxblood inline-flex min-h-11 items-center gap-2 border px-3.5 font-sans text-[0.92rem] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
+                  className="border-oxblood text-oxblood hover:bg-oxblood hover:text-paper focus-visible:outline-oxblood inline-flex min-h-11 items-center gap-2 border px-3.5 font-sans text-[1.067rem] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
                 >
                   {condition}
-                  <span aria-hidden className="text-[1.05rem] leading-none">
+                  <span aria-hidden className="text-[1.218rem] leading-none">
                     ×
                   </span>
                 </button>
               ) : (
-                <span className="border-oxblood text-oxblood inline-flex min-h-11 items-center border px-3.5 font-sans text-[0.92rem]">
+                <span className="border-oxblood text-oxblood inline-flex min-h-11 items-center border px-3.5 font-sans text-[1.067rem]">
                   {condition}
                 </span>
               )}
@@ -93,9 +89,7 @@ export function ConditionsPanel({
         </ul>
       )}
 
-      {error ? (
-        <p className="text-oxblood mt-3 font-sans text-[0.9rem]">{error}</p>
-      ) : null}
+      {error ? <p className="text-oxblood mt-3 font-sans text-[1.044rem]">{error}</p> : null}
 
       {editable ? (
         <div className="mt-4 flex items-end gap-3">
@@ -114,14 +108,14 @@ export function ConditionsPanel({
               }}
               placeholder={t("sheet.conditionPlaceholder")}
               maxLength={40}
-              className="border-rule focus:border-ink text-ink placeholder:text-ink-faint min-h-11 w-full border-0 border-b bg-transparent pb-1 font-sans text-[1rem] transition-colors outline-none placeholder:italic"
+              className="border-rule focus:border-ink text-ink placeholder:text-ink-faint min-h-11 w-full border-0 border-b bg-transparent pb-1 font-sans text-[1.16rem] transition-colors outline-none placeholder:italic"
             />
           </label>
           <button
             type="button"
             disabled={name.trim().length === 0}
             onClick={add}
-            className="border-ink text-ink hover:bg-ink hover:text-paper focus-visible:outline-ink inline-flex min-h-11 shrink-0 items-center border px-4 font-sans text-[0.82rem] tracking-[0.1em] uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-30"
+            className="border-ink text-ink hover:bg-ink hover:text-paper focus-visible:outline-ink inline-flex min-h-11 shrink-0 items-center border px-4 font-sans text-[0.951rem] tracking-[0.1em] uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-30"
           >
             {t("sheet.conditionAdd")}
           </button>

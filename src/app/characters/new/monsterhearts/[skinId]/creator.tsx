@@ -27,10 +27,8 @@ function Chip({
       type="button"
       onClick={onSelect}
       aria-pressed={selected}
-      className={`border-rule focus-visible:outline-ink min-h-11 border px-3 py-2 font-sans text-[0.92rem] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 ${
-        selected
-          ? "border-ink bg-ink text-paper"
-          : "text-ink-soft hover:border-ink hover:text-ink"
+      className={`border-rule focus-visible:outline-ink min-h-11 border px-3 py-2 font-sans text-[1.067rem] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 ${
+        selected ? "border-ink bg-ink text-paper" : "text-ink-soft hover:border-ink hover:text-ink"
       }`}
     >
       {label}
@@ -51,9 +49,7 @@ function Section({
     <section className="mt-10">
       <h2 className="sheet-heading">{title}</h2>
       {hint ? (
-        <p className="text-ink-faint mt-2 font-sans text-[0.82rem] tracking-wide">
-          {hint}
-        </p>
+        <p className="text-ink-faint mt-2 font-sans text-[0.951rem] tracking-wide">{hint}</p>
       ) : null}
       <div className="mt-4">{children}</div>
     </section>
@@ -72,10 +68,7 @@ export function Creator({ skin }: { skin: Skin }) {
   const [error, setError] = useState<string | null>(null)
   const [pending, startTransition] = useTransition()
 
-  const granted = useMemo(
-    () => new Set(skin.startingMoveIds),
-    [skin.startingMoveIds],
-  )
+  const granted = useMemo(() => new Set(skin.startingMoveIds), [skin.startingMoveIds])
   const movesLeft = skin.chooseMoveCount - chosenMoves.length
   const groupsComplete = skin.choiceGroups.every(
     (g) => (choices[g.id] ?? []).length === g.chooseCount,
@@ -126,7 +119,7 @@ export function Creator({ skin }: { skin: Skin }) {
     <div>
       <Section title={t("terms.identity")}>
         <label className="block">
-          <span className="text-ink-faint font-sans text-[0.78rem] tracking-[0.16em] uppercase">
+          <span className="text-ink-faint font-sans text-[1.03rem] tracking-[0.16em] uppercase">
             {t("terms.name")}
           </span>
           <input
@@ -159,7 +152,7 @@ export function Creator({ skin }: { skin: Skin }) {
           ] as const
         ).map(([label, options, value, set]) => (
           <div key={label} className="mt-6">
-            <span className="text-ink-faint font-sans text-[0.78rem] tracking-[0.16em] uppercase">
+            <span className="text-ink-faint font-sans text-[1.03rem] tracking-[0.16em] uppercase">
               {label}
             </span>
             <div className="mt-2 flex flex-wrap gap-2">
@@ -198,10 +191,10 @@ export function Creator({ skin }: { skin: Skin }) {
                 <span className="grid flex-1 grid-cols-4 gap-2">
                   {STAT_KEYS.map((key) => (
                     <span key={key} className="text-left">
-                      <span className="font-display text-ink block text-[1.15rem] leading-none">
+                      <span className="font-display text-ink block text-[1.334rem] leading-none">
                         {t(`terms.${key}`)}
                       </span>
-                      <span className="text-ink-soft mt-1 block font-sans text-[1.05rem] leading-none tabular-nums">
+                      <span className="text-ink-soft mt-1 block font-sans text-[1.218rem] leading-none tabular-nums">
                         {signed(line[key])}
                       </span>
                     </span>
@@ -245,20 +238,18 @@ export function Creator({ skin }: { skin: Skin }) {
                   <span
                     aria-hidden
                     className="mark mt-1.5"
-                    data-state={
-                      isGranted ? "granted" : isChosen ? "on" : "off"
-                    }
+                    data-state={isGranted ? "granted" : isChosen ? "on" : "off"}
                   />
                   <span className="min-w-0 flex-1">
-                    <span className="font-display text-ink flex items-baseline gap-2 text-[1.2rem] leading-tight tracking-wide">
+                    <span className="font-display text-ink flex items-baseline gap-2 text-[1.392rem] leading-tight tracking-wide">
                       {move.name}
                       {isGranted ? (
-                        <span className="text-ink-faint font-sans text-[0.66rem] tracking-[0.18em] uppercase">
+                        <span className="text-ink-faint font-sans text-[0.871rem] tracking-[0.18em] uppercase">
                           {t("terms.granted")}
                         </span>
                       ) : null}
                     </span>
-                    <span className="text-ink-soft mt-1 block font-sans text-[0.93rem] leading-snug">
+                    <span className="text-ink-soft mt-1 block font-sans text-[1.079rem] leading-snug">
                       {move.summary}
                     </span>
                   </span>
@@ -293,17 +284,13 @@ export function Creator({ skin }: { skin: Skin }) {
                         atLimit ? "opacity-45" : ""
                       }`}
                     >
-                      <span
-                        aria-hidden
-                        className="mark mt-1.5"
-                        data-state={isOn ? "on" : "off"}
-                      />
+                      <span aria-hidden className="mark mt-1.5" data-state={isOn ? "on" : "off"} />
                       <span className="min-w-0 flex-1">
-                        <span className="font-display text-ink block text-[1.15rem] leading-tight tracking-wide">
+                        <span className="font-display text-ink block text-[1.334rem] leading-tight tracking-wide">
                           {option.name}
                         </span>
                         {option.summary ? (
-                          <span className="text-ink-soft mt-1 block font-sans text-[0.93rem] leading-snug">
+                          <span className="text-ink-soft mt-1 block font-sans text-[1.079rem] leading-snug">
                             {option.summary}
                           </span>
                         ) : null}
@@ -322,7 +309,7 @@ export function Creator({ skin }: { skin: Skin }) {
           {skin.backstory.map((entry) => (
             <li
               key={entry.id}
-              className="border-ink-faint text-ink-soft border-l-2 pl-4 font-sans text-[0.95rem] leading-snug"
+              className="border-ink-faint text-ink-soft border-l-2 pl-4 font-sans text-[1.102rem] leading-snug"
             >
               {entry.summary}
             </li>
@@ -332,11 +319,9 @@ export function Creator({ skin }: { skin: Skin }) {
 
       {/* Sticky commit bar — the sheet's bottom edge, always in reach. */}
       <div className="bg-paper/95 border-rule sticky bottom-0 mt-12 -mx-5 border-t px-5 py-4 backdrop-blur-sm sm:-mx-8 sm:px-8">
-        {error ? (
-          <p className="text-oxblood mb-3 font-sans text-[0.9rem]">{error}</p>
-        ) : null}
+        {error ? <p className="text-oxblood mb-3 font-sans text-[1.044rem]">{error}</p> : null}
         <div className="flex items-center justify-between gap-4">
-          <p className="text-ink-faint font-sans text-[0.82rem] leading-tight">
+          <p className="text-ink-faint font-sans text-[0.951rem] leading-tight">
             {ready
               ? t("creator.statusReady")
               : statLineIndex === null
@@ -349,7 +334,7 @@ export function Creator({ skin }: { skin: Skin }) {
             type="button"
             disabled={!ready || pending}
             onClick={submit}
-            className="bg-ink text-paper focus-visible:outline-ink min-h-12 shrink-0 px-7 font-sans text-[0.95rem] tracking-[0.1em] uppercase transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-30"
+            className="bg-ink text-paper focus-visible:outline-ink min-h-12 shrink-0 px-7 font-sans text-[1.102rem] tracking-[0.1em] uppercase transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-30"
           >
             {pending ? t("common.saving") : t("common.create")}
           </button>
