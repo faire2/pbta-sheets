@@ -13,7 +13,9 @@
     "edit": "Edit",
     "unnamed": "Unnamed",
     "backToTable": "Your table",
-    "backToSkins": "All skins"
+    "backToSkins": "All skins",
+    "done": "Done",
+    "view": "View"
   },
   "terms": {
     "skin": "Skin",
@@ -93,7 +95,18 @@
     "leaving": "Leaving…",
     "nobodyElse": "Nobody else has joined yet. Share the code.",
     "you": "You",
-    "codePlaceholder": "ABC234"
+    "codePlaceholder": "ABC234",
+    "stringsLede": "Strings you hold on other people. Tap to gain or spend one.",
+    "stringsEmpty": "No Strings yet.",
+    "addString": "Add a String",
+    "stringsFromSeason": "At this table",
+    "stringsSomeoneElse": "Someone else",
+    "stringsAnyone": "On whom?",
+    "stringNamePlaceholder": "A name",
+    "stringTargetGone": "Deleted character",
+    "stringIncrease": "Gain a String on {name}",
+    "stringDecrease": "Spend a String on {name}",
+    "stringCount": "{count, plural, one {# String on {name}} other {# Strings on {name}}}"
   },
   "season": {
     "joinCodeHint": "Read this out at the table. Anyone with it can put a character in this season.",
@@ -103,7 +116,8 @@
     "removeSeason": "Remove season",
     "confirmRemove": "Yes, remove it",
     "keepIt": "Keep it",
-    "removing": "Removing…"
+    "removing": "Removing…",
+    "memberView": "You are playing in this season. Only whoever started it can rename or remove it."
   },
   "errors": {
     "signedIn": "You need to be signed in.",
@@ -122,7 +136,11 @@
     "noSeasonWithCode": "No season with the code {code}.",
     "differentGame": "That season is playing a different game.",
     "nameSeason": "Give the season a name.",
-    "createSeasonFailed": "Couldn't create that season. Try again."
+    "createSeasonFailed": "Couldn't create that season. Try again.",
+    "badStringTarget": "That target didn’t look right.",
+    "noSelfString": "You can’t hold a String on yourself.",
+    "stringTargetMissing": "That character no longer exists.",
+    "stringNotFound": "That String is already gone."
   },
   "language": {
     "label": "Language",

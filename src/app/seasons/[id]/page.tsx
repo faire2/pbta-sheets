@@ -28,13 +28,17 @@ export default async function SeasonPage({
     .limit(1)
 
   if (!season) notFound()
-  // Only the season's creator gets the edit view.
-  if (season.createdById !== userId) notFound()
 
   const roster = await db
     .select()
     .from(characters)
     .where(eq(characters.seasonId, season.id))
+
+  // The creator can rename and remove the season; players who joined it get
+  // the same roster, read-only. Everyone else gets a 404.
+  const canEdit = season.createdById === userId
+  const isMember = roster.some((character) => character.ownerId === userId)
+  if (!canEdit && !isMember) notFound()
 
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 px-5 pt-8 pb-20 sm:px-8">
@@ -45,11 +49,30 @@ export default async function SeasonPage({
         ← {t("common.backToTable")}
       </Link>
 
-      <SeasonEditor
-        id={season.id}
-        name={season.name}
-        joinCode={season.joinCode}
-      />
+      {canEdit ? (
+        <SeasonEditor
+          id={season.id}
+          name={season.name}
+          joinCode={season.joinCode}
+        />
+      ) : (
+        <header className="mt-5">
+          <p className="text-ink-faint font-sans text-[0.78rem] tracking-[0.16em] uppercase">
+            {t("terms.season")}
+          </p>
+          <h1 className="font-display text-ink mt-1.5 text-[2.25rem] leading-tight tracking-tight sm:text-5xl">
+            {season.name || t("home.untitledSeason")}
+          </h1>
+          <p className="text-ink-soft mt-3 font-sans text-[0.9rem]">
+            <span className="font-mono tracking-[0.24em]">
+              {season.joinCode}
+            </span>
+          </p>
+          <p className="text-ink-faint mt-2 font-sans text-[0.82rem] leading-relaxed">
+            {t("season.memberView")}
+          </p>
+        </header>
+      )}
 
       <section className="mt-12">
         <h2 className="sheet-heading">{t("terms.roster")}</h2>

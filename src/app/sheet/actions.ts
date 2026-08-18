@@ -7,7 +7,13 @@ import { z } from "zod"
 import { auth } from "@/auth"
 import { db } from "@/db"
 import { characters, seasons } from "@/db/schema"
-import { MAX_HARM, XP_PER_ADVANCE, sheetSchema } from "@/types/sheet"
+import {
+  MAX_HARM,
+  XP_PER_ADVANCE,
+  sheetSchema,
+  stringTargetSchema,
+} from "@/types/sheet"
+import type { StringTarget } from "@/types/sheet"
 
 export interface SheetActionResult {
   error: string
@@ -175,4 +181,112 @@ export async function leaveSeason(
 
   revalidatePath(`/sheet/${characterId}`)
   revalidatePath("/")
+}
+
+// ── Strings ───────────────────────────────────────────────────────────────
+//
+// Monsterhearts sets no ceiling on Strings. This one exists only so a stuck
+// button can't write an absurd number into the sheet.
+const MAX_STRING_COUNT = 20
+
+/**
+ * Two targets are the same person. Names compare case-insensitively so
+ * "Ms. Kelly" typed twice increments one row instead of making two.
+ */
+function sameTarget(a: StringTarget, b: StringTarget): boolean {
+  if (a.kind === "character" && b.kind === "character") {
+    return a.characterId === b.characterId
+  }
+  if (a.kind === "name" && b.kind === "name") {
+    return a.name.trim().toLowerCase() === b.name.trim().toLowerCase()
+  }
+  return false
+}
+
+async function writeSheet(
+  characterId: string,
+  sheet: z.infer<typeof sheetSchema>,
+): Promise<void> {
+  await db
+    .update(characters)
+    .set({ sheet, updatedAt: new Date() })
+    .where(eq(characters.id, characterId))
+
+  revalidatePath(`/sheet/${characterId}`)
+}
+
+/**
+ * Adds a String, or increments the one already held on that target — holding
+ * "two Strings on Rook" is one row at 2, never two rows at 1.
+ */
+export async function addString(
+  characterId: string,
+  target: StringTarget,
+): Promise<SheetActionResult | undefined> {
+  const loaded = await loadOwned(characterId)
+  if (!loaded.ok) return { error: loaded.error }
+
+  const t = await getTranslations("errors")
+  const parsed = stringTargetSchema.safeParse(
+    target.kind === "name" ? { ...target, name: target.name.trim() } : target,
+  )
+  if (!parsed.success) return { error: t("badStringTarget") }
+
+  if (parsed.data.kind === "character") {
+    if (parsed.data.characterId === characterId) {
+      return { error: t("noSelfString") }
+    }
+    const [exists] = await db
+      .select({ id: characters.id })
+      .from(characters)
+      .where(eq(characters.id, parsed.data.characterId))
+      .limit(1)
+    if (!exists) return { error: t("stringTargetMissing") }
+  }
+
+  const sheet = sheetSchema.parse(loaded.row.sheet)
+  const existing = sheet.strings.find((entry) =>
+    sameTarget(entry.target, parsed.data),
+  )
+
+  if (existing) {
+    existing.count = Math.min(existing.count + 1, MAX_STRING_COUNT)
+  } else {
+    sheet.strings.push({
+      id: crypto.randomUUID(),
+      target: parsed.data,
+      count: 1,
+    })
+  }
+
+  await writeSheet(characterId, sheet)
+}
+
+/**
+ * Sets a String row to an exact count. Zero removes the row: holding no
+ * Strings on someone is the same as not listing them.
+ */
+export async function setStringCount(
+  characterId: string,
+  stringId: string,
+  count: number,
+): Promise<SheetActionResult | undefined> {
+  const loaded = await loadOwned(characterId)
+  if (!loaded.ok) return { error: loaded.error }
+
+  const t = await getTranslations("errors")
+  const parsed = z.number().int().min(0).max(MAX_STRING_COUNT).safeParse(count)
+  if (!parsed.success) return { error: t("valueOutOfRange") }
+
+  const sheet = sheetSchema.parse(loaded.row.sheet)
+  const entry = sheet.strings.find((s) => s.id === stringId)
+  if (!entry) return { error: t("stringNotFound") }
+
+  if (parsed.data === 0) {
+    sheet.strings = sheet.strings.filter((s) => s.id !== stringId)
+  } else {
+    entry.count = parsed.data
+  }
+
+  await writeSheet(characterId, sheet)
 }

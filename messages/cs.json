@@ -13,7 +13,9 @@
     "edit": "Upravit",
     "unnamed": "Bez jména",
     "backToTable": "Tvůj stůl",
-    "backToSkins": "Všechny kůže"
+    "backToSkins": "Všechny kůže",
+    "done": "Hotovo",
+    "view": "Zobrazit"
   },
   "terms": {
     "skin": "Kůže",
@@ -93,7 +95,18 @@
     "leaving": "Odcházím…",
     "nobodyElse": "Zatím se nikdo další nepřipojil. Sdílej kód.",
     "you": "Ty",
-    "codePlaceholder": "ABC234"
+    "codePlaceholder": "ABC234",
+    "stringsLede": "Páky, které držíš na ostatních. Klepnutím páku získáš nebo utratíš.",
+    "stringsEmpty": "Zatím žádné páky.",
+    "addString": "Přidat páku",
+    "stringsFromSeason": "U tohoto stolu",
+    "stringsSomeoneElse": "Někdo jiný",
+    "stringsAnyone": "Na koho?",
+    "stringNamePlaceholder": "Jméno",
+    "stringTargetGone": "Smazaná postava",
+    "stringIncrease": "Získat páku na {name}",
+    "stringDecrease": "Utratit páku na {name}",
+    "stringCount": "{count, plural, one {# páka na {name}} few {# páky na {name}} other {# pák na {name}}}"
   },
   "season": {
     "joinCodeHint": "Přečti ho nahlas u stolu. Kdokoli s ním může do téhle sezóny přidat postavu.",
@@ -103,7 +116,8 @@
     "removeSeason": "Odebrat sezónu",
     "confirmRemove": "Ano, odeber ji",
     "keepIt": "Nechat",
-    "removing": "Odebírám…"
+    "removing": "Odebírám…",
+    "memberView": "V této sezóně hraješ. Přejmenovat nebo odstranit ji může jen ten, kdo ji založil."
   },
   "errors": {
     "signedIn": "Musíš být přihlášen.",
@@ -122,7 +136,11 @@
     "noSeasonWithCode": "Žádná sezóna s kódem {code}.",
     "differentGame": "Tahle sezóna hraje jinou hru.",
     "nameSeason": "Pojmenuj sezónu.",
-    "createSeasonFailed": "Sezónu se nepodařilo vytvořit. Zkus to znovu."
+    "createSeasonFailed": "Sezónu se nepodařilo vytvořit. Zkus to znovu.",
+    "badStringTarget": "Tenhle cíl nevypadá správně.",
+    "noSelfString": "Na sebe páku držet nemůžeš.",
+    "stringTargetMissing": "Tato postava už neexistuje.",
+    "stringNotFound": "Tato páka už tam není."
   },
   "language": {
     "label": "Jazyk",

@@ -1,4 +1,4 @@
-import { desc, eq, inArray } from "drizzle-orm"
+import { desc, eq, inArray, or } from "drizzle-orm"
 import { getLocale, getTranslations } from "next-intl/server"
 import type { Locale } from "@/i18n/config"
 import Link from "next/link"
@@ -56,10 +56,27 @@ export default async function HomePage() {
     .where(eq(characters.ownerId, userId))
     .orderBy(desc(characters.updatedAt))
 
+  // Seasons you started, plus any your characters joined — a player who typed
+  // someone else's code still has to find that season from here.
+  const joinedSeasonIds = [
+    ...new Set(
+      myCharacters
+        .map((character) => character.seasonId)
+        .filter((value): value is string => value !== null),
+    ),
+  ]
+
   const mySeasons = await db
     .select()
     .from(seasons)
-    .where(eq(seasons.createdById, userId))
+    .where(
+      joinedSeasonIds.length > 0
+        ? or(
+            eq(seasons.createdById, userId),
+            inArray(seasons.id, joinedSeasonIds),
+          )
+        : eq(seasons.createdById, userId),
+    )
     .orderBy(desc(seasons.updatedAt))
 
   // Roster sizes count every character in the season, not just your own.
@@ -192,7 +209,9 @@ export default async function HomePage() {
                     aria-hidden
                     className="text-ink-faint group-hover:text-ink shrink-0 font-sans text-[0.78rem] tracking-[0.14em] uppercase transition-colors"
                   >
-                    {t("common.edit")}
+                    {season.createdById === userId
+                      ? t("common.edit")
+                      : t("common.view")}
                   </span>
                 </Link>
               </li>

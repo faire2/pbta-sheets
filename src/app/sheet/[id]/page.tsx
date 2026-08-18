@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm"
+import { eq, inArray } from "drizzle-orm"
 import { getLocale, getTranslations } from "next-intl/server"
 import type { Locale } from "@/i18n/config"
 import Link from "next/link"
@@ -11,6 +11,11 @@ import { localizeSkin } from "@/data/skins/localize"
 import { sheetSchema } from "@/types/sheet"
 import { HarmTrack, XpTrack } from "./tracks"
 import { SeasonPanel, type RosterEntry } from "./season-panel"
+import {
+  StringsPanel,
+  type StringCandidate,
+  type StringRow,
+} from "./strings-panel"
 
 /** Stat labels come from the catalogue — see docs/GLOSSARY.md. */
 const STAT_KEYS = ["hot", "cold", "volatile", "dark"] as const
@@ -83,6 +88,60 @@ export default async function SheetPage({ params }: PageProps<"/sheet/[id]">) {
     }
   }
 
+  // String targets resolve by id rather than from the roster: a String outlives
+  // its target leaving the season, and the name has to outlive it too.
+  const targetIds = sheet.strings
+    .map((entry) =>
+      entry.target.kind === "character" ? entry.target.characterId : null,
+    )
+    .filter((value): value is string => value !== null)
+
+  const targets =
+    targetIds.length > 0
+      ? await db
+          .select({
+            id: characters.id,
+            name: characters.name,
+            skinId: characters.skinId,
+          })
+          .from(characters)
+          .where(inArray(characters.id, targetIds))
+      : []
+
+  const targetById = new Map(targets.map((target) => [target.id, target]))
+
+  const stringRows: StringRow[] = sheet.strings.map((entry) => {
+    if (entry.target.kind === "name") {
+      return { id: entry.id, count: entry.count, label: entry.target.name }
+    }
+    const target = targetById.get(entry.target.characterId)
+    if (!target) {
+      return {
+        id: entry.id,
+        count: entry.count,
+        label: t("sheet.stringTargetGone"),
+      }
+    }
+    const rawTargetSkin = getSkin(target.skinId)
+    return {
+      id: entry.id,
+      count: entry.count,
+      label: target.name || t("common.unnamed"),
+      href: `/sheet/${target.id}`,
+      detail: rawTargetSkin
+        ? localizeSkin(rawTargetSkin, locale as Locale).name
+        : target.skinId,
+    }
+  })
+
+  const stringCandidates: StringCandidate[] = roster
+    .filter((entry) => !entry.isSelf)
+    .map((entry) => ({
+      id: entry.id,
+      name: entry.name || t("common.unnamed"),
+      skinName: entry.skinName,
+    }))
+
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 px-5 pt-8 pb-20 sm:px-8">
       <Link
@@ -153,6 +212,13 @@ export default async function SheetPage({ params }: PageProps<"/sheet/[id]">) {
         editable={isOwner}
         season={seasonInfo}
         roster={roster}
+      />
+
+      <StringsPanel
+        characterId={row.id}
+        editable={isOwner}
+        rows={stringRows}
+        candidates={stringCandidates}
       />
 
       <section className="mt-12">
